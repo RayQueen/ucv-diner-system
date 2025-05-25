@@ -20,7 +20,7 @@ Esto es un proyecto de programación y gestión de proyectos para el curso de In
 - **Control de Versiones**: Git y GitHub
 - **Editor de Código**: Visual Studio Code con los siguientes plugins:
   - Git Graph
-  - Draw.io Integration
+  - PlantUML
   - LaTeX Workshop
   - Extension Pack for Java
   - Debugger for Java

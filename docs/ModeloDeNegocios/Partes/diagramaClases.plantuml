@@ -1,0 +1,46 @@
+@startuml Diagrama de clases
+
+class Usuario {
+
+}
+
+class Estudiante  {
+
+}
+
+class Empleado  {
+
+}
+
+class Administrador  {
+
+}
+
+class Turno {
+
+}
+
+class Menú {
+
+}
+
+class Insumo {
+
+}
+
+class Reporte {
+
+}
+
+Usuario <|-- Estudiante
+Usuario <|-- Empleado
+Usuario "1..*" -up- "0..*" Turno : se registra en >
+Usuario "1..*" -up- "0..*" Menú : consulta >
+Administrador "1..*" -- "0..*" Menú : gestiona >
+Administrador "1" -- "0..*" Reporte : genera >
+Administrador "1..*" -- "0..*" Insumo : visualiza >
+Menú "1..*" o-- "0..*" Insumo
+Menú "1..*" --o "1" Turno
+Reporte "1" --* "1" Turno
+
+@enduml

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.22)  25 MAY 2025 13:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.22)  25 MAY 2025 16:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -147,15 +147,15 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2505 strings out of 474486
- 43613 string characters out of 5743755
- 1929542 words of memory out of 5000000
- 24827 multiletter control sequences out of 15000+600000
+ 2504 strings out of 474486
+ 43605 string characters out of 5743755
+ 1928542 words of memory out of 5000000
+ 24826 multiletter control sequences out of 15000+600000
  558982 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,5n,65p,339b,365s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,5n,65p,314b,365s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on glosario.pdf (1 page, 45597 bytes).
+Output written on glosario.pdf (1 page, 44531 bytes).
 PDF statistics:
  21 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
