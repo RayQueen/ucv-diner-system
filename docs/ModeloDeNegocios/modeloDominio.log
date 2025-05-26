@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.22)  25 MAY 2025 17:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.22)  26 MAY 2025 18:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -176,7 +176,13 @@ File: Partes/ModeloDominio.png Graphic file (type png)
 <use Partes/ModeloDominio.png>
 Package pdftex.def Info: Partes/ModeloDominio.png  used on input line 38.
 (pdftex.def)             Requested size: 284.52756pt x 443.09018pt.
- [1 <./Partes/ModeloDominio.png (PNG copy)>] [2] [3] (modeloDominio.aux
+ [1 <./Partes/ModeloDominio.png (PNG copy)>] [2]
+<Partes/DiagramaEstados.png, id=15, 352.31625pt x 876.27374pt>
+File: Partes/DiagramaEstados.png Graphic file (type png)
+<use Partes/DiagramaEstados.png>
+Package pdftex.def Info: Partes/DiagramaEstados.png  used on input line 58.
+(pdftex.def)             Requested size: 241.84842pt x 601.51413pt.
+ [3 <./Partes/DiagramaEstados.png (PNG copy)>] (modeloDominio.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -186,17 +192,17 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3315 strings out of 474486
- 56107 string characters out of 5743755
+ 3322 strings out of 474486
+ 56337 string characters out of 5743755
  1929542 words of memory out of 5000000
- 25608 multiletter control sequences out of 15000+600000
+ 25615 multiletter control sequences out of 15000+600000
  560184 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,5n,65p,319b,365s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on modeloDominio.pdf (4 pages, 74885 bytes).
+Output written on modeloDominio.pdf (4 pages, 102052 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
+ 32 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,11 @@
+@startuml DiagramaEstados
+state c <<choice>>
+[*] --> EnEsperaParaEntradaAlComedor : Llegar al comedor
+EnEsperaParaEntradaAlComedor  --> c : ¿Hay comida disponible?
+c --> IdentificaciónDeTipoDeUsuario: Si
+c --> [*] : No
+IdentificaciónDeTipoDeUsuario --> EnEsperaPorPlatoDelMenu: Poner brazalete a usuario
+EnEsperaPorPlatoDelMenu --> Comiendo: Plato entregado
+Comiendo --> EntregaDeBandeja : Plato terminado
+EntregaDeBandeja --> [*]: Salida
+@enduml

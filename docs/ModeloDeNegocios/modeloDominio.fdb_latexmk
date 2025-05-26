@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1748209776.13164 "c:/Users/mishi/projects/ucv-diner-system/docs/ModeloDeNegocios/modeloDominio.tex" "modeloDominio.pdf" "modeloDominio" 1748209776.67659 0
+["pdflatex"] 1748297462.80077 "c:/Users/mishi/projects/ucv-diner-system/docs/ModeloDeNegocios/modeloDominio.tex" "modeloDominio.pdf" "modeloDominio" 1748297463.32514 0
   "C:/Users/mishi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1740523586 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/mishi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1740257616 24225046 8e5c402117eba36c44695ebb18943a88 ""
   "C:/Users/mishi/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -31,10 +31,11 @@
   "C:/Users/mishi/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/mishi/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/mishi/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
+  "Partes/DiagramaEstados.png" 1748297242 27361 6a5677758af8f90d48c41b3d8478fa70 ""
   "Partes/ModeloDominio.png" 1748209354 25475 60a1e19b7bca906afebe57d0229cfbab ""
-  "c:/Users/mishi/projects/ucv-diner-system/docs/ModeloDeNegocios/modeloDominio.tex" 1748209775 2637 27f6b620f7f345dc2fbc025815d6dc47 ""
-  "modeloDominio.aux" 1748209776 530 733a485fefce813520a66602b0fd5d25 "pdflatex"
-  "modeloDominio.tex" 1748209775 2637 27f6b620f7f345dc2fbc025815d6dc47 ""
+  "c:/Users/mishi/projects/ucv-diner-system/docs/ModeloDeNegocios/modeloDominio.tex" 1748297462 2794 be3d5e979bf990177c54ecfc52b35543 ""
+  "modeloDominio.aux" 1748297463 530 733a485fefce813520a66602b0fd5d25 "pdflatex"
+  "modeloDominio.tex" 1748297462 2794 be3d5e979bf990177c54ecfc52b35543 ""
   (generated)
   "modeloDominio.aux"
   "modeloDominio.log"
