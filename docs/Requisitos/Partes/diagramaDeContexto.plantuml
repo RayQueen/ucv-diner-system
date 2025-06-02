@@ -1,0 +1,29 @@
+@startuml diagramaDeContexto
+    [*] --> NoAutenticado
+
+    NoAutenticado --> Autenticado: Iniciar Sesión (Éxito)
+    NoAutenticado --> NoAutenticado: Iniciar Sesión (Fallo)
+    NoAutenticado --> Registrado: Registrar Usuario
+
+    Autenticado --> AutenticadoAdmin: Ingresar Admin
+    Autenticado --> AutenticadoRegular: Ingresar Usuario
+    Autenticado --> NoAutenticado: Cerrar Sesión
+
+    AutenticadoAdmin --> AutenticadoAdmin: Generar Reportes
+    AutenticadoAdmin --> AutenticadoAdmin: Registrar Consumo Diario
+    AutenticadoAdmin --> AutenticadoAdmin: Gestionar Menús Semanales
+    AutenticadoAdmin --> Autenticado: Salir de Modo Admin
+
+    AutenticadoRegular --> AutenticadoRegular: Consultar Menú
+    AutenticadoRegular --> Autenticado: Salir de Modo Usuario
+
+    Registrado --> Autenticado: Iniciar Sesión (después de registro)
+    Registrado --> NoAutenticado: Cancelar Registro
+
+    state Autenticado {
+        state AutenticadoAdmin <<choice>>
+        state AutenticadoRegular <<choice>>
+    }
+
+    Autenticado --> [*]: Apagar Sistema
+@enduml
