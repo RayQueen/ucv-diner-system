@@ -1,43 +1,30 @@
 @startuml casosDeUso
 left to right direction
 
-actor BD
-actor Estudiante
-actor Empleado
+' Definición de actores
 actor Usuario
-actor AdministradorComedor
+actor Administrador
 
-rectangle "DinnerSys" {
-
-    usecase "Registrar Usuario" as UC1
-    usecase "Consultar Menú" as UC2
-    usecase "Gestionar Menús Semanales" as UC3
-    usecase "Registrar Consumo Diario" as UC4
-    usecase "Generar Reportes" as UC5
-    usecase "Iniciar Sesión" as UC6
-
-    Estudiante -up-|> Usuario
-    Empleado -up-|> Usuario
-
-    Usuario -right- UC1
-    Usuario -right- UC2
-    Usuario -up- UC6
-    
-    AdministradorComedor -- UC1
-    AdministradorComedor -- UC3
-    AdministradorComedor -- UC4
-    AdministradorComedor -- UC5
-    AdministradorComedor - UC6
-    
-    BD -- UC1
-
-    UC3 ..> UC6 : <<extend>>
-
-    UC4 ..> UC6 : <<extend>>
-    UC4 <. UC5 : <<include>>
-
-    UC6 .> UC1 : <<include>>
-    UC6 <.. UC2 : <<extend>> 
-    
+' Contenedor principal para los casos de uso del sistema
+package "Sabor Central UCV" {
+    (Iniciar sesión)
+    (Consultar menú)
+    (Registrar usuario)
+    (Gestionar menú semanal)
+    (Registrar consumo diario)
+    (Generar reportes)      
 }
+
+' Relaciones entre actores y casos de uso
+Usuario -- (Iniciar sesión)
+Usuario -- (Consultar menú)
+Usuario -- (Registrar usuario)
+
+Administrador -- (Iniciar sesión)
+Administrador -- (Gestionar menú semanal)
+Administrador -- (Registrar consumo diario)
+Administrador -- (Generar reportes)
+
+' Relaciones extend/include
+(Generar reportes) <.. (Registrar consumo diario) : <<extend>>
 @enduml
