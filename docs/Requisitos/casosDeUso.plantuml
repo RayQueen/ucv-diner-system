@@ -6,7 +6,7 @@ actor Usuario
 actor Administrador
 
 ' Contenedor principal para los casos de uso del sistema
-package "Sabor Central UCV" {
+rectangle "Sabor Central UCV" {
     (Iniciar sesión)
     (Consultar menú)
     (Registrar usuario)
@@ -22,7 +22,6 @@ Usuario -- (Registrar usuario)
 
 Administrador -- (Iniciar sesión)
 Administrador -- (Gestionar menú semanal)
-Administrador -- (Registrar consumo diario)
 Administrador -- (Generar reportes)
 
 ' Relaciones extend/include
