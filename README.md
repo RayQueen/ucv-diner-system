@@ -4,6 +4,13 @@
 
 Esto es un proyecto de programación y gestión de proyectos para el curso de Ingeniería del Software (IS) del periodo 2025-1 con el objetivo de desarrollar un sistema de software que automatice la gestión del comedor universitario de la Universidad Central de Venezuela (UCV).
 
+## Integrantes
+- Samantha Arellano – C.I. 30.830.771
+- Tobias Briceño – C.I. 31.307.238
+- María Laura Reina – C.I. 31.275.108
+- Victoria Ruza – C.I. 30.946.460
+
+
 ## Funcionalidades
 - **Registro de Usuarios**: Permitir a estudiantes y empleados registrarse para acceder al comedor.
 - **Consulta de Menús**: Visualizar los menús disponibles.
