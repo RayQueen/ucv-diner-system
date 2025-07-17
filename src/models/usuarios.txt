@@ -1,2 +1,3 @@
-Ray,12345678
-usuario,contraseña
+Ray,12345,María Laura Reina, 9876.99,0
+usuario,contraseña,usuario, 777.77,1
+a,a,María Laura Reina, 9876.99,0

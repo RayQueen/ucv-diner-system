@@ -2,9 +2,11 @@ package controllers;
 
 import view.IniciarSesionView;
 import models.Usuario;
+import models.UsuarioRegistrado;
 import models.CI;
 import view.RecuperacionCredencialesView;
 import view.ValidacionCIView;
+import view.PantallaInicioView;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -72,10 +74,19 @@ public class IniciarSesionController implements ActionListener {
 
             boolean credencialCorrecta = userModel.validarUsuario(usuarioIngresado, contrasenaIngresada);
             if (credencialCorrecta) {
+                UsuarioRegistrado usuario = userModel.getUsuario(usuarioIngresado);
                 JOptionPane.showMessageDialog(null,
-                    "¡Bienvenido, " + usuarioIngresado + "!",
+                    "¡Bienvenido, " + usuario.getNombreCompleto() + "!",
                     "Acceso concedido", JOptionPane.INFORMATION_MESSAGE);
-                    ultimoMensaje = "¡Bienvenido, " + usuarioIngresado + "!";
+                    ultimoMensaje = "¡Bienvenido/a, " + usuario.getUsuario() + "!";
+                view.dispose();
+                PantallaInicioView view = new PantallaInicioView();
+                new PantallaInicioController(view, usuario);
+                view.setVisible(true);
+                view.setBounds(0, 0, 500, 400);
+                view.setVisible(true);
+                view.setResizable(false);
+                view.setLocationRelativeTo(null);
             } else {
                 JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos",
