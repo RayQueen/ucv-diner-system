@@ -3,9 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RecuperacionCredencialesView extends JFrame {
-    public JTextField textfield1;
+    public JTextField correo;
     public JLabel label1, label2, label3;
-    public JButton boton1;
+    public JButton enviar;
 
     public RecuperacionCredencialesView() {
         setLayout(null);
@@ -21,16 +21,16 @@ public class RecuperacionCredencialesView extends JFrame {
         label2.setBounds(10, 40, 200, 30);
         add(label2);
 
-        textfield1 = new JTextField();
-        textfield1.setBounds(10, 70, 200, 30);
-        add(textfield1);
+        correo = new JTextField();
+        correo.setBounds(10, 70, 200, 30);
+        add(correo);
 
         label3 = new JLabel("Recibirás un correo para restablecer tu contraseña");
         label3.setBounds(10, 110, 300, 30);
         add(label3);
 
-        boton1 = new JButton("ENVIAR");
-        boton1.setBounds(10, 150, 200, 30);
-        add(boton1);
+        enviar = new JButton("ENVIAR");
+        enviar.setBounds(10, 150, 200, 30);
+        add(enviar);
     }
 }

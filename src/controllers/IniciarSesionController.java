@@ -17,11 +17,25 @@ public class IniciarSesionController implements ActionListener {
         this.view.boton1.addActionListener(this);
         this.view.forgotPassword.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                RecuperacionCredencialesView ventana = new RecuperacionCredencialesView();
-                ventana.setBounds(0, 0, 500, 400);
-                ventana.setVisible(true);
-                ventana.setResizable(false);
-                ventana.setLocationRelativeTo(null);
+                RecuperacionCredencialesView view = new RecuperacionCredencialesView();
+                new RecuperacionCredencialesController(view);
+                view.setVisible(true);
+                view.setBounds(0, 0, 500, 400);
+                view.setVisible(true);
+                view.setResizable(false);
+                view.setLocationRelativeTo(null);
+            }
+        });
+        this.view.usuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.contrasena.requestFocus();
+            }
+        });
+        this.view.contrasena.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.boton1.doClick();
             }
         });
     }
