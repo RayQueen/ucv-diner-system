@@ -7,53 +7,57 @@ import java.util.regex.*;
 
 public class RegistroController implements ActionListener {
     private RegistroView view;
+    public String ultimoMensaje;
 
     public RegistroController(RegistroView view) {
         this.view = view;
-        this.view.boton1.addActionListener(this);
+        this.view.registrarse.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.boton1) {
-            if (view.textfield1.getText().isEmpty() ||
-                view.textfield2.getText().isEmpty() ||
-                view.textfield3.getText().isEmpty() ||
-                view.textfield4.getText().isEmpty() ||
-                view.textfield5.getText().isEmpty() ||
-                view.textfield6.getText().isEmpty()) {
+        if (e.getSource() == view.registrarse) {
+            if (view.nombre.getText().isEmpty() ||
+                view.apellido.getText().isEmpty() ||
+                view.correo.getText().isEmpty() ||
+                view.telefono.getText().isEmpty() ||
+                view.ocupacion.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(view,
                     "Por favor complete todos los campos obligatorios",
                     "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "Por favor complete todos los campos obligatorios";
                 return;
             }
-            if (!isValidName(view.textfield1.getText()) || !isValidName(view.textfield2.getText())) {
+            if (!isValidName(view.nombre.getText()) || !isValidName(view.apellido.getText())) {
                 JOptionPane.showMessageDialog(view,
                     "El nombre y el apellido deben contener solo letras",
                     "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "El nombre y el apellido deben contener solo letras";
                 return;
             }
-            if (!isValidEmail(view.textfield3.getText())) {
+            if (!isValidEmail(view.correo.getText())) {
                 JOptionPane.showMessageDialog(view,
                     "El correo electrónico no es válido",
                     "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "El correo electrónico no es válido";
                 return;
             }
-            if (!isValidPhone(view.textfield4.getText())) {
+            if (!isValidPhone(view.telefono.getText())) {
                 JOptionPane.showMessageDialog(view,
                     "El teléfono debe contener solo números",
                     "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "El teléfono debe contener solo números";
                 return;
             }
             JOptionPane.showMessageDialog(view,
                 "Registro completado exitosamente",
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            view.textfield1.setText("");
-            view.textfield2.setText("");
-            view.textfield3.setText("");
-            view.textfield4.setText("");
-            view.textfield5.setText("");
-            view.textfield6.setText("");
+            ultimoMensaje = "Registro completado exitosamente";
+            view.nombre.setText("");
+            view.apellido.setText("");
+            view.correo.setText("");
+            view.telefono.setText("");
+            view.ocupacion.setText("");
         }
     }
 

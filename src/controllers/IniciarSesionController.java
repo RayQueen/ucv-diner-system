@@ -4,7 +4,6 @@ import view.IniciarSesionView;
 import models.Usuario;
 import models.CI;
 import view.RecuperacionCredencialesView;
-import view.RegistroView;
 import view.ValidacionCIView;
 
 import javax.swing.*;
