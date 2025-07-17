@@ -3,7 +3,7 @@ package models;
 import java.io.*;
 
 public class Usuario {
-    private String[][] usuariosValidos;
+    private UsuarioRegistrado[] usuariosValidos;
 
     public Usuario(String rutaArchivo) {
         cargarUsuarios(rutaArchivo);
@@ -17,19 +17,23 @@ public class Usuario {
                 totalUsuarios++;
             }
             brCount.close();
-            usuariosValidos = new String[totalUsuarios][2];
-            BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));
+            usuariosValidos = new UsuarioRegistrado[totalUsuarios];
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("src/models/usuarios.txt"), "UTF-8"));
             String linea;
             int index = 0;
-            while ((linea = br.readLine()) != null) {
+            while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 2) {
-                    usuariosValidos[index][0] = partes[0].trim();
-                    usuariosValidos[index][1] = partes[1].trim();
+                if (partes.length == 5) {
+                    String usuario = partes[0].trim();
+                    String contrasena = partes[1].trim();
+                    String nombreCompleto = partes[2].trim();
+                    double saldo = Double.parseDouble(partes[3].trim());
+                    boolean admin = Boolean.parseBoolean(partes[4].trim());
+                    usuariosValidos[index] = new UsuarioRegistrado(usuario, contrasena, nombreCompleto, saldo, admin);
                     index++;
                 }
             }
-            br.close();
+            reader.close();
         } catch (IOException e) {
             // Manejo de error
         }
@@ -37,11 +41,20 @@ public class Usuario {
 
     public boolean validarUsuario(String usuario, String contrasena) {
         for (int i = 0; i < usuariosValidos.length; i++) {
-            if (usuariosValidos[i][0].equals(usuario)
-                && usuariosValidos[i][1].equals(contrasena)) {
+            if (usuariosValidos[i].getUsuario().equals(usuario)
+                && usuariosValidos[i].getContrasena().equals(contrasena)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public UsuarioRegistrado getUsuario(String usuario) {
+        for (UsuarioRegistrado usuarioRegistrado : usuariosValidos) {
+            if (usuarioRegistrado.getUsuario().equals(usuario)) {
+                return usuarioRegistrado;
+            }
+        }
+        return null; // Usuario no encontrado
     }
 }

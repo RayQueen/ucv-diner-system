@@ -6,9 +6,12 @@ import java.awt.event.ActionListener;
 
 public class ConsultarMenusController {
     private ConsultarMenusView view;
+    private models.UsuarioRegistrado usuario;
 
-    public ConsultarMenusController(ConsultarMenusView view) {
+    public ConsultarMenusController(ConsultarMenusView view, models.UsuarioRegistrado usuario) {
         this.view = view;
+        this.usuario = usuario;
+        this.view.actualizarUsuario(usuario);
         this.view.botonMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -17,6 +20,5 @@ public class ConsultarMenusController {
                 view.repaint();
             }
         });
-        // Aquí puedes agregar más listeners para los demás botones
     }
 }

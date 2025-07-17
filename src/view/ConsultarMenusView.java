@@ -4,6 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConsultarMenusView extends JFrame {
+    // ...existing code...
+    // Método para actualizar la pantalla según el usuario
+    public void actualizarUsuario(models.UsuarioRegistrado usuario) {
+        etiquetaBienvenida.setText("BIENVENIDO/A " + usuario.getNombreCompleto());
+        // Si quieres mostrar el saldo, puedes agregar un JLabel para saldo y actualizarlo aquí
+        if (usuario.esAdmin()) {
+            botonRecargar.setVisible(false);
+            botonPrePagar.setVisible(false);
+        } else {
+            botonRecargar.setVisible(true);
+            botonPrePagar.setVisible(true);
+        }
+    }
     public JPanel panelLateral;
     public JPanel panelSuperior;
     public JPanel panelContenido;
