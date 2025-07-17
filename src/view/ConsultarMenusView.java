@@ -23,7 +23,7 @@ public class ConsultarMenusView extends JFrame {
     public JButton botonMenu;
     public JLabel etiquetaBienvenida;
     public JButton botonRecargar;
-    public JButton botonConsultar;
+    public JButton botonInicio;
     public JButton botonPrePagar;
 
     public ConsultarMenusView() {
@@ -70,14 +70,14 @@ public class ConsultarMenusView extends JFrame {
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
         panelLateral.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelLateral.setPreferredSize(new Dimension(200, 0));
+        botonInicio = new JButton("Inicio");
         botonRecargar = new JButton("Recargar wallet");
-        botonConsultar = new JButton("Consultar menús");
         botonPrePagar = new JButton("Pre-pagar plato");
         panelLateral.add(new JLabel("Menú Principal"));
         panelLateral.add(Box.createRigidArea(new Dimension(0, 15)));
         panelLateral.add(botonRecargar);
         panelLateral.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelLateral.add(botonConsultar);
+        panelLateral.add(botonInicio);
         panelLateral.add(Box.createRigidArea(new Dimension(0, 10)));
         panelLateral.add(botonPrePagar);
         panelLateral.setVisible(false);
