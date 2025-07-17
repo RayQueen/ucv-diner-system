@@ -8,6 +8,7 @@ public class IniciarSesionView extends JFrame {
     public JLabel label1, label2, label3;
     public JButton boton1;
     public JLabel forgotPassword;
+    public JLabel register;
 
     public IniciarSesionView() {
         setLayout(null);
@@ -42,8 +43,14 @@ public class IniciarSesionView extends JFrame {
         forgotPassword.setBounds(10, 180, 200, 30);
         add(forgotPassword);
 
+        register = new JLabel("<html>¿No tienes cuenta? Regístrate <a href='#'>aquí</a></html>");
+        register.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        register.setBounds(10, 210, 200, 30);
+        add(register);
+
         boton1 = new JButton("INICIAR SESIÓN");
-        boton1.setBounds(10, 220, 200, 30);
+        boton1.setBounds(10, 250, 200, 30);
         add(boton1);
     }
 }

@@ -2,13 +2,18 @@ package controllers;
 
 import view.IniciarSesionView;
 import models.Usuario;
+import models.CI;
 import view.RecuperacionCredencialesView;
+import view.RegistroView;
+import view.ValidacionCIView;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class IniciarSesionController implements ActionListener {
     private IniciarSesionView view;
     private Usuario userModel = new Usuario("src/models/usuarios.txt");
+    private CI identificationModel = new CI("src/models/CI_validas.txt");
     public String ultimoMensaje;
 
     public IniciarSesionController(IniciarSesionView view, Usuario userModel) {
@@ -36,6 +41,18 @@ public class IniciarSesionController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.boton1.doClick();
+            }
+        });
+        this.view.register.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ValidacionCIView view = new ValidacionCIView();
+                new ValidacionCIController(view, identificationModel);
+                view.setVisible(true);
+                view.setBounds(0, 0, 500, 400);
+                view.setVisible(true);
+                view.setResizable(false);
+                view.setLocationRelativeTo(null);                
             }
         });
     }
