@@ -3,8 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IniciarSesionView extends JFrame {
-    public JTextField textfield1;
-    public JPasswordField textfield2;
+    public JTextField usuario;
+    public JPasswordField contrasena;
     public JLabel label1, label2, label3;
     public JButton boton1;
     public JLabel forgotPassword;
@@ -23,17 +23,17 @@ public class IniciarSesionView extends JFrame {
         label2.setBounds(10, 40, 200, 30);
         add(label2);
 
-        textfield1 = new JTextField();
-        textfield1.setBounds(10, 70, 200, 30);
-        add(textfield1);
+        usuario = new JTextField();
+        usuario.setBounds(10, 70, 200, 30);
+        add(usuario);
 
         label3 = new JLabel("Contraseña:");
         label3.setBounds(10, 110, 200, 30);
         add(label3);
 
-        textfield2 = new JPasswordField();
-        textfield2.setBounds(10, 140, 200, 30);
-        add(textfield2);
+        contrasena = new JPasswordField();
+        contrasena.setBounds(10, 140, 200, 30);
+        add(contrasena);
 
         forgotPassword = new JLabel("Olvidé mi contraseña");
         forgotPassword.setForeground(new Color(0, 102, 204));
