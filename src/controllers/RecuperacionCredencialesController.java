@@ -1,5 +1,6 @@
 package controllers;
 
+import view.IniciarSesionView;
 import view.RecuperacionCredencialesView;
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,6 +21,19 @@ public class RecuperacionCredencialesController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.enviar.doClick();
+            }
+        });
+        this.view.cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                IniciarSesionView iniciarSesionView = new IniciarSesionView();
+                models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+                new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+                iniciarSesionView.setBounds(0, 0, 500, 400);
+                iniciarSesionView.setVisible(true);
+                iniciarSesionView.setResizable(false);
+                iniciarSesionView.setLocationRelativeTo(null);
             }
         });
     }
