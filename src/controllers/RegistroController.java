@@ -9,9 +9,12 @@ import java.util.regex.*;
 public class RegistroController implements ActionListener {
     private RegistroView view;
     public String ultimoMensaje;
+    private models.CI ciModel = new models.CI("src/models/CI_validas.txt");
+    private String CI_Ingresada;
 
-    public RegistroController(RegistroView view) {
+    public RegistroController(RegistroView view, String CI_Ingresada) {
         this.view = view;
+        this.CI_Ingresada = CI_Ingresada;
         this.view.registrarse.addActionListener(this);
     }
 
@@ -65,8 +68,8 @@ public class RegistroController implements ActionListener {
             String contrasena = String.valueOf(view.contrasena.getPassword()).trim();
             String nombreCompleto = view.nombre.getText().trim() + " " + view.apellido.getText().trim();
             double saldo = 0.0;
-            boolean admin = view.rol.getSelectedItem().toString().equalsIgnoreCase("admin");
             String correo = view.correo.getText().trim();
+            boolean admin = ciModel.esAdmin(CI_Ingresada);
             try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("src/models/usuarios.txt"))) {
                 String lineaExistente;
                 while ((lineaExistente = br.readLine()) != null) {

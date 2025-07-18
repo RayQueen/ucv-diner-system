@@ -37,11 +37,20 @@ public class RecuperacionCredencialesControllerTest {
 
     @Test
     public void testRecuperacionCredencialesExito() {
-        mockView.correo.setText("correo@ejemplo.com");
+        mockView.correo.setText("reinamlaura@gmail.com");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.enviar, 0, ""));
     
         assertEquals("Se ha enviado un correo para restablecer su contraseña", controller.ultimoMensaje);
         assertFalse(mockView.isVisible());
+    }
+
+    @Test
+    public void testRecuperacionCredencialesUsuarioNoEncontrado() {
+        mockView.correo.setText("usuario_inexistente@gmail.com");
+
+        controller.actionPerformed(new java.awt.event.ActionEvent(mockView.enviar, 0, ""));
+
+        assertEquals("No existe ningún usuario asociado a ese correo electrónico", controller.ultimoMensaje);
     }
 }

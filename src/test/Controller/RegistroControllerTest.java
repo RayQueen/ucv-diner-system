@@ -14,7 +14,7 @@ public class RegistroControllerTest {
     @BeforeEach
     public void setUp() {
         mockView = new RegistroView();
-        controller = new RegistroController(mockView);
+        controller = new RegistroController(mockView, "12345678");
     }
     
     @Test

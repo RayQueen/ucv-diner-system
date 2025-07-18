@@ -76,7 +76,7 @@ public class RecuperacionCredencialesController implements ActionListener {
     }
 
     private boolean enviarCorreo(String toEmail, String usuario, String contrasena) {
-        String from = "victoriaruza@gmail"; // Cambia esto por tu correo
+        String from = "victoriaruza@gmail.com"; // Cambia esto por tu correo
         String password = "budc eyyf wjux jeqk"; // Cambia esto por tu contraseña de aplicación
 
         java.util.Properties props = new java.util.Properties();

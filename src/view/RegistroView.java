@@ -62,7 +62,7 @@ public class RegistroView extends JFrame {
         label8 = new JLabel("Rol:");
         label8.setBounds(35, 280, 100, 30);
         add(label8);
-        rol = new JComboBox<>(new String[]{"estudiante", "empleado", "profesor", "admin"});
+        rol = new JComboBox<>(new String[]{"estudiante", "empleado", "profesor"});
         rol.setBounds(150, 280, 150, 25);
         add(rol);
 

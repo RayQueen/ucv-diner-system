@@ -34,7 +34,7 @@ public class ValidacionCIController implements ActionListener {
                 ultimoMensaje = "CI válida. Proceda al registro.";
                 view.dispose();
                 RegistroView registroView = new RegistroView();
-                new RegistroController(registroView);
+                new RegistroController(registroView, CI_ingresada);
                 registroView.setVisible(true);
                 registroView.setBounds(0, 0, 500, 400);
                 registroView.setVisible(true);
