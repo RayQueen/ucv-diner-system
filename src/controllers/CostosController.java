@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 public class CostosController {
     private CostosView view;
     private UsuarioRegistrado usuario;
+    public String ultimoMensaje;
 
     public CostosController(CostosView view, UsuarioRegistrado usuario) {
     this.view = view;
@@ -44,30 +45,35 @@ public class CostosController {
         String costoFijoStr = view.campoCostoFijo.getText();
         String costoVariableStr = view.campoCostoVariable.getText();
         if (costoFijoStr.isEmpty() || costoVariableStr.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Ambos campos deben tener un valor.", "Error", JOptionPane.ERROR_MESSAGE);
+            ultimoMensaje = "Por favor complete todos los campos obligatorios";
+            JOptionPane.showMessageDialog(view, "Por favor complete todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
             double costoFijo = Double.parseDouble(costoFijoStr);
             double costoVariable = Double.parseDouble(costoVariableStr);
             if (costoFijo < 0 || costoVariable < 0) {
+                ultimoMensaje = "Los costos no pueden ser negativos.";
                 JOptionPane.showMessageDialog(view, "Los costos no pueden ser negativos.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             try (java.io.FileWriter writer = new java.io.FileWriter("src/models/costos.txt", false)) {
                 writer.write(costoFijo + "\n");
                 writer.write(costoVariable + "\n");
+                ultimoMensaje = "Costos guardados correctamente.";
                 JOptionPane.showMessageDialog(view,
                         "Datos guardados correctamente en el archivo costos.txt",
                         "Guardado Exitoso",
                         JOptionPane.INFORMATION_MESSAGE);
             } catch (java.io.IOException ex) {
+                ultimoMensaje = "Ocurrió un error al guardar el archivo.";
                 JOptionPane.showMessageDialog(view,
                         "Ocurrió un error al guardar el archivo.",
                         "Error de Guardado",
                         JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException ex) {
+            ultimoMensaje = "Ingrese valores numéricos válidos.";
             JOptionPane.showMessageDialog(view, "Ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

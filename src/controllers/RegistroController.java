@@ -30,11 +30,20 @@ public class RegistroController implements ActionListener {
                 ultimoMensaje = "Por favor complete todos los campos obligatorios";
                 return;
             }
+            
             if (!isValidName(view.nombre.getText()) || !isValidName(view.apellido.getText())) {
                 JOptionPane.showMessageDialog(view,
                     "El nombre y el apellido deben contener solo letras",
                     "Error", JOptionPane.ERROR_MESSAGE);
                 ultimoMensaje = "El nombre y el apellido deben contener solo letras";
+                return;
+            }
+            String correoStr = view.correo.getText().trim();
+            if (!correoStr.matches("^[A-Za-z0-9._%+-]+@(gmail\\.com|ucv\\.ve|ucv\\.[a-zA-Z]+\\.ve)$")) {
+                JOptionPane.showMessageDialog(view,
+                    "El correo debe terminar en @gmail.com, @ucv.ve o @ucv.<facultad>.ve",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "El correo debe terminar en @gmail.com, @ucv.ve o @ucv.<facultad>.ve";
                 return;
             }
             if (!isValidEmail(view.correo.getText())) {

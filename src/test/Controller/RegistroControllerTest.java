@@ -37,7 +37,7 @@ public class RegistroControllerTest {
     public void testRegistroNombreApellidoInvalidos() {
         mockView.nombre.setText("123");
         mockView.apellido.setText("456");
-        mockView.correo.setText("correo@valido.com");
+        mockView.correo.setText("correo@gmail.com.com");
         mockView.telefono.setText("1234567890");
         mockView.usuario.setText("usuario");
         mockView.contrasena.setText("clave");
@@ -64,10 +64,25 @@ public class RegistroControllerTest {
     }
 
     @Test
+    public void testRegistroCorreoDireccionInvalida() {
+        mockView.nombre.setText("Nombre");
+        mockView.apellido.setText("Apellido");
+        mockView.correo.setText("correo@invalido.com");
+        mockView.telefono.setText("1234567890");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("empleado");
+
+        controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
+
+        assertEquals("El correo debe terminar en @gmail.com, @ucv.ve o @ucv.<facultad>.ve", controller.ultimoMensaje);
+    }
+
+    @Test
     public void testRegistroTelefonoInvalido() {
         mockView.nombre.setText("Nombre");
         mockView.apellido.setText("Apellido");
-        mockView.correo.setText("correo@valido.com");
+        mockView.correo.setText("correo@gmail.com");
         mockView.telefono.setText("telefono_invalido");
         mockView.usuario.setText("usuario");
         mockView.contrasena.setText("clave");
@@ -82,7 +97,7 @@ public class RegistroControllerTest {
     public void testRegistroExitoso() {
         mockView.nombre.setText("Nombre");
         mockView.apellido.setText("Apellido");
-        mockView.correo.setText("NombreApellido123@valido.com");
+        mockView.correo.setText("NombreApellido123@gmail.com");
         mockView.telefono.setText("1234567890");
         mockView.usuario.setText("NA123");
         mockView.contrasena.setText("clave");
@@ -97,7 +112,7 @@ public class RegistroControllerTest {
     public void testRegistroUsuarioExistente() {
         mockView.nombre.setText("Jhon");
         mockView.apellido.setText("Doe");
-        mockView.correo.setText("JhonDoe@valido.com");
+        mockView.correo.setText("JhonDoe@gmail.com");
         mockView.telefono.setText("1234567890");
         mockView.usuario.setText("usuario");
         mockView.contrasena.setText("clave");
@@ -112,7 +127,7 @@ public class RegistroControllerTest {
     public void testRegistroCorreoExistente() {
         mockView.nombre.setText("Jane");
         mockView.apellido.setText("Doe");
-        mockView.correo.setText("correo@valido.com");
+        mockView.correo.setText("correo@gmail.com");
         mockView.telefono.setText("1234567890");
         mockView.usuario.setText("JNDoe");
         mockView.contrasena.setText("clave");
