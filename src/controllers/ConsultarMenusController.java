@@ -26,13 +26,12 @@ public class ConsultarMenusController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.dispose();
-                PantallaInicioView view = new PantallaInicioView();
-                new PantallaInicioController(view, usuario);
-                view.setVisible(true);
-                view.setBounds(0, 0, 500, 400);
-                view.setVisible(true);
-                view.setResizable(false);
-                view.setLocationRelativeTo(null); 
+                PantallaInicioView userView = new PantallaInicioView();
+                new PantallaInicioController(userView, usuario);
+                userView.setVisible(true);
+                userView.setBounds(0, 0, 800, 468);
+                userView.setResizable(false);
+                userView.setLocationRelativeTo(null); 
             }
         });
     }

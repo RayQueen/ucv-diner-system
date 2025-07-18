@@ -30,7 +30,7 @@ public class PantallaInicioController {
                 ConsultarMenusView view = new ConsultarMenusView();
                 new ConsultarMenusController(view, usuario);
                 view.setVisible(true);
-                view.setBounds(0, 0, 500, 400);
+                view.setBounds(0, 0, 500, 600);
                 view.setVisible(true);
                 view.setResizable(false);
                 view.setLocationRelativeTo(null);
