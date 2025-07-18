@@ -82,14 +82,44 @@ public class RegistroControllerTest {
     public void testRegistroExitoso() {
         mockView.nombre.setText("Nombre");
         mockView.apellido.setText("Apellido");
-        mockView.correo.setText("correo@valido.com");
+        mockView.correo.setText("NombreApellido123@valido.com");
         mockView.telefono.setText("1234567890");
-        mockView.usuario.setText("usuario");
+        mockView.usuario.setText("NA123");
         mockView.contrasena.setText("clave");
         mockView.rol.setSelectedItem("estudiante");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
 
         assertEquals("Registro completado exitosamente", controller.ultimoMensaje);
+    }
+
+    @Test
+    public void testRegistroUsuarioExistente() {
+        mockView.nombre.setText("Jhon");
+        mockView.apellido.setText("Doe");
+        mockView.correo.setText("JhonDoe@valido.com");
+        mockView.telefono.setText("1234567890");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("admin");
+
+        controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
+
+        assertEquals("El nombre de usuario ya está registrado", controller.ultimoMensaje);
+    }
+
+    @Test
+    public void testRegistroCorreoExistente() {
+        mockView.nombre.setText("Jane");
+        mockView.apellido.setText("Doe");
+        mockView.correo.setText("correo@valido.com");
+        mockView.telefono.setText("1234567890");
+        mockView.usuario.setText("JNDoe");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("admin");
+
+        controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
+
+        assertEquals("El correo electrónico ya está registrado", controller.ultimoMensaje);
     }
 }

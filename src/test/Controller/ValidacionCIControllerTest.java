@@ -29,6 +29,13 @@ public class ValidacionCIControllerTest {
     }
 
     @Test
+    void testValidarCILetras() {
+        mockView.cedula.setText("abcd");
+        controller.actionPerformed(new java.awt.event.ActionEvent(mockView.enviar, 0, ""));
+        assertEquals("Campo de cédula vacío", controller.ultimoMensaje);
+    }
+
+    @Test
     void testValidarCICorrecto() {
         mockView.cedula.setText("12345678");
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.enviar, 0, ""));
