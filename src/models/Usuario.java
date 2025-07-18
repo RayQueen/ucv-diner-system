@@ -3,7 +3,7 @@ package models;
 import java.io.*;
 
 public class Usuario {
-    private UsuarioRegistrado[] usuariosValidos;
+    public UsuarioRegistrado[] usuariosValidos;
 
     public Usuario(String rutaArchivo) {
         cargarUsuarios(rutaArchivo);
@@ -29,7 +29,8 @@ public class Usuario {
                     String nombreCompleto = partes[2].trim();
                     double saldo = Double.parseDouble(partes[3].trim());
                     boolean admin = Boolean.parseBoolean(partes[4].trim());
-                    usuariosValidos[index] = new UsuarioRegistrado(usuario, contrasena, nombreCompleto, saldo, admin);
+                    String correo = partes[5].trim();
+                    usuariosValidos[index] = new UsuarioRegistrado(usuario, contrasena, nombreCompleto, saldo, admin, correo);
                     index++;
                 }
             }
