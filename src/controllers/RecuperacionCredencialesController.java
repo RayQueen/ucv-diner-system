@@ -76,14 +76,13 @@ public class RecuperacionCredencialesController implements ActionListener {
     }
 
     private boolean enviarCorreo(String toEmail, String usuario, String contrasena) {
-        String host = "smtp.gmail.com";
-        String from = "reinamlaura@gmail.com"; // Cambia esto por tu correo
-        String password = "Vic12345"; // Cambia esto por tu contraseña de aplicación
+        String from = "victoriaruza@gmail"; // Cambia esto por tu correo
+        String password = "budc eyyf wjux jeqk"; // Cambia esto por tu contraseña de aplicación
 
         java.util.Properties props = new java.util.Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", "587");
 
         javax.mail.Session session = javax.mail.Session.getInstance(props,
