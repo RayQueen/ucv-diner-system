@@ -1,0 +1,2 @@
+Costo Fijo: 1234.0
+Costo Variable: 5678.0

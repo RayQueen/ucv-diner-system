@@ -85,7 +85,7 @@ public class IniciarSesionController implements ActionListener {
                 if (usuario.esAdmin()) {
                     view.PantallaInicioAdminView adminView = new view.PantallaInicioAdminView();
                     adminView.actualizarUsuario(usuario.getNombreCompleto());
-                    new controllers.PantallaInicioAdminController(adminView);
+                    new controllers.PantallaInicioAdminController(adminView, usuario);
                     adminView.setVisible(true);
                     adminView.setBounds(0, 0, 800, 600);
                     adminView.setResizable(false);
