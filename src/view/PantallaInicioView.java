@@ -155,14 +155,7 @@ public class PantallaInicioView extends JFrame {
     public void actualizarUsuario(UsuarioRegistrado usuario) {
         etiquetaBienvenida.setText("BIENVENIDO/A " + usuario.getNombreCompleto());
         etiquetaSaldo.setText("Saldo actual: Bs. " + usuario.getSaldo());
-        // Ejemplo: mostrar/ocultar botones según el tipo de usuario
-        if (usuario.esAdmin()) {
-            botonRecargar.setVisible(false);
-            botonPrePagar.setVisible(false);
-        } else {
             botonRecargar.setVisible(true);
             botonPrePagar.setVisible(true);
         }
-        // Puedes agregar más personalización aquí
     }
-}
