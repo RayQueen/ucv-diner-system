@@ -105,18 +105,6 @@ public class RegistroView extends JFrame {
         formPanel.add(contrasena);
         formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JLabel rolLabel = new JLabel("Rol");
-        rolLabel.setFont(new Font("Serif", Font.BOLD, 13));
-        rolLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        formPanel.add(rolLabel);
-        rol = new JComboBox<>(new String[]{"estudiante", "profesor", "empleado", "admin"});
-        rol.setMaximumSize(new Dimension(320, 28));
-        rol.setPreferredSize(new Dimension(320, 28));
-        rol.setFont(new Font("Serif", Font.PLAIN, 16));
-        rol.setAlignmentX(Component.CENTER_ALIGNMENT);
-        formPanel.add(rol);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 18)));
-
         JPanel botonesPanel = new JPanel();
         botonesPanel.setBackground(Color.WHITE);
         botonesPanel.setLayout(new BoxLayout(botonesPanel, BoxLayout.X_AXIS));
