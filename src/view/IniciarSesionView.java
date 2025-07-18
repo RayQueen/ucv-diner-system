@@ -15,6 +15,14 @@ public class IniciarSesionView extends JFrame {
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBackground(new Color(240, 248, 255));
+
+        JPanel topPanel = new JPanel();
+        topPanel.setOpaque(false); // Make it transparent to show mainPanel's background
+        topPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0)); // Add some top padding
+
         label1 = new JLabel("Iniciar Sesión");
         label1.setBounds(35, 5, 300, 30);
         label1.setFont(new Font("Andale Mono", Font.BOLD, 18));
@@ -52,5 +60,9 @@ public class IniciarSesionView extends JFrame {
         boton1 = new JButton("INICIAR SESIÓN");
         boton1.setBounds(10, 250, 200, 30);
         add(boton1);
+
+        topPanel.add(Box.createVerticalStrut(10)); // Space between logo and title
+        topPanel.add(label1);
+        topPanel.add(label2);
     }
 }

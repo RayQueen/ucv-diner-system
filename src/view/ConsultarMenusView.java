@@ -26,6 +26,7 @@ public class ConsultarMenusView extends JFrame {
     public JButton botonInicio;
     public JButton botonPrePagar;
 
+
     public ConsultarMenusView() {
         setTitle("Consultar Menús - Sabor Central UCV");
         setSize(800, 600);
