@@ -1,73 +1,171 @@
 package view;
 import javax.swing.*;
+import java.awt.*;
 
 public class RegistroView extends JFrame {
-    public JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9;
-    public JTextField nombre, apellido, correo, telefono, usuario;
+    public JTextField nombre;
+    public JTextField apellido;
+    public JTextField usuario;
+    public JTextField correo;
+    public JTextField telefono;
     public JPasswordField contrasena;
     public JComboBox<String> rol;
     public JButton registrarse;
+    public JButton cancelar;
 
     public RegistroView() {
-        setLayout(null);
-        setTitle("Registro");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Registro de Usuario");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(700, 600);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
-        label1 = new JLabel("Información Personal");
-        label1.setBounds(150, 5, 200, 30);
-        add(label1);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(70, 110, 150));
+        mainPanel.setLayout(new GridBagLayout());
 
-        label2 = new JLabel("Nombre:");
-        label2.setBounds(35, 40, 100, 30);
-        add(label2);
+        JPanel formPanel = new JPanel();
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+        formPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        formPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel nombreLabel = new JLabel("Nombre");
+        nombreLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        nombreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(nombreLabel);
         nombre = new JTextField();
-        nombre.setBounds(150, 40, 150, 25);
-        add(nombre);
+        nombre.setMaximumSize(new Dimension(320, 28));
+        nombre.setPreferredSize(new Dimension(320, 28));
+        nombre.setFont(new Font("Serif", Font.PLAIN, 16));
+        nombre.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        nombre.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(nombre);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        label3 = new JLabel("Apellido:");
-        label3.setBounds(35, 80, 100, 30);
-        add(label3);
+        JLabel apellidoLabel = new JLabel("Apellido");
+        apellidoLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        apellidoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(apellidoLabel);
         apellido = new JTextField();
-        apellido.setBounds(150, 80, 150, 25);
-        add(apellido);
+        apellido.setMaximumSize(new Dimension(320, 28));
+        apellido.setPreferredSize(new Dimension(320, 28));
+        apellido.setFont(new Font("Serif", Font.PLAIN, 16));
+        apellido.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        apellido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(apellido);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        label4 = new JLabel("Correo:");
-        label4.setBounds(35, 120, 100, 30);
-        add(label4);
-        correo = new JTextField();
-        correo.setBounds(150, 120, 150, 25);
-        add(correo);
-
-        label5 = new JLabel("Teléfono:");
-        label5.setBounds(35, 160, 100, 30);
-        add(label5);
-        telefono = new JTextField();
-        telefono.setBounds(150, 160, 150, 25);
-        add(telefono);
-
-        label6 = new JLabel("Usuario:");
-        label6.setBounds(35, 200, 100, 30);
-        add(label6);
+        JLabel usuarioLabel = new JLabel("Usuario");
+        usuarioLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        usuarioLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(usuarioLabel);
         usuario = new JTextField();
-        usuario.setBounds(150, 200, 150, 25);
-        add(usuario);
+        usuario.setMaximumSize(new Dimension(320, 28));
+        usuario.setPreferredSize(new Dimension(320, 28));
+        usuario.setFont(new Font("Serif", Font.PLAIN, 16));
+        usuario.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        usuario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(usuario);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        label7 = new JLabel("Contraseña:");
-        label7.setBounds(35, 240, 100, 30);
-        add(label7);
+        JLabel correoLabel = new JLabel("Correo");
+        correoLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        correoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(correoLabel);
+        correo = new JTextField();
+        correo.setMaximumSize(new Dimension(320, 28));
+        correo.setPreferredSize(new Dimension(320, 28));
+        correo.setFont(new Font("Serif", Font.PLAIN, 16));
+        correo.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        correo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(correo);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JLabel telefonoLabel = new JLabel("Teléfono");
+        telefonoLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        telefonoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(telefonoLabel);
+        telefono = new JTextField();
+        telefono.setMaximumSize(new Dimension(320, 28));
+        telefono.setPreferredSize(new Dimension(320, 28));
+        telefono.setFont(new Font("Serif", Font.PLAIN, 16));
+        telefono.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        telefono.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(telefono);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JLabel contrasenaLabel = new JLabel("Contraseña");
+        contrasenaLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        contrasenaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(contrasenaLabel);
         contrasena = new JPasswordField();
-        contrasena.setBounds(150, 240, 150, 25);
-        add(contrasena);
+        contrasena.setMaximumSize(new Dimension(320, 28));
+        contrasena.setPreferredSize(new Dimension(320, 28));
+        contrasena.setFont(new Font("Serif", Font.PLAIN, 16));
+        contrasena.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        contrasena.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(contrasena);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        label8 = new JLabel("Rol:");
-        label8.setBounds(35, 280, 100, 30);
-        add(label8);
-        rol = new JComboBox<>(new String[]{"estudiante", "empleado", "profesor", "admin"});
-        rol.setBounds(150, 280, 150, 25);
-        add(rol);
+        JLabel rolLabel = new JLabel("Rol");
+        rolLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        rolLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(rolLabel);
+        rol = new JComboBox<>(new String[]{"estudiante", "profesor", "empleado", "admin"});
+        rol.setMaximumSize(new Dimension(320, 28));
+        rol.setPreferredSize(new Dimension(320, 28));
+        rol.setFont(new Font("Serif", Font.PLAIN, 16));
+        rol.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(rol);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 18)));
 
-        registrarse = new JButton("COMPLETAR REGISTRO");
-        registrarse.setBounds(100, 320, 200, 30);
-        add(registrarse);
+        JPanel botonesPanel = new JPanel();
+        botonesPanel.setBackground(Color.WHITE);
+        botonesPanel.setLayout(new BoxLayout(botonesPanel, BoxLayout.X_AXIS));
+        botonesPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        registrarse = new JButton("Registrarse");
+        registrarse.setFont(new Font("Arial", Font.BOLD, 13));
+        registrarse.setBackground(new Color(70, 110, 150));
+        registrarse.setForeground(Color.WHITE);
+        registrarse.setFocusPainted(false);
+        registrarse.setPreferredSize(new Dimension(150, 40));
+        registrarse.setMaximumSize(new Dimension(150, 40));
+        registrarse.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        botonesPanel.add(registrarse);
+        botonesPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+
+        cancelar = new JButton("Cancelar");
+        cancelar.setFont(new Font("Arial", Font.BOLD, 13));
+        cancelar.setBackground(new Color(220, 230, 245));
+        cancelar.setForeground(new Color(70, 110, 150));
+        cancelar.setFocusPainted(false);
+        cancelar.setPreferredSize(new Dimension(150, 40));
+        cancelar.setMaximumSize(new Dimension(150, 40));
+        cancelar.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        botonesPanel.add(cancelar);
+
+        formPanel.add(botonesPanel);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        mainPanel.add(formPanel, gbc);
+
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

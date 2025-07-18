@@ -1,42 +1,85 @@
 package view;
 import javax.swing.*;
+import java.awt.*;
 
 public class ValidacionCIView extends JFrame {
-    public JLabel label1;
     public JTextField cedula;
     public JButton enviar;
+    public JButton cancelar;
 
     public ValidacionCIView() {
-        setLayout(null);
-        setTitle("Validación de credenciales");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Validar CI");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(600, 400);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
-        label1 = new JLabel("Ingresa tu cédula de identidad");
-        label1.setBounds(35, 5, 300, 30);
-        add(label1);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(70, 110, 150));
+        mainPanel.setLayout(new GridBagLayout());
 
+        JPanel formPanel = new JPanel();
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+        formPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        formPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel cedulaLabel = new JLabel("Cédula");
+        cedulaLabel.setFont(new Font("Serif", Font.BOLD, 13));
+        cedulaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(cedulaLabel);
         cedula = new JTextField();
-        cedula.setBounds(10, 70, 200, 30);
-        add(cedula);
+        cedula.setMaximumSize(new Dimension(320, 45));
+        cedula.setPreferredSize(new Dimension(320, 45));
+        cedula.setFont(new Font("Serif", Font.PLAIN, 16));
+        cedula.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        cedula.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(cedula);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // Solo permitir números en el campo cedula
-        ((javax.swing.text.AbstractDocument) cedula.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
-            @Override
-            public void insertString(FilterBypass fb, int offset, String string, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                if (string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
-            @Override
-            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
-                if (text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-        });
+        JLabel mensajeLabel = new JLabel("Ingrese su cédula para validar su identidad");
+        mensajeLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+        mensajeLabel.setForeground(new Color(70, 110, 150));
+        mensajeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        formPanel.add(mensajeLabel);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 18)));
 
-        enviar = new JButton("ENVIAR");
-        enviar.setBounds(10, 120, 200, 30);
-        add(enviar);
+        JPanel botonesPanel = new JPanel();
+        botonesPanel.setBackground(Color.WHITE);
+        botonesPanel.setLayout(new BoxLayout(botonesPanel, BoxLayout.X_AXIS));
+        botonesPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        enviar = new JButton("Registrarse");
+        enviar.setFont(new Font("Arial", Font.BOLD, 13));
+        enviar.setBackground(new Color(70, 110, 150));
+        enviar.setForeground(Color.WHITE);
+        enviar.setFocusPainted(false);
+        enviar.setPreferredSize(new Dimension(150, 40));
+        enviar.setMaximumSize(new Dimension(150, 40));
+        enviar.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        botonesPanel.add(enviar);
+        botonesPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+
+        cancelar = new JButton("Cancelar");
+        cancelar.setFont(new Font("Arial", Font.BOLD, 13));
+        cancelar.setBackground(new Color(220, 230, 245));
+        cancelar.setForeground(new Color(70, 110, 150));
+        cancelar.setFocusPainted(false);
+        cancelar.setPreferredSize(new Dimension(150, 40));
+        cancelar.setMaximumSize(new Dimension(150, 40));
+        cancelar.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        botonesPanel.add(cancelar);
+
+        formPanel.add(botonesPanel);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        mainPanel.add(formPanel, gbc);
+
+        add(mainPanel, BorderLayout.CENTER);
     }
 }

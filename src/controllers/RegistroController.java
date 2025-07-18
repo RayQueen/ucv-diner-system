@@ -13,6 +13,19 @@ public class RegistroController implements ActionListener {
     public RegistroController(RegistroView view) {
         this.view = view;
         this.view.registrarse.addActionListener(this);
+        this.view.cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                IniciarSesionView iniciarSesionView = new IniciarSesionView();
+                models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+                new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+                iniciarSesionView.setBounds(0, 0, 500, 400);
+                iniciarSesionView.setVisible(true);
+                iniciarSesionView.setResizable(false);
+                iniciarSesionView.setLocationRelativeTo(null);
+            }
+        });
     }
 
     @Override
