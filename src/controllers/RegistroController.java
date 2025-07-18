@@ -1,5 +1,6 @@
 package controllers;
 
+import view.IniciarSesionView;
 import view.RegistroView;
 import javax.swing.*;
 import java.awt.event.*;
@@ -21,7 +22,8 @@ public class RegistroController implements ActionListener {
                 view.apellido.getText().isEmpty() ||
                 view.correo.getText().isEmpty() ||
                 view.telefono.getText().isEmpty() ||
-                view.ocupacion.getText().isEmpty()) {
+                view.usuario.getText().isEmpty() ||
+                String.valueOf(view.contrasena.getPassword()).isEmpty()) {
                 JOptionPane.showMessageDialog(view,
                     "Por favor complete todos los campos obligatorios",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -49,15 +51,36 @@ public class RegistroController implements ActionListener {
                 ultimoMensaje = "El teléfono debe contener solo números";
                 return;
             }
+            // Guardar en usuarios.txt
+            String usuario = view.usuario.getText().trim();
+            String contrasena = String.valueOf(view.contrasena.getPassword()).trim();
+            String nombreCompleto = view.nombre.getText().trim() + " " + view.apellido.getText().trim();
+            double saldo = 0.0;
+            boolean admin = view.rol.getSelectedItem().toString().equalsIgnoreCase("admin");
+            String correo = view.correo.getText().trim();
+            // Formato: usuario,contraseña,nombreCompleto,saldo,admin,correo
+            String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + admin + "," + correo + "\n";
+            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/usuarios.txt", true)) {
+                fw.write(linea);
+            } catch (java.io.IOException ex) {
+                JOptionPane.showMessageDialog(view,
+                    "Error al guardar el usuario: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "Error al guardar el usuario";
+                return;
+            }
             JOptionPane.showMessageDialog(view,
                 "Registro completado exitosamente",
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
             ultimoMensaje = "Registro completado exitosamente";
-            view.nombre.setText("");
-            view.apellido.setText("");
-            view.correo.setText("");
-            view.telefono.setText("");
-            view.ocupacion.setText("");
+            view.dispose();
+            IniciarSesionView iniciarSesionView = new IniciarSesionView();
+            models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+            new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+            iniciarSesionView.setBounds(0, 0, 500, 400);
+            iniciarSesionView.setVisible(true);
+            iniciarSesionView.setResizable(false);
+            iniciarSesionView.setLocationRelativeTo(null);
         }
     }
 

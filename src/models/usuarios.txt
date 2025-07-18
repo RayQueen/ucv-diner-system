@@ -1,3 +1,6 @@
 Ray,12345,María Laura Reina, 9876.99,0,reinamlaura@gmail.com
 usuario,contraseña,usuario, 777.77,1,queen.laura.2110@gmail.com
 a,a,María Laura Reina, 9876.99,0,daringfaithful21@gmail.com
+b,b,b b,0.0,true,daringfaithful21@gmail.com
+c,c,camilo cuevas,0.0,false,cc@gmail.com
+d,d,daniela dantes,0.0,false,dd@gmail.com

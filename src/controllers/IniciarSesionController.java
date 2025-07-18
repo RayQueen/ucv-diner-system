@@ -23,6 +23,7 @@ public class IniciarSesionController implements ActionListener {
         this.view.boton1.addActionListener(this);
         this.view.forgotPassword.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                view.dispose();
                 RecuperacionCredencialesView view = new RecuperacionCredencialesView();
                 new RecuperacionCredencialesController(view);
                 view.setVisible(true);
@@ -47,6 +48,7 @@ public class IniciarSesionController implements ActionListener {
         this.view.register.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                view.dispose();
                 ValidacionCIView view = new ValidacionCIView();
                 new ValidacionCIController(view, identificationModel);
                 view.setVisible(true);

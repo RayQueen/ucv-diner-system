@@ -2,8 +2,10 @@ package view;
 import javax.swing.*;
 
 public class RegistroView extends JFrame {
-    public JLabel label1, label2, label3, label4, label5, label6;
-    public JTextField nombre, apellido, correo, telefono, ocupacion;
+    public JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9;
+    public JTextField nombre, apellido, correo, telefono, usuario;
+    public JPasswordField contrasena;
+    public JComboBox<String> rol;
     public JButton registrarse;
 
     public RegistroView() {
@@ -43,15 +45,29 @@ public class RegistroView extends JFrame {
         telefono.setBounds(150, 160, 150, 25);
         add(telefono);
 
-        label6 = new JLabel("Carrera/Departamento:");
+        label6 = new JLabel("Usuario:");
         label6.setBounds(35, 200, 100, 30);
         add(label6);
-        ocupacion = new JTextField();
-        ocupacion.setBounds(150, 200, 150, 25);
-        add(ocupacion);
+        usuario = new JTextField();
+        usuario.setBounds(150, 200, 150, 25);
+        add(usuario);
+
+        label7 = new JLabel("Contraseña:");
+        label7.setBounds(35, 240, 100, 30);
+        add(label7);
+        contrasena = new JPasswordField();
+        contrasena.setBounds(150, 240, 150, 25);
+        add(contrasena);
+
+        label8 = new JLabel("Rol:");
+        label8.setBounds(35, 280, 100, 30);
+        add(label8);
+        rol = new JComboBox<>(new String[]{"estudiante", "empleado", "profesor", "admin"});
+        rol.setBounds(150, 280, 150, 25);
+        add(rol);
 
         registrarse = new JButton("COMPLETAR REGISTRO");
-        registrarse.setBounds(100, 240, 200, 30);
+        registrarse.setBounds(100, 320, 200, 30);
         add(registrarse);
     }
 }
