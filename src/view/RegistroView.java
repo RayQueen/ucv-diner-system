@@ -31,7 +31,7 @@ public class RegistroView extends JFrame {
         apellido.setBounds(150, 80, 150, 25);
         add(apellido);
 
-        label4 = new JLabel("Correo UCV:");
+        label4 = new JLabel("Correo:");
         label4.setBounds(35, 120, 100, 30);
         add(label4);
         correo = new JTextField();
