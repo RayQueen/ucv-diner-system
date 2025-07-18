@@ -90,21 +90,6 @@ public class RegistroView extends JFrame {
         formPanel.add(correo);
         formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JLabel telefonoLabel = new JLabel("Teléfono");
-        telefonoLabel.setFont(new Font("Serif", Font.BOLD, 13));
-        telefonoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        formPanel.add(telefonoLabel);
-        telefono = new JTextField();
-        telefono.setMaximumSize(new Dimension(320, 28));
-        telefono.setPreferredSize(new Dimension(320, 28));
-        telefono.setFont(new Font("Serif", Font.PLAIN, 16));
-        telefono.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(200, 200, 200)),
-            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
-        telefono.setAlignmentX(Component.CENTER_ALIGNMENT);
-        formPanel.add(telefono);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
         JLabel contrasenaLabel = new JLabel("Contraseña");
         contrasenaLabel.setFont(new Font("Serif", Font.BOLD, 13));
         contrasenaLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
