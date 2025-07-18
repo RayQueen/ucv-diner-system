@@ -27,7 +27,7 @@ public class IniciarSesionController implements ActionListener {
                 RecuperacionCredencialesView view = new RecuperacionCredencialesView();
                 new RecuperacionCredencialesController(view);
                 view.setVisible(true);
-                view.setBounds(0, 0, 500, 400);
+                view.setBounds(0, 0, 1000, 400);
                 view.setVisible(true);
                 view.setResizable(false);
                 view.setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public class IniciarSesionController implements ActionListener {
                 ValidacionCIView view = new ValidacionCIView();
                 new ValidacionCIController(view, identificationModel);
                 view.setVisible(true);
-                view.setBounds(0, 0, 500, 400);
+                view.setBounds(0, 0, 1000, 400);
                 view.setVisible(true);
                 view.setResizable(false);
                 view.setLocationRelativeTo(null);                
@@ -94,7 +94,7 @@ public class IniciarSesionController implements ActionListener {
                     PantallaInicioView userView = new PantallaInicioView();
                     new PantallaInicioController(userView, usuario);
                     userView.setVisible(true);
-                    userView.setBounds(0, 0, 500, 400);
+                    userView.setBounds(0, 0, 800, 468);
                     userView.setResizable(false);
                     userView.setLocationRelativeTo(null);
                 }
