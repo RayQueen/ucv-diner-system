@@ -23,7 +23,7 @@ public class Usuario {
             int index = 0;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 5) {
+                if (partes.length == 6) {
                     String usuario = partes[0].trim();
                     String contrasena = partes[1].trim();
                     String nombreCompleto = partes[2].trim();
