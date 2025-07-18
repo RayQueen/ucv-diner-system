@@ -36,7 +36,7 @@ public class CostosView extends JFrame {
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
         panelSuperior.setBackground(azulOscuro);
 
-        etiquetaBienvenida = new JLabel("Preparación de Costos");
+        etiquetaBienvenida = new JLabel("Preparación de Costos: Periodo I-2025");
         etiquetaBienvenida.setFont(new Font("Arial", Font.BOLD, 20));
         etiquetaBienvenida.setForeground(blanco);
 

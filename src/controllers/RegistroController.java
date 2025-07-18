@@ -34,7 +34,6 @@ public class RegistroController implements ActionListener {
             if (view.nombre.getText().isEmpty() ||
                 view.apellido.getText().isEmpty() ||
                 view.correo.getText().isEmpty() ||
-                view.telefono.getText().isEmpty() ||
                 view.usuario.getText().isEmpty() ||
                 String.valueOf(view.contrasena.getPassword()).isEmpty()) {
                 JOptionPane.showMessageDialog(view,
@@ -66,19 +65,11 @@ public class RegistroController implements ActionListener {
                 ultimoMensaje = "El correo electrónico no es válido";
                 return;
             }
-            if (!isValidPhone(view.telefono.getText())) {
-                JOptionPane.showMessageDialog(view,
-                    "El teléfono debe contener solo números",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                ultimoMensaje = "El teléfono debe contener solo números";
-                return;
-            }
             // Verificar que usuario y correo no existan
             String usuario = view.usuario.getText().trim();
             String contrasena = String.valueOf(view.contrasena.getPassword()).trim();
             String nombreCompleto = view.nombre.getText().trim() + " " + view.apellido.getText().trim();
             double saldo = 0.0;
-            boolean admin = view.rol.getSelectedItem().toString().equalsIgnoreCase("admin");
             String correo = view.correo.getText().trim();
             try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("src/models/usuarios.txt"))) {
                 String lineaExistente;
@@ -109,7 +100,7 @@ public class RegistroController implements ActionListener {
                 return;
             }
             // Guardar en usuarios.txt
-            String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + admin + "," + correo + "\n";
+            String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + false + "," + correo + "\n";
             try (java.io.FileWriter fw = new java.io.FileWriter("src/models/usuarios.txt", true)) {
                 fw.write(linea);
             } catch (java.io.IOException ex) {

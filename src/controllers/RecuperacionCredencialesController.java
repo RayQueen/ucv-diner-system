@@ -70,6 +70,13 @@ public class RecuperacionCredencialesController implements ActionListener {
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 ultimoMensaje = "Se ha enviado un correo con sus credenciales";
                 view.dispose();
+                IniciarSesionView iniciarSesionView = new IniciarSesionView();
+                models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+                new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+                iniciarSesionView.setBounds(0, 0, 500, 400);
+                iniciarSesionView.setVisible(true);
+                iniciarSesionView.setResizable(false);
+                iniciarSesionView.setLocationRelativeTo(null);
             } else {
                 JOptionPane.showMessageDialog(view,
                     "Error al enviar el correo electrónico",
@@ -90,8 +97,8 @@ public class RecuperacionCredencialesController implements ActionListener {
     }
 
     private boolean enviarCorreo(String toEmail, String usuario, String contrasena) {
-        String from = "victoriaruza@gmail"; // Cambia esto por tu correo
-        String password = "budc eyyf wjux jeqk"; // Cambia esto por tu contraseña de aplicación
+        String from = "victoriaruza@gmail.com"; // Cambia esto por tu correo
+        String password = "fold pfjd uqrg oxca"; // Cambia esto por tu contraseña de aplicación
 
         java.util.Properties props = new java.util.Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -114,7 +121,6 @@ public class RecuperacionCredencialesController implements ActionListener {
             message.setText("Estimado usuario,\n\n"
                          + "Su usuario es: " + usuario + "\n"
                          + "Su contraseña es: " + contrasena + "\n\n"
-                         + "Por favor, cámbiela después de iniciar sesión si lo desea.\n\n"
                          + "Atentamente,\nEl equipo de soporte");
 
             javax.mail.Transport.send(message);
