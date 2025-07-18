@@ -51,14 +51,42 @@ public class RegistroController implements ActionListener {
                 ultimoMensaje = "El teléfono debe contener solo números";
                 return;
             }
-            // Guardar en usuarios.txt
+            // Verificar que usuario y correo no existan
             String usuario = view.usuario.getText().trim();
             String contrasena = String.valueOf(view.contrasena.getPassword()).trim();
             String nombreCompleto = view.nombre.getText().trim() + " " + view.apellido.getText().trim();
             double saldo = 0.0;
             boolean admin = view.rol.getSelectedItem().toString().equalsIgnoreCase("admin");
             String correo = view.correo.getText().trim();
-            // Formato: usuario,contraseña,nombreCompleto,saldo,admin,correo
+            try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("src/models/usuarios.txt"))) {
+                String lineaExistente;
+                while ((lineaExistente = br.readLine()) != null) {
+                    String[] partes = lineaExistente.split(",");
+                    if (partes.length >= 6) {
+                        if (partes[0].trim().equalsIgnoreCase(usuario)) {
+                            JOptionPane.showMessageDialog(view,
+                                "El nombre de usuario ya está registrado",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                            ultimoMensaje = "El nombre de usuario ya está registrado";
+                            return;
+                        }
+                        if (partes[5].trim().equalsIgnoreCase(correo)) {
+                            JOptionPane.showMessageDialog(view,
+                                "El correo electrónico ya está registrado",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                            ultimoMensaje = "El correo electrónico ya está registrado";
+                            return;
+                        }
+                    }
+                }
+            } catch (java.io.IOException ex) {
+                JOptionPane.showMessageDialog(view,
+                    "Error al verificar usuario/correo: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                ultimoMensaje = "Error al verificar usuario/correo";
+                return;
+            }
+            // Guardar en usuarios.txt
             String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + admin + "," + correo + "\n";
             try (java.io.FileWriter fw = new java.io.FileWriter("src/models/usuarios.txt", true)) {
                 fw.write(linea);
@@ -85,7 +113,7 @@ public class RegistroController implements ActionListener {
     }
 
     private boolean isValidName(String name) {
-        return name.matches("[a-zA-Z]+");
+        return name.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+(\\s[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+)*");
     }
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";

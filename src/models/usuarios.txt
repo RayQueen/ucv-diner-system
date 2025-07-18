@@ -1,6 +1,5 @@
-Ray,12345,María Laura Reina, 9876.99,0,reinamlaura@gmail.com
-usuario,contraseña,usuario, 777.77,1,queen.laura.2110@gmail.com
-a,a,María Laura Reina, 9876.99,0,daringfaithful21@gmail.com
-b,b,b b,0.0,true,daringfaithful21@gmail.com
-c,c,camilo cuevas,0.0,false,cc@gmail.com
-d,d,daniela dantes,0.0,false,dd@gmail.com
+Ray,12345,María Laura Reina, 9876.99,false,reinamlaura@gmail.com
+usuario,contraseña,usuario, 777.77,true,queen.laura.2110@gmail.com
+a,a,María Laura Reina, 9876.99,false,daringfaithful21@gmail.com
+María,ml,M.L.R.,823129813.0,false,mlr@gmail.com
+usuario,clave,Nombre Apellido,0.0,false,correo@valido.com

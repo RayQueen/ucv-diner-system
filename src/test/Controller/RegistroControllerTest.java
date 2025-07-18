@@ -23,7 +23,9 @@ public class RegistroControllerTest {
         mockView.apellido.setText("");
         mockView.correo.setText("");
         mockView.telefono.setText("");
-        mockView.ocupacion.setText("");
+        mockView.usuario.setText("");
+        mockView.contrasena.setText("");
+        mockView.rol.setSelectedItem("estudiante");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
         
@@ -37,7 +39,9 @@ public class RegistroControllerTest {
         mockView.apellido.setText("456");
         mockView.correo.setText("correo@valido.com");
         mockView.telefono.setText("1234567890");
-        mockView.ocupacion.setText("Ocupacion");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("profesor");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
 
@@ -50,7 +54,9 @@ public class RegistroControllerTest {
         mockView.apellido.setText("Apellido");
         mockView.correo.setText("correo_invalido");
         mockView.telefono.setText("1234567890");
-        mockView.ocupacion.setText("Ocupacion");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("empleado");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
 
@@ -63,7 +69,9 @@ public class RegistroControllerTest {
         mockView.apellido.setText("Apellido");
         mockView.correo.setText("correo@valido.com");
         mockView.telefono.setText("telefono_invalido");
-        mockView.ocupacion.setText("Ocupacion");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("admin");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
 
@@ -76,7 +84,9 @@ public class RegistroControllerTest {
         mockView.apellido.setText("Apellido");
         mockView.correo.setText("correo@valido.com");
         mockView.telefono.setText("1234567890");
-        mockView.ocupacion.setText("Ocupacion");
+        mockView.usuario.setText("usuario");
+        mockView.contrasena.setText("clave");
+        mockView.rol.setSelectedItem("estudiante");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.registrarse, 0, ""));
 

@@ -70,7 +70,7 @@ public class IniciarSesionController implements ActionListener {
                 JOptionPane.showMessageDialog(null,
                     "Usuario y contraseña son obligatorios",
                     "Error", JOptionPane.WARNING_MESSAGE);
-                    ultimoMensaje = "Usuario y contraseña son obligatorios";
+                ultimoMensaje = "Usuario y contraseña son obligatorios";
                 return;
             }
 
@@ -80,20 +80,29 @@ public class IniciarSesionController implements ActionListener {
                 JOptionPane.showMessageDialog(null,
                     "¡Bienvenido, " + usuario.getNombreCompleto() + "!",
                     "Acceso concedido", JOptionPane.INFORMATION_MESSAGE);
-                    ultimoMensaje = "¡Bienvenido/a, " + usuario.getUsuario() + "!";
+                ultimoMensaje = "¡Bienvenido/a, " + usuario.getUsuario() + "!";
                 view.dispose();
-                PantallaInicioView view = new PantallaInicioView();
-                new PantallaInicioController(view, usuario);
-                view.setVisible(true);
-                view.setBounds(0, 0, 500, 400);
-                view.setVisible(true);
-                view.setResizable(false);
-                view.setLocationRelativeTo(null);
+                if (usuario.esAdmin()) {
+                    view.PantallaInicioAdminView adminView = new view.PantallaInicioAdminView();
+                    adminView.actualizarUsuario(usuario.getNombreCompleto());
+                    new controllers.PantallaInicioAdminController(adminView);
+                    adminView.setVisible(true);
+                    adminView.setBounds(0, 0, 800, 600);
+                    adminView.setResizable(false);
+                    adminView.setLocationRelativeTo(null);
+                } else {
+                    PantallaInicioView userView = new PantallaInicioView();
+                    new PantallaInicioController(userView, usuario);
+                    userView.setVisible(true);
+                    userView.setBounds(0, 0, 500, 400);
+                    userView.setResizable(false);
+                    userView.setLocationRelativeTo(null);
+                }
             } else {
                 JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos",
                     "Error", JOptionPane.ERROR_MESSAGE);
-                    ultimoMensaje = "Usuario o contraseña incorrectos";
+                ultimoMensaje = "Usuario o contraseña incorrectos";
             }
         }
     }

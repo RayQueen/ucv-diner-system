@@ -63,12 +63,10 @@ public class IniciarSesionControllerTest {
     @Test
     public void testIniciarSesionIncorrecto() {
         mockView.usuario.setText("usuario");
-        mockView.contrasena.setText("contraseñaIncorrecta");
+        mockView.contrasena.setText("Contraseña");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.boton1, 0, ""));
 
         assertEquals("Usuario o contraseña incorrectos", controller.ultimoMensaje);
     }
-
-
 }
