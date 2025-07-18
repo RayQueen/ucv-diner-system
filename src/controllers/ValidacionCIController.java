@@ -2,6 +2,7 @@ package controllers;
 
 import view.ValidacionCIView;
 import models.CI;
+import view.IniciarSesionView;
 import view.RegistroView;
 
 import javax.swing.*;
@@ -16,6 +17,19 @@ public class ValidacionCIController implements ActionListener {
         this.view = view;
         this.model = model;
         this.view.enviar.addActionListener(this);
+        this.view.cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                IniciarSesionView iniciarSesionView = new IniciarSesionView();
+                models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+                new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+                iniciarSesionView.setBounds(0, 0, 500, 400);
+                iniciarSesionView.setVisible(true);
+                iniciarSesionView.setResizable(false);
+                iniciarSesionView.setLocationRelativeTo(null);
+            }
+        });
     }
 
     @Override
@@ -36,7 +50,7 @@ public class ValidacionCIController implements ActionListener {
                 RegistroView registroView = new RegistroView();
                 new RegistroController(registroView);
                 registroView.setVisible(true);
-                registroView.setBounds(0, 0, 500, 400);
+                registroView.setBounds(0, 0, 500, 600);
                 registroView.setVisible(true);
                 registroView.setResizable(false);
                 registroView.setLocationRelativeTo(null);
