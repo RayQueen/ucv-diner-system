@@ -16,6 +16,19 @@ public class RegistroController implements ActionListener {
         this.view = view;
         this.CI_Ingresada = CI_Ingresada;
         this.view.registrarse.addActionListener(this);
+        this.view.cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+                IniciarSesionView iniciarSesionView = new IniciarSesionView();
+                models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
+                new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+                iniciarSesionView.setBounds(0, 0, 500, 400);
+                iniciarSesionView.setVisible(true);
+                iniciarSesionView.setResizable(false);
+                iniciarSesionView.setLocationRelativeTo(null);
+            }
+        });
     }
 
     @Override
@@ -24,7 +37,6 @@ public class RegistroController implements ActionListener {
             if (view.nombre.getText().isEmpty() ||
                 view.apellido.getText().isEmpty() ||
                 view.correo.getText().isEmpty() ||
-                view.telefono.getText().isEmpty() ||
                 view.usuario.getText().isEmpty() ||
                 String.valueOf(view.contrasena.getPassword()).isEmpty()) {
                 JOptionPane.showMessageDialog(view,
@@ -54,13 +66,6 @@ public class RegistroController implements ActionListener {
                     "El correo electrónico no es válido",
                     "Error", JOptionPane.ERROR_MESSAGE);
                 ultimoMensaje = "El correo electrónico no es válido";
-                return;
-            }
-            if (!isValidPhone(view.telefono.getText())) {
-                JOptionPane.showMessageDialog(view,
-                    "El teléfono debe contener solo números",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                ultimoMensaje = "El teléfono debe contener solo números";
                 return;
             }
             // Verificar que usuario y correo no existan
@@ -99,7 +104,7 @@ public class RegistroController implements ActionListener {
                 return;
             }
             // Guardar en usuarios.txt
-            String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + admin + "," + correo + "\n";
+            String linea = usuario + "," + contrasena + "," + nombreCompleto + "," + saldo + "," + false + "," + correo + "\n";
             try (java.io.FileWriter fw = new java.io.FileWriter("src/models/usuarios.txt", true)) {
                 fw.write(linea);
             } catch (java.io.IOException ex) {

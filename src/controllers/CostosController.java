@@ -18,7 +18,6 @@ public class CostosController {
     public CostosController(CostosView view, UsuarioRegistrado usuario) {
     this.view = view;
     this.usuario = usuario;
-    this.view.actualizarUsuario(usuario.getNombreCompleto());
     this.view.botonGuardar.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -32,12 +31,13 @@ public class CostosController {
     });
     this.view.botonInicio.addActionListener(e -> {
         view.dispose();
-        PantallaInicioAdminView inicioView = new PantallaInicioAdminView();
-        new PantallaInicioAdminController(inicioView, usuario);
-        inicioView.setVisible(true);
-        inicioView.setBounds(0, 0, 500, 400);
-        inicioView.setResizable(false);
-        inicioView.setLocationRelativeTo(null);
+        view.PantallaInicioAdminView adminView = new view.PantallaInicioAdminView();
+        adminView.actualizarUsuario(usuario.getNombreCompleto());
+        new controllers.PantallaInicioAdminController(adminView, usuario);
+        adminView.setVisible(true);
+        adminView.setBounds(0, 0, 800, 600);
+        adminView.setResizable(false);
+        adminView.setLocationRelativeTo(null);
     });
 }
 
@@ -65,6 +65,14 @@ public class CostosController {
                         "Datos guardados correctamente en el archivo costos.txt",
                         "Guardado Exitoso",
                         JOptionPane.INFORMATION_MESSAGE);
+                view.dispose();
+                view.PantallaInicioAdminView adminView = new view.PantallaInicioAdminView();
+                adminView.actualizarUsuario(usuario.getNombreCompleto());
+                new controllers.PantallaInicioAdminController(adminView, usuario);
+                adminView.setVisible(true);
+                adminView.setBounds(0, 0, 800, 600);
+                adminView.setResizable(false);
+                adminView.setLocationRelativeTo(null);
             } catch (java.io.IOException ex) {
                 ultimoMensaje = "Ocurrió un error al guardar el archivo.";
                 JOptionPane.showMessageDialog(view,

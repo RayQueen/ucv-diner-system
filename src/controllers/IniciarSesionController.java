@@ -94,7 +94,7 @@ public class IniciarSesionController implements ActionListener {
                     PantallaInicioView userView = new PantallaInicioView();
                     new PantallaInicioController(userView, usuario);
                     userView.setVisible(true);
-                    userView.setBounds(0, 0, 500, 400);
+                    userView.setBounds(0, 0, 800, 468);
                     userView.setResizable(false);
                     userView.setLocationRelativeTo(null);
                 }
