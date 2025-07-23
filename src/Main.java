@@ -1,10 +1,10 @@
-import view.IniciarSesionView;
+import view.LogInView;
 
 public class Main {
     public static void main(String[] args) {
-        IniciarSesionView iniciarSesionView = new IniciarSesionView();
-        models.Usuario usuarioModel = new models.Usuario("src/models/usuarios.txt");
-        new controllers.IniciarSesionController(iniciarSesionView, usuarioModel);
+        LogInView iniciarSesionView = new LogInView();
+        models.ValidUsers usuarioModel = new models.ValidUsers("src/models/validUsers.txt");
+        new controllers.LogInController(iniciarSesionView, usuarioModel);
         iniciarSesionView.setBounds(0, 0, 500, 400);
         iniciarSesionView.setVisible(true);
         iniciarSesionView.setResizable(false);
