@@ -1,153 +1,147 @@
 package view;
 
+import static view.TemplateView.*;
+
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.text.NumberFormat;
 
 public class CostsView extends JFrame {
     public JFormattedTextField fixedCostField;
     public JFormattedTextField variableCostField;
+    public JFormattedTextField plateNumberField;
+    public JFormattedTextField shrinkageField;
     public JButton saveButton;
-    public JButton menuButton;
-    public JPanel sidePanel;
+    public JButton cancelButton;
     public JButton homeButton;
-    public JButton menuManagementButton;
-    public JButton setPricingButton;
-    public JButton submitConsumptionButton;
-    public JButton generateReportsButton;
-    public JLabel welcomeLabel;
+    public JButton logOutButton;
+    public JLabel periodLabel;
 
     public CostsView() {
         setTitle("Configuración de Costos - Sabor Central UCV");
-        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
         setLocationRelativeTo(null);
+        setResizable(false);
+        
         setLayout(new BorderLayout(10, 10));
+        getContentPane().setBackground(WHITE);
 
-        // Paleta de colores
-        Color azulOscuro = new Color(32, 61, 112);
-        Color blanco = Color.WHITE;
-        Color grisClaro = new Color(240, 240, 240);
+        // Background panel
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBorder(BorderFactory.createEmptyBorder(20, 15, 20, 15));
+        topPanel.setBackground(PRINCIPAL_COLOR);
 
-        // Panel superior
-        JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
-        panelSuperior.setBackground(azulOscuro);
+        // Period label
+        periodLabel = templateLabel("Calculo CBB", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
 
-        welcomeLabel = new JLabel("Preparación de Costos: Periodo I-2025");
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        welcomeLabel.setForeground(blanco);
+        // Period panel
+        JPanel periodPanel = new JPanel();
+        periodPanel.setBackground(PRINCIPAL_COLOR);
+        periodPanel.setLayout(new BoxLayout(periodPanel, BoxLayout.Y_AXIS));
 
-        menuButton = new JButton("☰");
-        menuButton.setFont(new Font("Arial", Font.PLAIN, 20));
-        menuButton.setForeground(blanco);
-        menuButton.setBackground(azulOscuro);
-        menuButton.setBorderPainted(false);
-        menuButton.setFocusPainted(false);
+        // Icon panel for home and logout buttons
+        JPanel iconButtonPanel = new JPanel();
+        iconButtonPanel.setBackground(PRINCIPAL_COLOR);
+        iconButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0));
 
-        panelSuperior.add(welcomeLabel, BorderLayout.WEST);
-        panelSuperior.add(menuButton, BorderLayout.EAST);
+        // Load icons for home and logout buttons
+        ImageIcon homeIcon = null;
+        ImageIcon logoutIcon = null;
+        try {
+            java.net.URL homeUrl = getClass().getResource("/view/assets/home.png");
+            java.net.URL logoutUrl = getClass().getResource("/view/assets/logout.png");
+            if (homeUrl != null) {
+                Image img = new ImageIcon(homeUrl).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                homeIcon = new ImageIcon(img);
+            } else {
+                System.err.println("No se encontró el icono: /view/assets/home.png");
+                homeIcon = new ImageIcon();
+            }
+            if (logoutUrl != null) {
+                Image img = new ImageIcon(logoutUrl).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                logoutIcon = new ImageIcon(img);
+            } else {
+                System.err.println("No se encontró el icono: /view/assets/logout.png");
+                logoutIcon = new ImageIcon();
+            }
+        } catch (Exception e) {
+            System.err.println("Error cargando iconos: " + e.getMessage());
+            homeIcon = new ImageIcon();
+            logoutIcon = new ImageIcon();
+        }
 
-        // Panel principal tipo registro
-        JPanel panelPrincipal = new JPanel();
-        panelPrincipal.setBackground(grisClaro);
-        panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
-        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80));
+        // Home button
+        homeButton = templateButton(homeIcon, PRINCIPAL_COLOR, null, 48, 48);
 
-        JLabel tituloPantalla = new JLabel("Configuración de Costos");
-        tituloPantalla.setFont(new Font("Arial", Font.BOLD, 24));
-        tituloPantalla.setForeground(azulOscuro);
-        tituloPantalla.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Logout button
+        logOutButton = templateButton(logoutIcon, PRINCIPAL_COLOR, null, 48, 48);
+    
+        // Form panel
+        JPanel formPanel = new JPanel();
+        formPanel.setBackground(WHITE);
+        formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        panelPrincipal.add(tituloPantalla);
-        panelPrincipal.add(Box.createRigidArea(new Dimension(0, 20)));
+        // Fixed Cost label and field
+        JLabel fixedCostLabel = templateLabel("Costo Fijo", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        fixedCostField = templateNumericTextField();
 
-        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
-        formatoNumero.setGroupingUsed(false);
-        NumberFormatter formatoSoloNumeros = new NumberFormatter(formatoNumero);
-        formatoSoloNumeros.setValueClass(Double.class);
-        formatoSoloNumeros.setAllowsInvalid(false);
+        // Variable Cost label and field
+        JLabel variableCostLabel = templateLabel("Costo Variable", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        variableCostField = templateNumericTextField();
 
-        JLabel etiquetaCostoFijo = new JLabel("Costo Fijo:");
-        etiquetaCostoFijo.setFont(new Font("Arial", Font.PLAIN, 16));
-        etiquetaCostoFijo.setForeground(azulOscuro);
-        etiquetaCostoFijo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Plate Number label and field
+        JLabel plateNumberLabel = templateLabel("Número de Bandejas", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        plateNumberField = templateNumericTextField();
 
-        fixedCostField = new JFormattedTextField(formatoSoloNumeros);
-        fixedCostField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        fixedCostField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Shrinkage label and field
+        JLabel shrinkageLabel = templateLabel("Merma (%)", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        shrinkageField = templateNumericTextField();
 
-        JLabel etiquetaCostoVariable = new JLabel("Costo Variable:");
-        etiquetaCostoVariable.setFont(new Font("Arial", Font.PLAIN, 16));
-        etiquetaCostoVariable.setForeground(azulOscuro);
-        etiquetaCostoVariable.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Button panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        variableCostField = new JFormattedTextField(formatoSoloNumeros);
-        variableCostField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        variableCostField.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        panelPrincipal.add(etiquetaCostoFijo);
-        panelPrincipal.add(fixedCostField);
-        panelPrincipal.add(Box.createRigidArea(new Dimension(0, 15)));
-        panelPrincipal.add(etiquetaCostoVariable);
-        panelPrincipal.add(variableCostField);
-        panelPrincipal.add(Box.createRigidArea(new Dimension(0, 30)));
-
-        saveButton = new JButton("Guardar");
-        saveButton.setBackground(azulOscuro);
-        saveButton.setForeground(blanco);
+        // Save button
+        saveButton = templateButton("Guardar", B_TEXT, SECONDARY_COLOR_DARK, WHITE, 140);
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panelPrincipal.add(saveButton);
+        // Cancel button
+        cancelButton = templateButton("Cancelar", B_TEXT, SECONDARY_COLOR_LIGHT, SECONDARY_COLOR_DARK, 140);
+        cancelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Panel lateral
-        sidePanel = new JPanel();
-        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        sidePanel.setPreferredSize(new Dimension(200, 0));
-        sidePanel.setBackground(azulOscuro);
+        // Add components to period panel
+        periodPanel.add(periodLabel);
+        topPanel.add(periodPanel, BorderLayout.WEST);
+        topPanel.add(iconButtonPanel, BorderLayout.EAST);
+        iconButtonPanel.add(homeButton);
+        iconButtonPanel.add(logOutButton);
+        topPanel.add(iconButtonPanel, BorderLayout.EAST);
+        
+        // Add buttons to button panel
+        buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        buttonPanel.add(cancelButton);
 
-        JLabel menuTitulo = new JLabel("Menú Principal");
-        menuTitulo.setFont(new Font("Arial", Font.BOLD, 16));
-        menuTitulo.setForeground(blanco);
+        // Add components to form panel
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        formPanel.add(fixedCostLabel);
+        formPanel.add(fixedCostField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        formPanel.add(variableCostLabel);
+        formPanel.add(variableCostField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        formPanel.add(plateNumberLabel);
+        formPanel.add(plateNumberField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        formPanel.add(shrinkageLabel);
+        formPanel.add(shrinkageField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        formPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        homeButton = new JButton("Inicio");
-        homeButton.setBackground(blanco);
-        homeButton.setForeground(azulOscuro);
-
-        menuManagementButton = new JButton("Gestión menú");
-        menuManagementButton.setBackground(blanco);
-        menuManagementButton.setForeground(azulOscuro);
-
-        setPricingButton = new JButton("Establecer tarifas");
-        setPricingButton.setBackground(blanco);
-        setPricingButton.setForeground(azulOscuro);
-
-        submitConsumptionButton = new JButton("Ingresar consumo diario");
-        submitConsumptionButton.setBackground(blanco);
-        submitConsumptionButton.setForeground(azulOscuro);
-
-        generateReportsButton = new JButton("Generar reportes");
-        generateReportsButton.setBackground(blanco);
-        generateReportsButton.setForeground(azulOscuro);
-
-        sidePanel.add(menuTitulo);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 15)));
-        sidePanel.add(homeButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(menuManagementButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(setPricingButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(submitConsumptionButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(generateReportsButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.setVisible(false);
-
-        add(panelSuperior, BorderLayout.NORTH);
-        add(panelPrincipal, BorderLayout.CENTER);
-        add(sidePanel, BorderLayout.EAST);
+        add(topPanel, BorderLayout.NORTH);
+        add(formPanel, BorderLayout.CENTER);
     }
 }

@@ -41,10 +41,6 @@ public class AdminFeedController {
             CostsView costsView = new CostsView();
             new controllers.CostsController(costsView, registeredUser);
             costsView.setVisible(true);
-            costsView.setBounds(0, 0, 500, 400);
-            costsView.setVisible(true);
-            costsView.setResizable(false);
-            costsView.setLocationRelativeTo(null);
         });
     }
 }

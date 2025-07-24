@@ -22,6 +22,7 @@ public class AdminFeedView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        setResizable(false);
         
         setLayout(new BorderLayout(10, 10));
         getContentPane().setBackground(WHITE);

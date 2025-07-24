@@ -18,12 +18,6 @@ public class IDValidationController implements ActionListener {
         this.IDValidationView = IDValidationView;
         this.validRegistersModel = validRegistersModel;
         this.IDValidationView.sendButton.addActionListener(this);
-        this.IDValidationView.IDField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                IDValidationView.sendButton.doClick();
-            }
-        });
         this.IDValidationView.cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

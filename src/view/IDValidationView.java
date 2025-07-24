@@ -35,7 +35,7 @@ public class IDValidationView extends JFrame {
         // ID label
         JLabel IDLabel = templateLabel("Cédula", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
         
-        // ID field with NumberFormatteR for only numbers
+        // ID field with NumberFormatter for only numbers
         NumberFormat format = NumberFormat.getIntegerInstance();
         format.setGroupingUsed(false);
         NumberFormatter formatter = new NumberFormatter(format);

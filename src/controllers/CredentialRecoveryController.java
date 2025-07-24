@@ -29,12 +29,9 @@ public class CredentialRecoveryController implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 CredentialRecoveryView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUserModel = new models.ValidUsers("src/models/validUsers.txt");
-                new controllers.LogInController(logInView, validUserModel);
-                logInView.setBounds(0, 0, 500, 400);
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
-                logInView.setResizable(false);
-                logInView.setLocationRelativeTo(null);
             }
         });
     }
@@ -72,12 +69,9 @@ public class CredentialRecoveryController implements ActionListener {
                 lastMessage = "Se ha enviado un correo con sus credenciales";
                 CredentialRecoveryView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUserModel = new models.ValidUsers("src/models/validUsers.txt");
-                new controllers.LogInController(logInView, validUserModel);
-                logInView.setBounds(0, 0, 500, 400);
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
-                logInView.setResizable(false);
-                logInView.setLocationRelativeTo(null);
             } else {
                 JOptionPane.showMessageDialog(CredentialRecoveryView,
                     "Error al enviar el correo electrónico",

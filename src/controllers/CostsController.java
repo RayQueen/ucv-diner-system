@@ -1,7 +1,7 @@
 package controllers;
 
 import view.CostsView;
-import view.AdminFeedView;
+import view.LogInView;
 
 import models.RegisteredUser;
 
@@ -23,21 +23,30 @@ public class CostsController {
             saveCosts();
         }
     });
-    this.costsView.menuButton.addActionListener(e -> {
-        costsView.sidePanel.setVisible(!costsView.sidePanel.isVisible());
-        costsView.revalidate();
-        costsView.repaint();
-    });
     this.costsView.homeButton.addActionListener(e -> {
         costsView.dispose();
-        AdminFeedView adminView = new view.AdminFeedView();
+        view.AdminFeedView adminView = new view.AdminFeedView();
         adminView.updateUser(registeredUser.getFullName());
         new controllers.AdminFeedController(adminView, registeredUser);
         adminView.setVisible(true);
-        adminView.setBounds(0, 0, 800, 600);
-        adminView.setResizable(false);
-        adminView.setLocationRelativeTo(null);
     });
+    this.costsView.cancelButton.addActionListener(e -> {
+        costsView.dispose();
+        view.AdminFeedView adminView = new view.AdminFeedView();
+        adminView.updateUser(registeredUser.getFullName());
+        new controllers.AdminFeedController(adminView, registeredUser);
+        adminView.setVisible(true);
+    });
+    this.costsView.logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                costsView.dispose();
+                LogInView logInView = new LogInView();
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                new controllers.LogInController(logInView, validUsersModel);
+                logInView.setVisible(true);
+            }
+        });
 }
 
     private void saveCosts() {

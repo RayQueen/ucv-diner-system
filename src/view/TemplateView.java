@@ -1,10 +1,12 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 import controllers.LogInController;
 
 import java.awt.*;
+import java.text.NumberFormat;
 
 public class TemplateView extends JPanel {
 
@@ -152,6 +154,29 @@ public class TemplateView extends JPanel {
 
     public static JTextField templateTextField() {
         return templateTextField(TEXT, 320, 45);
+    }
+
+
+    // Numeric text field template
+    public static JFormattedTextField templateNumericTextField() {
+        // Formatted text fields
+        NumberFormat format = NumberFormat.getIntegerInstance();
+        format.setGroupingUsed(false);
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter.setValueClass(Long.class);
+        formatter.setAllowsInvalid(false);
+        formatter.setMinimum(0L);
+        
+        JFormattedTextField numericField = new JFormattedTextField(formatter);
+        numericField.setMaximumSize(new Dimension(320, 45));
+        numericField.setPreferredSize(new Dimension(320, 45));
+        numericField.setFont(TEXT);
+        numericField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        numericField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        return numericField;
     }
 
     // Password field template
