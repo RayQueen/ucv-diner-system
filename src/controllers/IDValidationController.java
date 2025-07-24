@@ -18,6 +18,12 @@ public class IDValidationController implements ActionListener {
         this.IDValidationView = IDValidationView;
         this.validRegistersModel = validRegistersModel;
         this.IDValidationView.sendButton.addActionListener(this);
+        this.IDValidationView.IDField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IDValidationView.sendButton.doClick();
+            }
+        });
         this.IDValidationView.cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,10 +31,7 @@ public class IDValidationController implements ActionListener {
                 LogInView logInView = new LogInView();
                 models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
-                logInView.setBounds(0, 0, 500, 400);
                 logInView.setVisible(true);
-                logInView.setResizable(false);
-                logInView.setLocationRelativeTo(null);
             }
         });
     }
@@ -51,10 +54,6 @@ public class IDValidationController implements ActionListener {
                 RegisterView registerView = new RegisterView();
                 new RegisterController(registerView, enteredID);
                 registerView.setVisible(true);
-                registerView.setBounds(0, 0, 500, 600);
-                registerView.setVisible(true);
-                registerView.setResizable(false);
-                registerView.setLocationRelativeTo(null);
             } else {
                 JOptionPane.showMessageDialog(null,
                     "No estás autorizado para registrarte. Contácta a Secretaría",

@@ -24,10 +24,7 @@ public class RegisterController implements ActionListener {
                 LogInView logInView = new LogInView();
                 models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
-                logInView.setBounds(0, 0, 500, 400);
                 logInView.setVisible(true);
-                logInView.setResizable(false);
-                logInView.setLocationRelativeTo(null);
             }
         });
     }
@@ -124,10 +121,7 @@ public class RegisterController implements ActionListener {
             LogInView logInView = new LogInView();
             models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
             new controllers.LogInController(logInView, validUsersModel);
-            logInView.setBounds(0, 0, 500, 400);
             logInView.setVisible(true);
-            logInView.setResizable(false);
-            logInView.setLocationRelativeTo(null);
         }
     }
 
@@ -142,7 +136,6 @@ public class RegisterController implements ActionListener {
     }
 
     private boolean isValidPassword(String password) {
-        // Password must be at least 8 characters long and contain at least one digit, one uppercase letter, and one lowercase letter
         String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
         Pattern pattern = Pattern.compile(passwordRegex);
         return pattern.matcher(password).matches();

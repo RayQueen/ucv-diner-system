@@ -1,133 +1,154 @@
 package view;
 
+import static view.TemplateView.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class AdminFeedView extends JFrame {
-    public JPanel sidePanel;
     public JPanel topPanel;
     public JPanel contentPanel;
-    public JButton menuButton;
     public JLabel welcomeLabel;
     public JButton menuManagementButton;
     public JButton calculateCCBButton;
     public JButton setPricingButton;
     public JButton submitConsumptionButton;
     public JButton generateReportsButton;
-
-    // Paleta de colores basada en la imagen de usuario
-    private final Color azulOscuro = new Color(32, 61, 112);
-    private final Color blanco = Color.WHITE;
-    private final Color grisClaro = new Color(240, 240, 240);
+    public JButton logOutButton;
+    public JButton homeButton;
 
     public AdminFeedView() {
         setTitle("Sabor Central UCV - Admin");
-        setSize(1500, 900); // Tamaño grande como el usuario
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1280, 720);
         setLocationRelativeTo(null);
+        
         setLayout(new BorderLayout(10, 10));
-        getContentPane().setBackground(grisClaro);
+        getContentPane().setBackground(WHITE);
 
-        // Panel superior
+        // Background panel
         topPanel = new JPanel(new BorderLayout());
-        topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
-        topPanel.setBackground(azulOscuro);
+        topPanel.setBorder(BorderFactory.createEmptyBorder(20, 15, 20, 15));
+        topPanel.setBackground(PRINCIPAL_COLOR);
 
-        welcomeLabel = new JLabel("BIENVENIDO/A");
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        welcomeLabel.setForeground(blanco);
+        // Welcome label
+        welcomeLabel = templateLabel("BIENVENIDO", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
+        
+        // Welcome panel
+        JPanel welcomePanel = new JPanel();
+        welcomePanel.setBackground(PRINCIPAL_COLOR);
+        welcomePanel.setLayout(new BoxLayout(welcomePanel, BoxLayout.Y_AXIS));
 
-        JLabel iconoUsuario = new JLabel("\uD83D\uDC64");
-        iconoUsuario.setFont(new Font("Arial", Font.PLAIN, 32));
-        iconoUsuario.setForeground(blanco);
+        // Icon panel for home and logout buttons
+        JPanel iconButtonPanel = new JPanel();
+        iconButtonPanel.setBackground(PRINCIPAL_COLOR);
+        iconButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 0));
 
-        JPanel panelBienvenida = new JPanel();
-        panelBienvenida.setBackground(azulOscuro);
-        panelBienvenida.setLayout(new BoxLayout(panelBienvenida, BoxLayout.Y_AXIS));
-        panelBienvenida.add(iconoUsuario);
-        panelBienvenida.add(welcomeLabel);
-
-        menuButton = new JButton("☰");
-        menuButton.setFont(new Font("Arial", Font.PLAIN, 28));
-        menuButton.setForeground(blanco);
-        menuButton.setBackground(azulOscuro);
-        menuButton.setBorderPainted(false);
-        menuButton.setFocusPainted(false);
-
-        topPanel.add(panelBienvenida, BorderLayout.WEST);
-        topPanel.add(menuButton, BorderLayout.EAST);
-
-        // Panel contenido
-        contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBackground(grisClaro);
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        contentPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel etiquetaTitulo = new JLabel("Panel de Administración");
-        etiquetaTitulo.setFont(new Font("Arial", Font.BOLD, 24));
-        etiquetaTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        etiquetaTitulo.setForeground(azulOscuro);
-
-        JLabel etiquetaSubtitulo = new JLabel("Gestione las operaciones del comedor universitario.");
-        etiquetaSubtitulo.setFont(new Font("Arial", Font.ITALIC, 14));
-        etiquetaSubtitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        etiquetaSubtitulo.setForeground(Color.GRAY);
-
-        contentPanel.add(etiquetaTitulo);
-        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        contentPanel.add(etiquetaSubtitulo);
-        contentPanel.add(Box.createVerticalGlue());
-
-        // Panel lateral (menú)
-        sidePanel = new JPanel();
-        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        sidePanel.setPreferredSize(new Dimension(220, 0));
-        sidePanel.setBackground(azulOscuro);
-
-        JLabel menuTitulo = new JLabel("Panel de Administración");
-        menuTitulo.setFont(new Font("Arial", Font.BOLD, 16));
-        menuTitulo.setForeground(blanco);
-
-        menuManagementButton = new JButton("Gestionar menú");
-        calculateCCBButton = new JButton("Calcular CCB");
-        setPricingButton = new JButton("Establecer tarifas");
-        submitConsumptionButton = new JButton("Ingresar consumo diario");
-        generateReportsButton = new JButton("Generar reportes");
-
-        for (JButton btn : new JButton[]{
-                menuManagementButton,
-                calculateCCBButton,
-                setPricingButton,
-                submitConsumptionButton,
-                generateReportsButton
-        }) {
-            btn.setBackground(blanco);
-            btn.setForeground(azulOscuro);
-            btn.setFocusPainted(false);
-            btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Load icons for home and logout buttons
+        ImageIcon homeIcon = null;
+        ImageIcon logoutIcon = null;
+        try {
+            java.net.URL homeUrl = getClass().getResource("/view/assets/home.png");
+            java.net.URL logoutUrl = getClass().getResource("/view/assets/logout.png");
+            if (homeUrl != null) {
+                Image img = new ImageIcon(homeUrl).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                homeIcon = new ImageIcon(img);
+            } else {
+                System.err.println("No se encontró el icono: /view/assets/home.png");
+                homeIcon = new ImageIcon();
+            }
+            if (logoutUrl != null) {
+                Image img = new ImageIcon(logoutUrl).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                logoutIcon = new ImageIcon(img);
+            } else {
+                System.err.println("No se encontró el icono: /view/assets/logout.png");
+                logoutIcon = new ImageIcon();
+            }
+        } catch (Exception e) {
+            System.err.println("Error cargando iconos: " + e.getMessage());
+            homeIcon = new ImageIcon();
+            logoutIcon = new ImageIcon();
         }
 
-        sidePanel.add(menuTitulo);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 15)));
-        sidePanel.add(menuManagementButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(calculateCCBButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(setPricingButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(submitConsumptionButton);
-        sidePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        sidePanel.add(generateReportsButton);
-        sidePanel.setVisible(false);
+        // Home button
+        homeButton = templateButton(homeIcon, PRINCIPAL_COLOR, null, 48, 48);
+
+        // Logout button
+        logOutButton = templateButton(logoutIcon, PRINCIPAL_COLOR, null, 48, 48);
+        
+        // Right panel for buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(WHITE);
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 120));
+
+        // CCB button
+        calculateCCBButton = templateButton("Calcular CCB", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+        
+        // Pricing rates button
+        setPricingButton = templateButton("Establecer Tarifas", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+        
+        // Menu management button
+        menuManagementButton = templateButton("Gestionar Menú", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+        
+        // Consumption submission button
+        submitConsumptionButton = templateButton("Registrar Consumo", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+        
+        // Reports generation button
+        generateReportsButton = templateButton("Generar Reportes", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+        
+        // Left panel for data display
+        JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(WHITE);
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(50, 120, 20, 20));
+        
+        // Data panel for data display
+        JPanel dataPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(SECONDARY_COLOR_MEDIUM);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 32, 32);
+                g2.dispose();
+            }
+        };
+        dataPanel.setOpaque(false);
+        dataPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        dataPanel.setMaximumSize(new Dimension(600, 425));
+        dataPanel.setPreferredSize(new Dimension(600, 425));
+        dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
+        
+        // Add components to welcome panel
+        welcomePanel.add(welcomeLabel);
+        topPanel.add(welcomePanel, BorderLayout.WEST);
+        topPanel.add(iconButtonPanel, BorderLayout.EAST);
+        iconButtonPanel.add(homeButton);
+        iconButtonPanel.add(logOutButton);
+        topPanel.add(iconButtonPanel, BorderLayout.EAST);
+
+        // Add buttons to right panel
+        buttonPanel.add(calculateCCBButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(setPricingButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(menuManagementButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(submitConsumptionButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(generateReportsButton);
+
+        // Add components to left panel
+        leftPanel.add(dataPanel);
+        
 
         add(topPanel, BorderLayout.NORTH);
-        add(contentPanel, BorderLayout.CENTER);
-        add(sidePanel, BorderLayout.EAST);
+        add(buttonPanel, BorderLayout.EAST);
+        add(leftPanel, BorderLayout.WEST);
     }
 
-    // Método para actualizar el nombre del usuario admin en la vista
     public void updateUser(String nombreCompleto) {
         welcomeLabel.setText("BIENVENIDO/A " + nombreCompleto);
     }

@@ -1,7 +1,7 @@
 package controllers;
 
 import view.CostsView;
-
+import view.LogInView;
 import view.AdminFeedView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,12 +16,24 @@ public class AdminFeedController {
         this.adminFeedView = adminFeedView;
         this.registeredUser = usuario;
         this.adminFeedView.updateUser(usuario.getFullName());
-        this.adminFeedView.menuButton.addActionListener(new ActionListener() {
+        this.adminFeedView.homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                adminFeedView.sidePanel.setVisible(!adminFeedView.sidePanel.isVisible());
-                adminFeedView.revalidate();
-                adminFeedView.repaint();
+                adminFeedView.dispose();
+                view.AdminFeedView adminView = new view.AdminFeedView();
+                adminView.updateUser(registeredUser.getFullName());
+                new controllers.AdminFeedController(adminView, registeredUser);
+                adminView.setVisible(true);
+            }
+        });
+        this.adminFeedView.logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adminFeedView.dispose();
+                LogInView logInView = new LogInView();
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                new controllers.LogInController(logInView, validUsersModel);
+                logInView.setVisible(true);
             }
         });
         this.adminFeedView.calculateCCBButton.addActionListener(e -> {

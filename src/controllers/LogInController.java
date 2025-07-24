@@ -28,10 +28,6 @@ public class LogInController implements ActionListener {
                 CredentialRecoveryView passwordRecoveryView = new CredentialRecoveryView();
                 new CredentialRecoveryController(passwordRecoveryView);
                 passwordRecoveryView.setVisible(true);
-                passwordRecoveryView.setBounds(0, 0, 500, 400);
-                passwordRecoveryView.setVisible(true);
-                passwordRecoveryView.setResizable(false);
-                passwordRecoveryView.setLocationRelativeTo(null);
             }
         });
         this.logInView.userField.addActionListener(new ActionListener() {
@@ -52,11 +48,7 @@ public class LogInController implements ActionListener {
                 logInView.dispose();
                 IDValidationView IDValidationView = new IDValidationView();
                 new IDValidationController(IDValidationView, identificationModel);
-                IDValidationView.setVisible(true);
-                IDValidationView.setBounds(0, 0, 500, 400);
-                IDValidationView.setVisible(true);
-
-                IDValidationView.setLocationRelativeTo(null);                
+                IDValidationView.setVisible(true);                
             }
         });
     }
@@ -85,16 +77,10 @@ public class LogInController implements ActionListener {
                     adminView.updateUser(userField.getFullName());
                     new controllers.AdminFeedController(adminView, userField);
                     adminView.setVisible(true);
-                    adminView.setBounds(0, 0, 800, 600);
-                    adminView.setResizable(false);
-                    adminView.setLocationRelativeTo(null);
                 } else {
                     FeedView userView = new FeedView();
                     new FeedController(userView, userField);
                     userView.setVisible(true);
-                    userView.setBounds(0, 0, 800, 468);
-                    userView.setResizable(false);
-                    userView.setLocationRelativeTo(null);
                 }
             } else {
                 JOptionPane.showMessageDialog(null,

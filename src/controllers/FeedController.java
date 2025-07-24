@@ -1,7 +1,7 @@
 package controllers;
 
 import view.FeedView;
-import view.ConsultMenuView;
+import view.LogInView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,25 +13,23 @@ public class FeedController {
     public FeedController(FeedView feedView, RegisteredUser registeredUser) {
         this.feedView = feedView;
         this.feedView.updateUser(registeredUser);
-        this.feedView.menuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                feedView.sidePanel.setVisible(!feedView.sidePanel.isVisible());
-                feedView.revalidate();
-                feedView.repaint();
-            }
-        });
-        this.feedView.consultButton.addActionListener(new ActionListener() {
+        this.feedView.homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 feedView.dispose();
-                ConsultMenuView consultMenuView = new ConsultMenuView();
-                new ConsultMenuController(consultMenuView, registeredUser);
-                consultMenuView.setVisible(true);
-                consultMenuView.setBounds(0, 0, 500, 600);
-                consultMenuView.setVisible(true);
-                consultMenuView.setResizable(false);
-                consultMenuView.setLocationRelativeTo(null);
+                FeedView userView = new FeedView();
+                new FeedController(userView, registeredUser);
+                userView.setVisible(true);
+            }
+        });
+        this.feedView.logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                feedView.dispose();
+                LogInView logInView = new LogInView();
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                new controllers.LogInController(logInView, validUsersModel);
+                logInView.setVisible(true);
             }
         });
     }
