@@ -238,9 +238,7 @@ public class FeedView extends JFrame {
     // Método para actualizar la pantalla según el usuario
     public void updateUser(RegisteredUser usuario) {
         welcomeLabel.setText("BIENVENIDO/A " + usuario.getFullName());
-        balanceLabel.setText("Saldo actual: Bs. " + usuario.getBalance());
-        addBalanceButton.setVisible(true);
-        payLunchButton.setVisible(true);
+        balanceValueLabel.setText("Bs. " + usuario.getBalance());
     }
 
     private JPanel updateMenu(String turn, String soup, String dry, String juice, String dessert, JButton prePayButton) {

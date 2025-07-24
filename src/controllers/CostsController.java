@@ -46,7 +46,31 @@ public class CostsController {
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }
-        });
+    });
+    this.costsView.fixedCostField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                costsView.variableCostField.requestFocus();
+            }
+    });
+    this.costsView.variableCostField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                costsView.plateNumberField.requestFocus();
+            }
+    });
+    this.costsView.plateNumberField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                costsView.shrinkageField.requestFocus();
+            }
+    });
+    this.costsView.shrinkageField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                costsView.saveButton.doClick();
+            }
+    });
 }
 
     private void saveCosts() {

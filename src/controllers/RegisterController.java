@@ -27,6 +27,36 @@ public class RegisterController implements ActionListener {
                 logInView.setVisible(true);
             }
         });
+        this.registerView.firstNameField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerView.lastNameField.requestFocus();
+            }
+        });
+        this.registerView.lastNameField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerView.usernameField.requestFocus();
+            }
+        });
+        this.registerView.usernameField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerView.emailField.requestFocus();
+            }
+        });
+        this.registerView.emailField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerView.passwordField.requestFocus();
+            }
+        });
+        this.registerView.passwordField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerView.registerButton.doClick();
+            }
+        });
     }
 
     @Override
