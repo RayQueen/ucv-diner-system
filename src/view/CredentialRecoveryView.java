@@ -12,7 +12,7 @@ public class CredentialRecoveryView extends JFrame {
 
     public CredentialRecoveryView() {
         setTitle("Recuperar Credenciales");
-                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
         setResizable(false);

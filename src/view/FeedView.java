@@ -2,13 +2,17 @@ package view;
 
 import static view.TemplateView.*;
 
+import models.RegisteredUser;
+import models.Menu;
+import models.Turn;
+
 import javax.swing.*;
 import java.awt.*;
-import models.RegisteredUser;
 
 public class FeedView extends JFrame {
     public JPanel topPanel;
-    public JPanel menuPanel;
+    public JPanel menu1Panel;
+    public JPanel menu2Panel;
     public JPanel leftPanel;
     public JPanel breakfastPanel;
     public JPanel lunchPanel;
@@ -136,7 +140,7 @@ public class FeedView extends JFrame {
         addBalanceButton = templateButton("Recargar saldo", B_TEXT, PRINCIPAL_COLOR, WHITE, 200, 45);
 
         // Menu panel
-        menuPanel = new JPanel();
+        JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         menuPanel.setBackground(WHITE);
         menuPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 80));
@@ -147,7 +151,7 @@ public class FeedView extends JFrame {
         payBreakfastButton = templateButton("Pre-pagar", B_TEXT, PRINCIPAL_COLOR, WHITE, 150);
 
         // Breakfast panel
-        JPanel menu1Panel = new JPanel() {
+        menu1Panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -163,17 +167,9 @@ public class FeedView extends JFrame {
         menu1Panel.setMaximumSize(new Dimension(600, 225));
         menu1Panel.setPreferredSize(new Dimension(600, 225));
         menu1Panel.setLayout(new BoxLayout(menu1Panel, BoxLayout.Y_AXIS));
-        menu1Panel.add(updateMenu(
-            "Desayuno (7:00 AM - 11:00 AM)",
-            "Sopa: Crema de auyama",
-            "Seco: Pabellón criollo",
-            "Jugo: Jugo de papelón con limón",
-            "Postre: Manzana y durazno",
-            payBreakfastButton
-        ));
 
         // Lunch panel
-        JPanel menu2Panel = new JPanel() {
+        menu2Panel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -189,14 +185,6 @@ public class FeedView extends JFrame {
         menu2Panel.setMaximumSize(new Dimension(600, 225));
         menu2Panel.setPreferredSize(new Dimension(600, 225));
         menu2Panel.setLayout(new BoxLayout(menu2Panel, BoxLayout.Y_AXIS));
-        menu2Panel.add(updateMenu(
-            "Almuerzo (12:00 PM - 5:00 PM)",
-            "Sopa: Sopa de lentejas",
-            "Seco: Pabellón criollo",
-            "Jugo: Papelón con limón",
-            "Postre: Quesillo",
-            payLunchButton
-        ));
 
         // Add components to menu panel
         menuPanel.add(menu1Panel);
@@ -241,14 +229,14 @@ public class FeedView extends JFrame {
         balanceValueLabel.setText("Bs. " + usuario.getBalance());
     }
 
-    private JPanel updateMenu(String turn, String soup, String dry, String juice, String dessert, JButton prePayButton) {
+    private JPanel getTurnPanel(Turn menu, JButton prePayButton) {
         JPanel turnPanel = new JPanel();
         turnPanel.setBackground(SECONDARY_COLOR_LIGHT);
         turnPanel.setLayout(new BoxLayout(turnPanel, BoxLayout.Y_AXIS));
         turnPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         turnPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
-        JLabel turnLabel = templateLabel(turn, TITLE2, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
+        JLabel turnLabel = templateLabel(menu.getTurn(), TITLE2, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
 
         JPanel labelsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         labelsPanel.setBackground(SECONDARY_COLOR_LIGHT);
@@ -257,10 +245,10 @@ public class FeedView extends JFrame {
         verticalPanel.setLayout(new BoxLayout(verticalPanel, BoxLayout.Y_AXIS));
         verticalPanel.setBackground(SECONDARY_COLOR_LIGHT);
 
-        JLabel labelSoup = templateLabel(soup, B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelDry = templateLabel(dry, B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelJuice = templateLabel(juice, B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelDessert = templateLabel(dessert, B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelSoup = templateLabel(menu.getSoup(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelDry = templateLabel(menu.getDry(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelJuice = templateLabel(menu.getJuice(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelDessert = templateLabel(menu.getDessert(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
 
         labelSoup.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelDry.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -309,5 +297,12 @@ public class FeedView extends JFrame {
         turnPanel.add(horizontalPanel);
 
         return turnPanel;
+    }
+
+    public void updateMenu(Menu menu) {
+        this.menu1Panel.removeAll();
+        this.menu1Panel.add(getTurnPanel(menu.getBreakfast(), this.payBreakfastButton));
+        this.menu2Panel.removeAll();
+        this.menu2Panel.add(getTurnPanel(menu.getLunch(), this.payLunchButton));
     }
 }

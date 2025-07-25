@@ -13,6 +13,8 @@ public class FeedController {
     public FeedController(FeedView feedView, RegisteredUser registeredUser) {
         this.feedView = feedView;
         this.feedView.updateUser(registeredUser);
+        models.Menu menuModel = new models.Menu("src/models/menu.txt");
+        this.feedView.updateMenu(menuModel);
         this.feedView.homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
