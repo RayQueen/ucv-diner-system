@@ -23,14 +23,14 @@ public class CostsController {
             saveCosts();
         }
     });
-    this.costsView.homeButton.addActionListener(e -> {
+    this.costsView.cancelButton.addActionListener(e -> {
         costsView.dispose();
         view.AdminFeedView adminView = new view.AdminFeedView();
         adminView.updateUser(registeredUser.getFullName());
         new controllers.AdminFeedController(adminView, registeredUser);
         adminView.setVisible(true);
     });
-    this.costsView.cancelButton.addActionListener(e -> {
+    this.costsView.homeButton.addActionListener(e -> {
         costsView.dispose();
         view.AdminFeedView adminView = new view.AdminFeedView();
         adminView.updateUser(registeredUser.getFullName());
