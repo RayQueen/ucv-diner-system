@@ -91,14 +91,28 @@ public class MenuManagementController implements ActionListener {
             return;
         } else {
             String turn = "";
+            int menuType = menuView.turn ? 0 : 1; // 0 for breakfast, 1 for lunch
             if (menuView.turn) {
                 turn = "Desayuno (7:00 AM - 9:00 AM)";
             } else {
                 turn = "Almuerzo (12:00 PM - 2:00 PM)";
             }
-            String line = turn + "," + soup + "," + dry + "," + juice + "," + dessert + "\n";
-            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/menu.txt", true)) {
-                fw.write(line);
+            String newLine = turn + "," + "Sopa: " + soup + "," + "Seco: " + dry + "," + "Jugo: " + juice + "," + "Postre: " + dessert;
+            java.util.List<String> lines = new java.util.ArrayList<>();
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("src/models/menu.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+            } catch (java.io.IOException ex) {
+                // Si el archivo no existe, lo creamos con líneas vacías
+            }
+            while (lines.size() <= menuType) lines.add("");
+            lines.set(menuType, newLine);
+            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/menu.txt", false)) {
+                for (String l : lines) {
+                    fw.write(l + "\n");
+                }
             } catch (java.io.IOException ex) {
                 JOptionPane.showMessageDialog(menuView,
                     "Error al guardar el menu: " + ex.getMessage(),

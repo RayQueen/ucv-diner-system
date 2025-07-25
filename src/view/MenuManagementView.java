@@ -84,6 +84,9 @@ public class MenuManagementView extends JFrame {
         
         // Selection box for menu type
         JComboBox<String> menuTypeCombo = new JComboBox<>(new String[]{"Desayuno", "Almuerzo"});
+        menuTypeCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        menuTypeCombo.setMaximumSize(new Dimension(320, 45));
+        menuTypeCombo.setPreferredSize(new Dimension(320, 45));
         turn = true;
         menuTypeCombo.addActionListener(e -> {
             int selected = menuTypeCombo.getSelectedIndex();
@@ -91,20 +94,20 @@ public class MenuManagementView extends JFrame {
         });
         
         // Soup label and field
-        JLabel soupLabel = new JLabel("Sopa");
-        soupField = new JTextField();
+        JLabel soupLabel = templateLabel("Sopa", B_TEXT, BLACK, CENTER_ALIGNMENT);
+        soupField = templateTextField();
 
         // Dry label and field
-        JLabel dryLabel = new JLabel("Seco");
-        dryField = new JTextField();
+        JLabel dryLabel = templateLabel("Seco", B_TEXT, BLACK, CENTER_ALIGNMENT);
+        dryField = templateTextField();
 
         // Juice label and field
-        JLabel juiceLabel = new JLabel("Jugo");
-        juiceField = new JTextField();
+        JLabel juiceLabel = templateLabel("Jugo", B_TEXT, BLACK, CENTER_ALIGNMENT);
+        juiceField = templateTextField();
 
         // Dessert label and field
-        JLabel dessertLabel = new JLabel("Postre");
-        dessertField = new JTextField();
+        JLabel dessertLabel = templateLabel("Postre", B_TEXT, BLACK, CENTER_ALIGNMENT);
+        dessertField = templateTextField();
 
         // Button panel
         JPanel buttonPanel = new JPanel();
@@ -134,6 +137,7 @@ public class MenuManagementView extends JFrame {
         buttonPanel.add(cancelButton);
 
         // Add components to the form panel
+        formPanel.add(menuTypeCombo);
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(soupLabel);
         formPanel.add(soupField);
@@ -143,8 +147,10 @@ public class MenuManagementView extends JFrame {
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(juiceLabel);
         formPanel.add(juiceField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(dessertLabel);
         formPanel.add(dessertField);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(buttonPanel, BorderLayout.CENTER);
 
         add(topPanel, BorderLayout.NORTH);

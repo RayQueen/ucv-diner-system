@@ -1,8 +1,6 @@
 package controllers;
 
-import view.CostsView;
-import view.LogInView;
-import view.AdminFeedView;
+import view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,6 +39,12 @@ public class AdminFeedController {
             CostsView costsView = new CostsView();
             new controllers.CostsController(costsView, registeredUser);
             costsView.setVisible(true);
+        });
+        this.adminFeedView.menuManagementButton.addActionListener(e -> {
+            adminFeedView.dispose();
+            MenuManagementView menusView = new MenuManagementView();
+            new MenuManagementController(menusView, registeredUser);
+            menusView.setVisible(true);
         });
     }
 }
