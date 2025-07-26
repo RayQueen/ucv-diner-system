@@ -1,12 +1,10 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 
 import controllers.LogInController;
 
 import java.awt.*;
-import java.text.NumberFormat;
 
 public class TemplateView extends JPanel {
 
@@ -158,16 +156,8 @@ public class TemplateView extends JPanel {
 
 
     // Numeric text field template
-    public static JFormattedTextField templateNumericTextField() {
-        // Formatted text fields
-        NumberFormat format = NumberFormat.getIntegerInstance();
-        format.setGroupingUsed(false);
-        NumberFormatter formatter = new NumberFormatter(format);
-        formatter.setValueClass(Long.class);
-        formatter.setAllowsInvalid(false);
-        formatter.setMinimum(0L);
-        
-        JFormattedTextField numericField = new JFormattedTextField(formatter);
+    public static JTextField templateNumericTextField() {
+        JTextField numericField = new JTextField();
         numericField.setMaximumSize(new Dimension(320, 45));
         numericField.setPreferredSize(new Dimension(320, 45));
         numericField.setFont(TEXT);
@@ -175,6 +165,22 @@ public class TemplateView extends JPanel {
             BorderFactory.createLineBorder(new Color(200, 200, 200)),
             BorderFactory.createEmptyBorder(8, 14, 8, 14)));
         numericField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // DocumentFilter para solo dígitos o vacío
+        ((javax.swing.text.AbstractDocument) numericField.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
+                if (string == null || string.isEmpty() || string.matches("\\d+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+                if (text == null || text.isEmpty() || text.matches("\\d+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
 
         return numericField;
     }

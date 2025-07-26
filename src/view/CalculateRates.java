@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CalculateRates extends JFrame {
-
-    public JFormattedTextField rateField;
+    public int userType;
+    public JTextField rateField;
     public JButton homeButton;
     public JButton logOutButton;
     public JButton saveButton;
@@ -15,7 +15,7 @@ public class CalculateRates extends JFrame {
     public JLabel periodLabel;
 
     public CalculateRates() {
-        setTitle("Calcular Tarifas - Sabor Central UCV");
+        setTitle("Modificar Tarifas - Sabor Central UCV");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class CalculateRates extends JFrame {
         topPanel.setBackground(PRINCIPAL_COLOR);
 
         // Period label
-        periodLabel = templateLabel("Calculo CBB", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
+        periodLabel = templateLabel("Modificar Tarifas", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
 
         // Period panel
         JPanel periodPanel = new JPanel();
@@ -78,16 +78,22 @@ public class CalculateRates extends JFrame {
         JPanel formPanel = new JPanel();
         formPanel.setBackground(WHITE);
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
-        formPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80)); // Más espacio alrededor
+        formPanel.setBorder(BorderFactory.createEmptyBorder(100, 80, 40, 80));
+
+        //User Type label
+        JLabel userTypeLabel = templateLabel("Seleccione la tarifa a modificar", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
 
         // ComboBox para tipo de usuario
         String[] userTypes = {"Estudiante", "Profesor", "Empleado"};
         JComboBox<String> userTypeComboBox = new JComboBox<>(userTypes);
-        userTypeComboBox.setMaximumSize(new Dimension(300, 30));
+        userTypeComboBox.setMaximumSize(new Dimension(320, 45));
         userTypeComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        userTypeComboBox.addActionListener(e -> {
+            userType = userTypeComboBox.getSelectedIndex();
+        });
 
         // Rate label and field
-        JLabel rateLabel = templateLabel("Tarifa:", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        JLabel rateLabel = templateLabel("Valor de la tarifa (%)", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
         rateField = templateNumericTextField();
 
         JPanel buttonPanel = new JPanel();
@@ -111,29 +117,21 @@ public class CalculateRates extends JFrame {
         iconButtonPanel.add(logOutButton);
         topPanel.add(iconButtonPanel, BorderLayout.EAST);
 
-        // Add components for form panel
-        buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
-        formPanel.add(userTypeComboBox); 
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20))); 
-        formPanel.add(rateLabel);
-        formPanel.add(rateField);
-
         // Add buttons to the button panel
         buttonPanel.add(saveButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         buttonPanel.add(cancelButton);
 
-        // Agrega los paneles al JFrame
+        // Add components for form panel
+        formPanel.add(userTypeLabel);
+        formPanel.add(userTypeComboBox); 
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20))); 
+        formPanel.add(rateLabel);
+        formPanel.add(rateField);
+        formPanel.add(Box.createVerticalStrut(30));
+        formPanel.add(buttonPanel);
+
         add(topPanel, BorderLayout.NORTH);
         add(formPanel, BorderLayout.CENTER);
-        formPanel.add(Box.createVerticalStrut(30)); // Espacio entre campo y botones
-        formPanel.add(buttonPanel);
-    }
-
-    public static void main(String[] args) {
-        CalculateRates calculateRates = new CalculateRates();
-        calculateRates.setVisible(true);
-        // Assuming you have a controller to handle the logic
-        // new controllers.CalculateRatesController(calculateRates);
     }
 }

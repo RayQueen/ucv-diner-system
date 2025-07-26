@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CostsView extends JFrame {
-    public JFormattedTextField fixedCostField;
-    public JFormattedTextField variableCostField;
-    public JFormattedTextField plateNumberField;
-    public JFormattedTextField shrinkageField;
+    public JTextField fixedCostField;
+    public JTextField variableCostField;
+    public JTextField plateNumberField;
+    public JTextField shrinkageField;
     public JButton saveButton;
     public JButton cancelButton;
     public JButton homeButton;
