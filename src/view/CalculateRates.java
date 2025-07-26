@@ -96,7 +96,7 @@ public class CalculateRates extends JFrame {
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Save button
-        saveButton = templateButton("Guardar", B_TEXT, SECONDARY_COLOR_LIGHT, PRINCIPAL_COLOR, 140);
+        saveButton = templateButton("Guardar", B_TEXT, SECONDARY_COLOR_DARK, WHITE, 140);
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Cancel button
