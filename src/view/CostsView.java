@@ -84,11 +84,11 @@ public class CostsView extends JFrame {
 
         // Fixed Cost label and field
         JLabel fixedCostLabel = templateLabel("Costo Fijo", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
-        fixedCostField = templateNumericTextField();
+        fixedCostField = templateDecimalTextField();
 
         // Variable Cost label and field
         JLabel variableCostLabel = templateLabel("Costo Variable", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
-        variableCostField = templateNumericTextField();
+        variableCostField = templateDecimalTextField();
 
         // Plate Number label and field
         JLabel plateNumberLabel = templateLabel("Número de Bandejas", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
@@ -96,7 +96,7 @@ public class CostsView extends JFrame {
 
         // Shrinkage label and field
         JLabel shrinkageLabel = templateLabel("Merma (%)", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
-        shrinkageField = templateNumericTextField();
+        shrinkageField = templateDecimalTextField();
 
         // Button panel
         JPanel buttonPanel = new JPanel();

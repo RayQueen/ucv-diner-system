@@ -1,2 +1,0 @@
-Desayuno (7:00 AM - 9:00 AM),Sopa: a1,Seco: b1,Jugo: c1,Postre: d1
-Almuerzo (12:00 PM - 2:00 PM),Sopa: a2,Seco: b2,Jugo: c2,Postre: d2

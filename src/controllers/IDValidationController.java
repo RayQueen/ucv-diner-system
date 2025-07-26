@@ -23,7 +23,7 @@ public class IDValidationController implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 IDValidationView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }

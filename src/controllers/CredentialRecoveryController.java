@@ -12,7 +12,7 @@ import java.util.regex.*;
 
 public class CredentialRecoveryController implements ActionListener {
     private CredentialRecoveryView CredentialRecoveryView;
-    private ValidUsers validUserModel = new ValidUsers("src/models/validUsers.txt");
+    private ValidUsers validUserModel = new ValidUsers("src/models/data/validUsers.txt");
     public String lastMessage;
 
     public CredentialRecoveryController(CredentialRecoveryView CredentialRecoveryView) {
@@ -29,7 +29,7 @@ public class CredentialRecoveryController implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 CredentialRecoveryView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }
@@ -69,7 +69,7 @@ public class CredentialRecoveryController implements ActionListener {
                 lastMessage = "Se ha enviado un correo con sus credenciales";
                 CredentialRecoveryView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             } else {

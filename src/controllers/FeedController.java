@@ -13,7 +13,7 @@ public class FeedController {
     public FeedController(FeedView feedView, RegisteredUser registeredUser) {
         this.feedView = feedView;
         this.feedView.updateUser(registeredUser);
-        models.Menu menuModel = new models.Menu("src/models/menu.txt");
+        models.Menu menuModel = new models.Menu("src/models/data/menu.txt");
         this.feedView.updateMenu(menuModel);
         this.feedView.homeButton.addActionListener(new ActionListener() {
             @Override
@@ -29,7 +29,7 @@ public class FeedController {
             public void actionPerformed(ActionEvent e) {
                 feedView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }

@@ -2,6 +2,8 @@ package view;
 
 import static view.TemplateView.*;
 
+import models.Pricing;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,6 +11,14 @@ public class AdminFeedView extends JFrame {
     public JPanel topPanel;
     public JPanel contentPanel;
     public JLabel welcomeLabel;
+    public JLabel fixedCostLabel;
+    public JLabel variableCostLabel;
+    public JLabel plateNumberLabel;
+    public JLabel shrinkageLabel;
+    public JLabel ccbLabel;
+    public JLabel studentRateLabel;
+    public JLabel teacherRateLabel;
+    public JLabel employeeRateLabel;
     public JButton menuManagementButton;
     public JButton calculateCCBButton;
     public JButton setPricingButton;
@@ -117,11 +127,61 @@ public class AdminFeedView extends JFrame {
             }
         };
         dataPanel.setOpaque(false);
-        dataPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        dataPanel.setBorder(BorderFactory.createEmptyBorder(50, 30, 30, 30));
         dataPanel.setMaximumSize(new Dimension(600, 425));
         dataPanel.setPreferredSize(new Dimension(600, 425));
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
-        
+
+        // Data title label
+        JLabel dataTitleLabel = templateLabel("Datos actuales", TITLE1, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
+
+        // Costs panel
+        JPanel costsPanel = new JPanel();
+        costsPanel.setBackground(SECONDARY_COLOR_MEDIUM);
+        costsPanel.setLayout(new BoxLayout(costsPanel, BoxLayout.X_AXIS));
+
+        // Costs left panel
+        JPanel leftCostPanel = new JPanel();
+        leftCostPanel.setBackground(SECONDARY_COLOR_MEDIUM);
+        leftCostPanel.setLayout(new BoxLayout(leftCostPanel, BoxLayout.Y_AXIS));
+
+        // Costs left panel
+        JPanel rightCostPanel = new JPanel();
+        rightCostPanel.setBackground(SECONDARY_COLOR_MEDIUM);
+        rightCostPanel.setLayout(new BoxLayout(rightCostPanel, BoxLayout.Y_AXIS));
+
+        // Fixed Cost label
+        fixedCostLabel = templateLabel("Costo Fijo: ", TITLE3, WHITE, Component.LEFT_ALIGNMENT);
+
+        // Variable Cost label
+        variableCostLabel = templateLabel("Costo Variable: ", TITLE3, WHITE, Component.LEFT_ALIGNMENT);
+
+        // Plate Number label
+        plateNumberLabel = templateLabel("Número de Bandejas: ", TITLE3, WHITE, Component.LEFT_ALIGNMENT);
+
+        // Shrinkage label
+        shrinkageLabel = templateLabel("Merma (%): ", TITLE3, WHITE, Component.LEFT_ALIGNMENT);
+
+        // CCB label
+        ccbLabel = templateLabel("CCB: ", TITLE2, WHITE, Component.CENTER_ALIGNMENT);
+
+        // Rates label
+        JLabel ratesLabel = templateLabel("Tarifas", TITLE1, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
+
+        // Rates panel
+        JPanel ratesPanel = new JPanel();
+        ratesPanel.setBackground(SECONDARY_COLOR_MEDIUM);
+        ratesPanel.setLayout(new BoxLayout(ratesPanel, BoxLayout.X_AXIS));
+
+        // Student rate label
+        studentRateLabel = templateLabel("Estudiante: ", TITLE3, WHITE, Component.LEFT_ALIGNMENT);
+
+        // Teacher rate label
+        teacherRateLabel = templateLabel("Profesor: ", TITLE3, WHITE, Component.CENTER_ALIGNMENT);
+
+        // Employee rate label
+        employeeRateLabel = templateLabel("Empleado: ", TITLE3, WHITE, Component.RIGHT_ALIGNMENT);
+
         // Add components to welcome panel
         welcomePanel.add(welcomeLabel);
         topPanel.add(welcomePanel, BorderLayout.WEST);
@@ -141,6 +201,35 @@ public class AdminFeedView extends JFrame {
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
         buttonPanel.add(generateReportsButton);
 
+        // Add components to costs panel
+        leftCostPanel.add(fixedCostLabel);
+        leftCostPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        leftCostPanel.add(variableCostLabel);
+        rightCostPanel.add(plateNumberLabel);
+        rightCostPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        rightCostPanel.add(shrinkageLabel);
+        costsPanel.add(leftCostPanel, BorderLayout.WEST);
+        costsPanel.add(Box.createRigidArea(new Dimension(80, 0)));
+        costsPanel.add(rightCostPanel, BorderLayout.EAST);
+
+        // Add components to rates panel
+        ratesPanel.add(studentRateLabel);
+        ratesPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        ratesPanel.add(teacherRateLabel);
+        ratesPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        ratesPanel.add(employeeRateLabel);
+
+        // Add components to data panel
+        dataPanel.add(dataTitleLabel);
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        dataPanel.add(costsPanel);
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        dataPanel.add(ccbLabel);
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        dataPanel.add(ratesLabel);
+        dataPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        dataPanel.add(ratesPanel);
+
         // Add components to left panel
         leftPanel.add(dataPanel);
         
@@ -152,5 +241,28 @@ public class AdminFeedView extends JFrame {
 
     public void updateUser(String nombreCompleto) {
         welcomeLabel.setText("BIENVENIDO/A " + nombreCompleto);
+    }
+
+    public void updateCosts(Pricing pricingModel) {
+        pricingModel.loadCosts();
+        fixedCostLabel.setText("Costo Fijo: " + pricingModel.getFixedCost());
+        variableCostLabel.setText("Costo Variable: " + pricingModel.getVariableCost());
+        plateNumberLabel.setText("Número de Bandejas: " + pricingModel.getPlateNumber());
+        shrinkageLabel.setText("Merma: " + pricingModel.getShrinkage() + "%");
+        ccbLabel.setText("CCB: " + pricingModel.getCCB());
+        studentRateLabel.setText("Estudiante: " + pricingModel.getRate(0) + "%");
+        teacherRateLabel.setText("Profesor: " + pricingModel.getRate(1) + "%");
+        employeeRateLabel.setText("Empleado: " + pricingModel.getRate(2) + "%");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            AdminFeedView adminFeedView = new AdminFeedView();
+            adminFeedView.setVisible(true);
+            // Example usage with dummy data
+            models.RegisteredUser user = new models.RegisteredUser("John", "Doe", "johndoe", 0.0, true, "johndoe@example.com");
+            adminFeedView.updateUser(user.getFullName());
+            adminFeedView.updateCosts(new Pricing());
+        });
     }
 }

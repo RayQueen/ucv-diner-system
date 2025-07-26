@@ -4,6 +4,7 @@ import view.MenuManagementView;
 import view.LogInView;
 
 import models.RegisteredUser;
+import models.Pricing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 public class MenuManagementController implements ActionListener {
     private MenuManagementView menuView;
     private RegisteredUser registeredUser;
+    private Pricing pricingModel;
     public String lastMessage;
 
     @Override
@@ -23,6 +25,7 @@ public class MenuManagementController implements ActionListener {
     public MenuManagementController(MenuManagementView menuView, RegisteredUser registeredUser) {
         this.menuView = menuView;
         this.registeredUser = registeredUser;
+        this.pricingModel = new Pricing();
         this.menuView.homeButton.addActionListener(e -> {
             menuView.dispose();
             view.AdminFeedView adminView = new view.AdminFeedView();
@@ -35,7 +38,7 @@ public class MenuManagementController implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     menuView.dispose();
                     LogInView logInView = new LogInView();
-                    models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                    models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                     new controllers.LogInController(logInView, validUsersModel);
                     logInView.setVisible(true);
                 }
@@ -99,7 +102,7 @@ public class MenuManagementController implements ActionListener {
             }
             String newLine = turn + "," + "Sopa: " + soup + "," + "Seco: " + dry + "," + "Jugo: " + juice + "," + "Postre: " + dessert;
             java.util.List<String> lines = new java.util.ArrayList<>();
-            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("src/models/menu.txt"))) {
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("src/models/data/menu.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     lines.add(line);
@@ -109,7 +112,7 @@ public class MenuManagementController implements ActionListener {
             }
             while (lines.size() <= menuType) lines.add("");
             lines.set(menuType, newLine);
-            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/menu.txt", false)) {
+            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/data/menu.txt", false)) {
                 for (String l : lines) {
                     fw.write(l + "\n");
                 }

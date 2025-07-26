@@ -7,7 +7,6 @@ import controllers.LogInController;
 import java.awt.*;
 
 public class TemplateView extends JPanel {
-
     // Guide colors
     public static final Color PRINCIPAL_COLOR = new Color(42, 71, 113);
     public static final Color SECONDARY_COLOR_LIGHT = new Color(220, 230, 245);
@@ -22,6 +21,7 @@ public class TemplateView extends JPanel {
     // Fonts
     public static final Font TITLE1 = new Font("Arial", Font.BOLD, 32);
     public static final Font TITLE2 = new Font("Arial", Font.BOLD, 24);
+    public static final Font TITLE3 = new Font("Arial", Font.BOLD, 20);
     public static final Font B_TEXT = new Font("Arial", Font.BOLD, 16);
     public static final Font TEXT = new Font("Arial", Font.PLAIN, 16);
 
@@ -183,6 +183,44 @@ public class TemplateView extends JPanel {
         });
 
         return numericField;
+    }
+
+    // Decimal text field template
+    public static JTextField templateDecimalTextField() {
+        JTextField decimalField = new JTextField();
+        decimalField.setMaximumSize(new Dimension(320, 45));
+        decimalField.setPreferredSize(new Dimension(320, 45));
+        decimalField.setFont(TEXT);
+        decimalField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(8, 14, 8, 14)));
+        decimalField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // DocumentFilter para solo dígitos, un punto y vacío
+        ((javax.swing.text.AbstractDocument) decimalField.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
+                if (isValidDecimal(fb.getDocument().getText(0, fb.getDocument().getLength()), string)) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+                String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                StringBuilder sb = new StringBuilder(currentText);
+                sb.replace(offset, offset + length, text == null ? "" : text);
+                if (isValidDecimal("", sb.toString())) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+            private boolean isValidDecimal(String before, String after) {
+                if (after.isEmpty()) return true;
+                // Solo dígitos y un punto, no dos puntos, no punto al inicio
+                return after.matches("\\d*\\.?\\d*") && after.chars().filter(ch -> ch == '.').count() <= 1 && !after.startsWith(".");
+            }
+        });
+
+        return decimalField;
     }
 
     // Password field template

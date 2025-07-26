@@ -5,15 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.RegisteredUser;
+import models.Pricing;
 
 public class AdminFeedController {
     private AdminFeedView adminFeedView;
     private RegisteredUser registeredUser;
+    private Pricing pricingModel;
 
-    public AdminFeedController(AdminFeedView adminFeedView, RegisteredUser usuario) {
+    public AdminFeedController(AdminFeedView adminFeedView, RegisteredUser user) {
         this.adminFeedView = adminFeedView;
-        this.registeredUser = usuario;
-        this.adminFeedView.updateUser(usuario.getFullName());
+        this.registeredUser = user;
+        this.pricingModel = new Pricing();
+        this.adminFeedView.updateUser(user.getFullName());
+        this.adminFeedView.updateCosts(pricingModel);
         this.adminFeedView.homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,7 +33,7 @@ public class AdminFeedController {
             public void actionPerformed(ActionEvent e) {
                 adminFeedView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }
@@ -39,6 +43,12 @@ public class AdminFeedController {
             CostsView costsView = new CostsView();
             new controllers.CostsController(costsView, registeredUser);
             costsView.setVisible(true);
+        });
+        this.adminFeedView.setPricingButton.addActionListener(e -> {
+            adminFeedView.dispose();
+            SetPricingView setPricingView = new SetPricingView();
+            new SetPricingController(setPricingView, registeredUser);
+            setPricingView.setVisible(true);
         });
         this.adminFeedView.menuManagementButton.addActionListener(e -> {
             adminFeedView.dispose();

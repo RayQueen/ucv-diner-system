@@ -5,7 +5,7 @@ import static view.TemplateView.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class CalculateRates extends JFrame {
+public class SetPricingView extends JFrame {
     public int userType;
     public JTextField rateField;
     public JButton homeButton;
@@ -14,7 +14,7 @@ public class CalculateRates extends JFrame {
     public JButton cancelButton;
     public JLabel periodLabel;
 
-    public CalculateRates() {
+    public SetPricingView() {
         setTitle("Modificar Tarifas - Sabor Central UCV");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);

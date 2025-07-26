@@ -1,8 +1,6 @@
 package controllers;
 
-import models.ValidUsers;
-import models.RegisteredUser;
-import models.ValidRegisters;
+import models.*;
 
 import view.LogInView;
 import view.CredentialRecoveryView;
@@ -14,8 +12,8 @@ import java.awt.event.*;
 
 public class LogInController implements ActionListener {
     private LogInView logInView;
-    private ValidUsers validUsersModel = new ValidUsers("src/models/validUsers.txt");
-    private ValidRegisters identificationModel = new ValidRegisters("src/models/validRegisters.txt");
+    private ValidUsers validUsersModel = new ValidUsers("src/models/data/validUsers.txt");
+    private ValidRegisters identificationModel = new ValidRegisters("src/models/data/validRegisters.txt");
     public String lastMessage;
 
     public LogInController(LogInView logInView, ValidUsers validUsersModel) {

@@ -4,6 +4,7 @@ import view.CostsView;
 import view.LogInView;
 
 import models.RegisteredUser;
+import models.Pricing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,11 +13,13 @@ import java.awt.event.ActionListener;
 public class CostsController {
     private CostsView costsView;
     private RegisteredUser registeredUser;
+    private Pricing pricingModel;
     public String lastMessage;
 
     public CostsController(CostsView costsView, RegisteredUser registeredUser) {
     this.costsView = costsView;
     this.registeredUser = registeredUser;
+    this.pricingModel = new Pricing();
     this.costsView.saveButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -42,7 +45,7 @@ public class CostsController {
             public void actionPerformed(ActionEvent e) {
                 costsView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }
@@ -76,7 +79,9 @@ public class CostsController {
     private void saveCosts() {
         String fixedCost = costsView.fixedCostField.getText();
         String variableCost = costsView.variableCostField.getText();
-        if (fixedCost.isEmpty() || variableCost.isEmpty()) {
+        String plateNumber = costsView.plateNumberField.getText();
+        String shrinkage = costsView.shrinkageField.getText();
+        if (fixedCost.isEmpty() || variableCost.isEmpty() || plateNumber.isEmpty() || shrinkage.isEmpty()) {
             lastMessage = "Por favor complete todos los campos obligatorios";
             JOptionPane.showMessageDialog(costsView, "Por favor complete todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -84,27 +89,20 @@ public class CostsController {
         try {
             double fixedCostValue = Double.parseDouble(fixedCost);
             double variableCostValue = Double.parseDouble(variableCost);
-            if (fixedCostValue < 0 || variableCostValue < 0) {
+            int plateNumberValue = Integer.parseInt(plateNumber);
+            double shrinkageValue = Double.parseDouble(shrinkage);
+            if (fixedCostValue < 0 || variableCostValue < 0 || plateNumberValue < 0 || shrinkageValue < 0) {
                 lastMessage = "Los costos no pueden ser negativos.";
                 JOptionPane.showMessageDialog(costsView, "Los costos no pueden ser negativos.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            try (java.io.FileWriter writer = new java.io.FileWriter("src/models/costs.txt", false)) {
-                writer.write(fixedCostValue + "\n");
-                writer.write(variableCostValue + "\n");
-                lastMessage = "Costos guardados correctamente.";
-                JOptionPane.showMessageDialog(costsView,
-                        "Datos guardados correctamente",
-                        "Guardado Exitoso",
-                        JOptionPane.INFORMATION_MESSAGE);
+            try (java.io.FileWriter writer = new java.io.FileWriter("src/models/data/costs.txt", false)) {
+                pricingModel.updateCostsInFile(fixedCostValue, variableCostValue, plateNumberValue, shrinkageValue);
                 costsView.dispose();
                 view.AdminFeedView adminFeedView = new view.AdminFeedView();
                 adminFeedView.updateUser(registeredUser.getFullName());
                 new controllers.AdminFeedController(adminFeedView, registeredUser);
                 adminFeedView.setVisible(true);
-                adminFeedView.setBounds(0, 0, 800, 600);
-                adminFeedView.setResizable(false);
-                adminFeedView.setLocationRelativeTo(null);
             } catch (java.io.IOException ex) {
                 lastMessage = "Ocurrió un error al guardar el archivo.";
                 JOptionPane.showMessageDialog(costsView,
