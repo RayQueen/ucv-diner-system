@@ -5,24 +5,22 @@ import static view.TemplateView.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuManagementView extends JFrame {
-    public boolean turn;
-    public JTextField soupField;
-    public JTextField dryField;
-    public JTextField juiceField;
-    public JTextField dessertField;
+public class CalculateRates extends JFrame {
+
+    public JFormattedTextField rateField;
     public JButton homeButton;
     public JButton logOutButton;
     public JButton saveButton;
     public JButton cancelButton;
+    public JLabel periodLabel;
 
-    public MenuManagementView() {
-        setTitle("Configuración de Costos - Sabor Central UCV");
+    public CalculateRates() {
+        setTitle("Calcular Tarifas - Sabor Central UCV");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
         setResizable(false);
-        
+
         setLayout(new BorderLayout(10, 10));
         getContentPane().setBackground(WHITE);
 
@@ -31,8 +29,8 @@ public class MenuManagementView extends JFrame {
         topPanel.setBorder(BorderFactory.createEmptyBorder(20, 15, 20, 15));
         topPanel.setBackground(PRINCIPAL_COLOR);
 
-        // Menu label
-        JLabel menuLabel = templateLabel("Gestión de Menú", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
+        // Period label
+        periodLabel = templateLabel("Calculo CBB", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
 
         // Period panel
         JPanel periodPanel = new JPanel();
@@ -80,81 +78,62 @@ public class MenuManagementView extends JFrame {
         JPanel formPanel = new JPanel();
         formPanel.setBackground(WHITE);
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
-        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        
-        // Selection box for menu type
-        JComboBox<String> menuTypeCombo = new JComboBox<>(new String[]{"Desayuno", "Almuerzo"});
-        menuTypeCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        menuTypeCombo.setMaximumSize(new Dimension(320, 45));
-        menuTypeCombo.setPreferredSize(new Dimension(320, 45));
-        turn = true;
-        menuTypeCombo.addActionListener(e -> {
-            int selected = menuTypeCombo.getSelectedIndex();
-            turn = (selected == 0); // 0 Breakfast, 1 Lunch
-        });
-        
-        // Soup label and field
-        JLabel soupLabel = templateLabel("Sopa", B_TEXT, BLACK, CENTER_ALIGNMENT);
-        soupField = templateTextField();
+        formPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80)); // Más espacio alrededor
 
-        // Dry label and field
-        JLabel dryLabel = templateLabel("Seco", B_TEXT, BLACK, CENTER_ALIGNMENT);
-        dryField = templateTextField();
+        // ComboBox para tipo de usuario
+        String[] userTypes = {"Estudiante", "Profesor", "Empleado"};
+        JComboBox<String> userTypeComboBox = new JComboBox<>(userTypes);
+        userTypeComboBox.setMaximumSize(new Dimension(300, 30));
+        userTypeComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Juice label and field
-        JLabel juiceLabel = templateLabel("Jugo", B_TEXT, BLACK, CENTER_ALIGNMENT);
-        juiceField = templateTextField();
+        // Rate label and field
+        JLabel rateLabel = templateLabel("Tarifa:", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        rateField = templateNumericTextField();
 
-        // Dessert label and field
-        JLabel dessertLabel = templateLabel("Postre", B_TEXT, BLACK, CENTER_ALIGNMENT);
-        dessertField = templateTextField();
-
-        // Button panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBackground(WHITE);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Save button
-        saveButton = templateButton("Guardar", B_TEXT, SECONDARY_COLOR_DARK, WHITE, 140);
+        saveButton = templateButton("Guardar", B_TEXT, SECONDARY_COLOR_LIGHT, PRINCIPAL_COLOR, 140);
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Cancel button
-        cancelButton = templateButton("Cancelar", B_TEXT, SECONDARY_COLOR_LIGHT, SECONDARY_COLOR_DARK, 140);
+        cancelButton = templateButton("Cancelar", B_TEXT, SECONDARY_COLOR_LIGHT, PRINCIPAL_COLOR, 140);
         cancelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Add components to period panel
-        periodPanel.add(menuLabel);
+        periodPanel.add(periodLabel);
         topPanel.add(periodPanel, BorderLayout.WEST);
         topPanel.add(iconButtonPanel, BorderLayout.EAST);
         iconButtonPanel.add(homeButton);
         iconButtonPanel.add(logOutButton);
         topPanel.add(iconButtonPanel, BorderLayout.EAST);
-        
-        // Add buttons to button panel
+
+        // Add components for form panel
+        buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        formPanel.add(userTypeComboBox); 
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20))); 
+        formPanel.add(rateLabel);
+        formPanel.add(rateField);
+
+        // Add buttons to the button panel
         buttonPanel.add(saveButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         buttonPanel.add(cancelButton);
 
-        // Add components to the form panel
-        formPanel.add(menuTypeCombo);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(soupLabel);
-        formPanel.add(soupField);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(dryLabel);
-        formPanel.add(dryField);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(juiceLabel);
-        formPanel.add(juiceField);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(dessertLabel);
-        formPanel.add(dessertField);
-        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(buttonPanel, BorderLayout.CENTER);
-
+        // Agrega los paneles al JFrame
         add(topPanel, BorderLayout.NORTH);
         add(formPanel, BorderLayout.CENTER);
+        formPanel.add(Box.createVerticalStrut(30)); // Espacio entre campo y botones
+        formPanel.add(buttonPanel);
+    }
+
+    public static void main(String[] args) {
+        CalculateRates calculateRates = new CalculateRates();
+        calculateRates.setVisible(true);
+        // Assuming you have a controller to handle the logic
+        // new controllers.CalculateRatesController(calculateRates);
     }
 }
-
