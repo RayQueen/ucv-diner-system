@@ -11,7 +11,7 @@ public class ValidUsersTest {
 
     @BeforeEach
     public void setUp() {
-        validUsers = new ValidUsers("src/models/validUsers.txt");
+        validUsers = new ValidUsers();
     }
 
     @Test

@@ -2,6 +2,7 @@ package test.Controller;
 
 import controllers.LogInController;
 import models.ValidUsers;
+
 import view.LogInView;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class LogInControllerTest {
     @BeforeEach
     public void setUp() {
         mockView = new LogInView();
-        mockUsuarioModel = new ValidUsers("src/models/validUsers.txt");
+        mockUsuarioModel = new ValidUsers();
         controller = new LogInController(mockView, mockUsuarioModel);
     }
 

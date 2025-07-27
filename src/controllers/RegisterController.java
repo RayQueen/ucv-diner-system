@@ -9,7 +9,7 @@ import java.util.regex.*;
 
 public class RegisterController implements ActionListener {
     private RegisterView registerView;
-    private models.ValidRegisters validRegisters = new models.ValidRegisters("src/models/data/validRegisters.txt");
+    private models.ValidRegisters validRegisters = new models.ValidRegisters();
     private String enteredID;
     public String lastMessage;
 
@@ -22,7 +22,7 @@ public class RegisterController implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 registerView.dispose();
                 LogInView logInView = new LogInView();
-                models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
+                models.ValidUsers validUsersModel = new models.ValidUsers();
                 new controllers.LogInController(logInView, validUsersModel);
                 logInView.setVisible(true);
             }
@@ -102,7 +102,7 @@ public class RegisterController implements ActionListener {
             String fullName = registerView.firstNameField.getText().trim() + " " + registerView.lastNameField.getText().trim();
             double balance = 0.0;
             String email = registerView.emailField.getText().trim();
-            boolean admin = validRegisters.isAdmin(enteredID);
+            int userType = validRegisters.getUserType(enteredID);
             try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("src/models/data/validUsers.txt"))) {
                 String lineaExistente;
                 while ((lineaExistente = br.readLine()) != null) {
@@ -133,7 +133,7 @@ public class RegisterController implements ActionListener {
             }
 
             // Save the new user
-            String linea = user + "," + password + "," + fullName + "," + balance + "," + admin + "," + email + "\n";
+            String linea = user + "," + password + "," + fullName + "," + balance + "," + userType + "," + email + "\n";
             try (java.io.FileWriter fw = new java.io.FileWriter("src/models/data/validUsers.txt", true)) {
                 fw.write(linea);
             } catch (java.io.IOException ex) {
@@ -149,7 +149,7 @@ public class RegisterController implements ActionListener {
             lastMessage = "Registro completado exitosamente";
             registerView.dispose();
             LogInView logInView = new LogInView();
-            models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
+            models.ValidUsers validUsersModel = new models.ValidUsers();
             new controllers.LogInController(logInView, validUsersModel);
             logInView.setVisible(true);
         }

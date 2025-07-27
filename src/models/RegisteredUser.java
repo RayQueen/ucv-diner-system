@@ -5,15 +5,15 @@ public class RegisteredUser {
     private String password;
     private String fullName;
     private double balance;
-    private boolean admin;
+    private int userType;
     private String email;
 
-    public RegisteredUser(String user, String password, String fullName, double balance, boolean admin, String email) {
+    public RegisteredUser(String user, String password, String fullName, double balance, int userType, String email) {
         this.user = user;
         this.password = password;
         this.fullName = fullName;
         this.balance = balance;
-        this.admin = admin;
+        this.userType = userType;
         this.email = email;
     }
 
@@ -26,7 +26,7 @@ public class RegisteredUser {
             throw new IllegalArgumentException("El monto debe ser positivo");
         }
     }
-    public boolean isAdmin() { return admin; }
+    public int getUserType() { return userType; }
     public String getUser() { return user; }
     public String getPassword() { return password; }
     public String getEmail() { return email; }

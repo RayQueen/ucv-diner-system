@@ -10,7 +10,7 @@ public class RegisteredUserTest {
 
     @BeforeEach
     public void setUp() {
-        usuario = new RegisteredUser("usuario1", "pass123", "Juan Pérez", 100.5, true, "juan@ucv.ve");
+        usuario = new RegisteredUser("usuario1", "pass123", "Juan Pérez", 100.5, 3, "juan@ucv.ve");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class RegisteredUserTest {
 
     @Test
     public void testEsAdmin() {
-        assertTrue(usuario.isAdmin());
+        assertEquals(3, usuario.getUserType());
     }
 
     @Test

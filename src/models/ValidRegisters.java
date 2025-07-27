@@ -4,32 +4,32 @@ import java.io.*;
 
 public class ValidRegisters {
     private String[] validIDs;
-    private boolean[] isAdmin;
+    private int[] userType;
 
-    public ValidRegisters(String filePath) {
-        loadIDs(filePath);
+    public ValidRegisters() {
+        loadIDs();
     }
 
-    private void loadIDs(String filePath) {
+    private void loadIDs() {
         try {
-            BufferedReader brCount = new BufferedReader(new FileReader(filePath));
+            BufferedReader brCount = new BufferedReader(new FileReader("src/models/data/validRegisters.txt"));
             int totalUsers = 0;
             while (brCount.readLine() != null) {
                 totalUsers++;
             }
             brCount.close();
             validIDs = new String[totalUsers];
-            isAdmin = new boolean[totalUsers];
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            userType = new int[totalUsers];
+            BufferedReader br = new BufferedReader(new FileReader("src/models/data/validRegisters.txt"));
             String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.trim().split(",");
                 validIDs[index] = parts[0].trim();
-                if (parts[1].trim().equalsIgnoreCase("true")) {
-                    isAdmin[index] = true;
-                } else {
-                    isAdmin[index] = false;
+                try {
+                    userType[index] = Integer.parseInt(parts[1].trim());
+                } catch (NumberFormatException e) {
+                    userType[index] = 0;
                 }
                 index++;
             }
@@ -48,12 +48,12 @@ public class ValidRegisters {
         return false;
     }
 
-    public boolean isAdmin(String ID) {
+    public int getUserType(String ID) {
         for (int i = 0; i < validIDs.length; i++) {
             if (validIDs[i].equals(ID)) {
-                return isAdmin[i];
+                return userType[i];
             }
         }
-        return false;
+        return 0;
     }
 }

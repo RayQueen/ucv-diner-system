@@ -12,8 +12,8 @@ import java.awt.event.*;
 
 public class LogInController implements ActionListener {
     private LogInView logInView;
-    private ValidUsers validUsersModel = new ValidUsers("src/models/data/validUsers.txt");
-    private ValidRegisters identificationModel = new ValidRegisters("src/models/data/validRegisters.txt");
+    private ValidUsers validUsersModel = new ValidUsers();
+    private ValidRegisters identificationModel = new ValidRegisters();
     public String lastMessage;
 
     public LogInController(LogInView logInView, ValidUsers validUsersModel) {
@@ -70,7 +70,7 @@ public class LogInController implements ActionListener {
                 RegisteredUser userField = validUsersModel.findRegisteredUser(logInUser);
                 lastMessage = "Acceso exitoso";
                 logInView.dispose();
-                if (userField.isAdmin()) {
+                if (userField.getUserType() == 3) {
                     view.AdminFeedView adminView = new view.AdminFeedView();
                     adminView.updateUser(userField.getFullName());
                     new controllers.AdminFeedController(adminView, userField);

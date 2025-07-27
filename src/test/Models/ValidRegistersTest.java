@@ -11,7 +11,7 @@ public class ValidRegistersTest {
 
     @BeforeEach
     public void setUp() {
-        ci = new ValidRegisters("src/models/validRegisters.txt");
+        ci = new ValidRegisters();
     }
 
     @Test

@@ -5,20 +5,20 @@ import java.io.*;
 public class ValidUsers {
     public RegisteredUser[] validUsers;
 
-    public ValidUsers(String filePath) {
-        loadUsers(filePath);
+    public ValidUsers() {
+        loadUsers();
     }
 
-    private void loadUsers(String filePath) {
+    private void loadUsers() {
         try {
-            BufferedReader brCount = new BufferedReader(new FileReader(filePath));
+            BufferedReader brCount = new BufferedReader(new FileReader("src/models/data/validUsers.txt"));
             int totalUsers = 0;
             while (brCount.readLine() != null) {
                 totalUsers++;
             }
             brCount.close();
             validUsers = new RegisteredUser[totalUsers];
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("src/models/data/validUsers.txt"), "UTF-8"));
             String line;
             int index = 0;
             while ((line = reader.readLine()) != null) {
@@ -28,9 +28,9 @@ public class ValidUsers {
                     String password = parts[1].trim();
                     String fullName = parts[2].trim();
                     double balance = Double.parseDouble(parts[3].trim());
-                    boolean admin = Boolean.parseBoolean(parts[4].trim());
+                    int userType = Integer.parseInt(parts[4].trim());
                     String email = parts[5].trim();
-                    validUsers[index] = new RegisteredUser(user, password, fullName, balance, admin, email);
+                    validUsers[index] = new RegisteredUser(user, password, fullName, balance, userType, email);
                     index++;
                 }
             }

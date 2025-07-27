@@ -17,7 +17,7 @@ public class IDValidationControllerTest {
     @BeforeEach
     void setUp() {
         mockView = new IDValidationView();
-        mockModel = new ValidRegisters("src/models/validRegisters.txt");
+        mockModel = new ValidRegisters();
         controller = new IDValidationController(mockView, mockModel);
     }
 

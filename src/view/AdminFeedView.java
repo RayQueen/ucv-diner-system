@@ -260,7 +260,7 @@ public class AdminFeedView extends JFrame {
             AdminFeedView adminFeedView = new AdminFeedView();
             adminFeedView.setVisible(true);
             // Example usage with dummy data
-            models.RegisteredUser user = new models.RegisteredUser("John", "Doe", "johndoe", 0.0, true, "johndoe@example.com");
+            models.RegisteredUser user = new models.RegisteredUser("John", "Doe", "johndoe", 0.0, 3, "johndoe@example.com");
             adminFeedView.updateUser(user.getFullName());
             adminFeedView.updateCosts(new Pricing());
         });

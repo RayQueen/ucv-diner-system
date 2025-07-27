@@ -16,7 +16,7 @@ public class CostsControllerTest {
     @BeforeEach
     public void setUp() {
         mockView = new CostsView();
-        mockUsuario = new RegisteredUser("admin", "admin123", "Nombre Apellido", 0.0, true, "correo@valido.com");
+        mockUsuario = new RegisteredUser("admin", "admin123", "Nombre Apellido", 0.0, 3, "correo@valido.com");
         controller = new CostsController(mockView, mockUsuario);
     }
 

@@ -31,7 +31,7 @@ public class SetPricingController {
         this.setPricingView.logOutButton.addActionListener(e -> {
             setPricingView.dispose();
             LogInView logInView = new LogInView();
-            models.ValidUsers validUsersModel = new models.ValidUsers("src/models/data/validUsers.txt");
+            models.ValidUsers validUsersModel = new models.ValidUsers();
             new controllers.LogInController(logInView, validUsersModel);
             logInView.setVisible(true);
         });
