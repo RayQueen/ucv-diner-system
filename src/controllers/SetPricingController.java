@@ -66,6 +66,21 @@ public class SetPricingController {
         }
         try {
             double rate = Double.parseDouble(rateText);
+            if (index==0 && (rate < 20 || rate > 30)) {
+                JOptionPane.showMessageDialog(setPricingView, "La tarifa de estudiantes debe estar entre un 20% y 30%", "Error", JOptionPane.ERROR_MESSAGE);
+                lastMessage = "La tarifa de estudiantes debe estar entre un 20% y 30%";
+                return;
+            }
+            if (index==1 && (rate < 70 || rate > 90)) {
+                JOptionPane.showMessageDialog(setPricingView, "La tarifa de profesores debe estar entre un 70% y 90%", "Error", JOptionPane.ERROR_MESSAGE);
+                lastMessage = "La tarifa de profesores debe estar entre un 70% y 90%";
+                return;
+            }
+            if (index==2 && (rate < 90 || rate > 110)) {
+                JOptionPane.showMessageDialog(setPricingView, "La tarifa de empleados debe estar entre un 90% y 110%", "Error", JOptionPane.ERROR_MESSAGE);
+                lastMessage = "La tarifa de empleados debe estar entre un 90% y 110%";
+                return;
+            }
             pricingModel.updateRatesInFile(index, rate);
             JOptionPane.showMessageDialog(setPricingView, "Tarifa guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             lastMessage = "Tarifa guardada exitosamente.";

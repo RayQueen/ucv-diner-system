@@ -20,11 +20,8 @@ public class RegisteredUser {
     public String getFullName() { return fullName; }
     public double getBalance() { return balance; }
     public void addBalance(double amount) {
-        if (amount > 0) {
-            this.balance += amount;
-        } else {
-            throw new IllegalArgumentException("El monto debe ser positivo");
-        }
+        double value = this.balance + amount;
+        this .balance = Math.round(value * 100.0) / 100.0;
     }
     public int getUserType() { return userType; }
     public String getUser() { return user; }

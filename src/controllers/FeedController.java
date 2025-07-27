@@ -43,6 +43,24 @@ public class FeedController {
                 addBalanceView.setVisible(true);
             }
         });
+        this.feedView.payBreakfastButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                feedView.dispose();
+                view.PayView payView = new view.PayView();
+                new controllers.PayController(payView, registeredUser);
+                payView.setVisible(true);
+            }
+        });
+        this.feedView.payLunchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                feedView.dispose();
+                view.PayView payView = new view.PayView();
+                new controllers.PayController(payView, registeredUser);
+                payView.setVisible(true);
+            }
+        });
     }
     
 }

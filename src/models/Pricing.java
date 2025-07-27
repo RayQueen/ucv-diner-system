@@ -51,7 +51,8 @@ public class Pricing {
         if (index < 0 || index >= 3) {
             throw new IndexOutOfBoundsException("Índice fuera de rango");
         }
-        return rates[index] * CCB;
+        double value = (rates[index]/100) * CCB;
+        return Math.round(value * 100.0) / 100.0;
     }
 
     public double getFixedCost() {
@@ -75,7 +76,8 @@ public class Pricing {
     }
 
     public void calculateCCB() {
-        this.CCB = ((fixedCost + variableCost) / plateNumber) * (1 + shrinkage);
+        double value = ((fixedCost + variableCost) / plateNumber) * (1 + shrinkage);
+        this.CCB = Math.round(value * 100.0) / 100.0;
     }
 
     public void loadCosts() {

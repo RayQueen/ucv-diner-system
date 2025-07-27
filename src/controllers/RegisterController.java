@@ -143,6 +143,30 @@ public class RegisterController implements ActionListener {
                 lastMessage = "Error al guardar el usuario";
                 return;
             }
+            // Delete the user correspondent line from validRegisters.txt
+            java.util.List<String> lines = new java.util.ArrayList<>();
+            boolean deleted = false;
+            try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("src/models/data/validRegisters.txt"))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.trim().split(",");
+                    if (parts.length > 1 && !deleted && parts[0].trim().equals(enteredID) && parts[1].trim().equals(String.valueOf(userType))) {
+                        deleted = true; // Delete the first match
+                        continue;
+                    }
+                    lines.add(line);
+                }
+            } catch (java.io.IOException ex) {
+                ex.printStackTrace();
+            }
+            try (java.io.BufferedWriter bw = new java.io.BufferedWriter(new java.io.FileWriter("src/models/data/validRegisters.txt", false))) {
+                for (String l : lines) {
+                    bw.write(l);
+                    bw.newLine();
+                }
+            } catch (java.io.IOException ex) {
+                ex.printStackTrace();
+            }
             JOptionPane.showMessageDialog(registerView,
                 "Registro completado exitosamente",
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
