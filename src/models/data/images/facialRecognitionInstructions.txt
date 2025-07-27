@@ -1,0 +1,4 @@
+En esta carpeta se colocaran las imagenes correspondientes a cada usuario.
+El nombre de cada imagen debe tener uno de los siguientes formatos:
+1. <username>.jpg
+2. <username>.png

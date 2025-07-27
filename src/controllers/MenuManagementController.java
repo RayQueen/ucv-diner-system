@@ -4,7 +4,6 @@ import view.MenuManagementView;
 import view.LogInView;
 
 import models.RegisteredUser;
-import models.Pricing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 public class MenuManagementController implements ActionListener {
     private MenuManagementView menuView;
     private RegisteredUser registeredUser;
-    private Pricing pricingModel;
     public String lastMessage;
 
     @Override
@@ -25,7 +23,6 @@ public class MenuManagementController implements ActionListener {
     public MenuManagementController(MenuManagementView menuView, RegisteredUser registeredUser) {
         this.menuView = menuView;
         this.registeredUser = registeredUser;
-        this.pricingModel = new Pricing();
         this.menuView.homeButton.addActionListener(e -> {
             menuView.dispose();
             view.AdminFeedView adminView = new view.AdminFeedView();
@@ -108,7 +105,9 @@ public class MenuManagementController implements ActionListener {
                     lines.add(line);
                 }
             } catch (java.io.IOException ex) {
-                // Si el archivo no existe, lo creamos con líneas vacías
+                JOptionPane.showMessageDialog(menuView,
+                    "Error al leer el archivo de menú: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
             }
             while (lines.size() <= menuType) lines.add("");
             lines.set(menuType, newLine);

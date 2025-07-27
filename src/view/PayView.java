@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PayView extends JFrame {
+    public JTextField imagePathField;
     public JButton payButton;
     public JButton cancelButton;
     public JLabel balanceValueLabel;
@@ -71,6 +72,25 @@ public class PayView extends JFrame {
         // Form label
         JLabel formLabel = templateLabel("Ingrese aquí su foto", TITLE3, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
         formLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Upload image button
+        JButton uploadImageButton = templateButton("Subir imagen", B_TEXT, PRINCIPAL_COLOR, WHITE);
+        uploadImageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        imagePathField = new JTextField(30);
+        imagePathField.setEditable(false);
+
+        uploadImageButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes PNG y JPG", "png", "jpg"));
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                imagePathField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            }
+        });
+
+        // Image info label
+        JLabel imageInfoLabel = templateLabel("La imagen debe ser de tipo PNG o JPG", B_TEXT, SECONDARY_COLOR_DARK, Component.CENTER_ALIGNMENT);
+        imageInfoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Button panel
         JPanel buttonPanel = new JPanel();
@@ -139,6 +159,11 @@ public class PayView extends JFrame {
         // Add components to the form panel
         formPanel.add(formLabel);
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        formPanel.add(imagePathField);
+        formPanel.add(uploadImageButton);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        formPanel.add(imageInfoLabel);
+        formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(buttonPanel);
 
         // Add components to the payment info panel
@@ -174,15 +199,5 @@ public class PayView extends JFrame {
     public void updatePrice(RegisteredUser usuario, Pricing price) {
         int userType = usuario.getUserType();
         priceValueLabel.setText("Bs. " + price.getPricing(userType));
-    }
-
-    public static void main(String[] args) {
-        PayView payView = new PayView();
-        payView.setVisible(true);
-        // Example usage with dummy data
-        RegisteredUser user = new RegisteredUser("John", "Doe", "johndoe", 123.45, 0, "correo@example.com");
-        Pricing price = new Pricing();
-        payView.updateBalance(user);
-        payView.updatePrice(user, price);
     }
 }
