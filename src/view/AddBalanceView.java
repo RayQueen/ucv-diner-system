@@ -3,11 +3,14 @@ package view;
 import static view.TemplateView.*;
 
 import javax.swing.*;
+
+import models.RegisteredUser;
+
 import java.awt.*;
 
 public class AddBalanceView extends JFrame {
-    public int bankField;
-    public int phoneCode;
+    public JComboBox<String> bankCombo;
+    public JComboBox<String> phoneCodeCombo;
     public JTextField phoneField;
     public JTextField dateField;
     public JTextField digitsField;
@@ -75,13 +78,10 @@ public class AddBalanceView extends JFrame {
 
         // Bank label and selection
         JLabel bankLabel = templateLabel("Banco emisor", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
-        JComboBox<String> bankCombo = new JComboBox<>(new String[]{"Banco de Venezuela", "Banesco", "Mercantil", "Provincial", "Bancamiga", "Bancaribe", "Banco del Tesoro"});
+        bankCombo = new JComboBox<>(new String[]{"Banco de Venezuela", "Banesco", "Mercantil", "Provincial", "Bancamiga", "Bancaribe", "Banco del Tesoro"});
         bankCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
         bankCombo.setMaximumSize(new Dimension(320, 45));
         bankCombo.setPreferredSize(new Dimension(320, 45));
-        bankCombo.addActionListener(e -> {
-            bankField = bankCombo.getSelectedIndex();
-        });
 
         // Phone panel
         JPanel phonePanel = new JPanel();
@@ -92,13 +92,10 @@ public class AddBalanceView extends JFrame {
         JLabel phoneLabel = templateLabel("Teléfono", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
         
         // Phone code selection
-        JComboBox<String> phoneCodeCombo = new JComboBox<>(new String[]{"0412", "0414", "0416", "0422", "0424", "0426"});
+        phoneCodeCombo = new JComboBox<>(new String[]{"0412", "0414", "0416", "0422", "0424", "0426"});
         phoneCodeCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
         phoneCodeCombo.setMaximumSize(new Dimension(100, 45));
         phoneCodeCombo.setPreferredSize(new Dimension(100, 45));
-        phoneCodeCombo.addActionListener(e -> {
-            phoneCode = phoneCodeCombo.getSelectedIndex();
-        });
         
         // Phone field
         phoneField = templateNumericTextField();
@@ -122,7 +119,7 @@ public class AddBalanceView extends JFrame {
         dateField = formattedDateField;
 
         // Digits label and field
-        JLabel digitsLabel = templateLabel("Últimos Dígitos de la Cuenta", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
+        JLabel digitsLabel = templateLabel("Últimos 4 Dígitos", B_TEXT, BLACK, Component.CENTER_ALIGNMENT);
         digitsField = templateNumericTextField();
         digitsField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -263,6 +260,10 @@ public class AddBalanceView extends JFrame {
         mainPanel.add(rightPanel, BorderLayout.EAST);
 
         add(mainPanel, BorderLayout.CENTER);
+    }
+
+    public void updateBalance(RegisteredUser usuario) {
+        balanceValueLabel.setText("Bs. " + usuario.getBalance());
     }
 }
 

@@ -34,6 +34,15 @@ public class FeedController {
                 logInView.setVisible(true);
             }
         });
+        this.feedView.addBalanceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                feedView.dispose();
+                view.AddBalanceView addBalanceView = new view.AddBalanceView();
+                new controllers.AddBalanceController(addBalanceView, registeredUser);
+                addBalanceView.setVisible(true);
+            }
+        });
     }
     
 }

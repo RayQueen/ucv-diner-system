@@ -223,7 +223,6 @@ public class FeedView extends JFrame {
         add(leftPanel, BorderLayout.WEST);
     }
 
-    // Método para actualizar la pantalla según el usuario
     public void updateUser(RegisteredUser usuario) {
         welcomeLabel.setText("BIENVENIDO/A " + usuario.getFullName());
         balanceValueLabel.setText("Bs. " + usuario.getBalance());

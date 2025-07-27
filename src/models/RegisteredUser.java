@@ -19,6 +19,13 @@ public class RegisteredUser {
 
     public String getFullName() { return fullName; }
     public double getBalance() { return balance; }
+    public void addBalance(double amount) {
+        if (amount > 0) {
+            this.balance += amount;
+        } else {
+            throw new IllegalArgumentException("El monto debe ser positivo");
+        }
+    }
     public boolean isAdmin() { return admin; }
     public String getUser() { return user; }
     public String getPassword() { return password; }
