@@ -1,0 +1,3 @@
+# Ignorar imágenes de usuarios
+src/models/data/images/*.jpg
+src/models/data/images/*.png
