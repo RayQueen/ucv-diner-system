@@ -1,2 +1,2 @@
-Desayuno (7:00 AM - 9:00 AM),Sopa: Crema de auyama,Seco: Arepas,Jugo: Toddy,Postre: Tizana
-Almuerzo (12:00 PM - 2:00 PM),Sopa: Sopa de pollo,Seco: Arroz con pollo,Jugo: Pepsi,Postre: Torta de chocolate
+Desayuno (7:00 AM - 9:00 AM),Sopa: -,Seco: Arepa con atún,Bebida: Jugo de pera,Postre: Ensalada de frutas
+Almuerzo (12:00 PM - 2:00 PM),Sopa: Crema de auyama,Seco: Pechuga de pollo con puré de papas,Bebida: Jugo de parchita,Postre: Ponqué de chocolate

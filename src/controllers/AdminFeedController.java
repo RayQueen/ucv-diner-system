@@ -56,5 +56,11 @@ public class AdminFeedController {
             new MenuManagementController(menusView, registeredUser);
             menusView.setVisible(true);
         });
+        this.adminFeedView.payButton.addActionListener(e -> {
+            adminFeedView.dispose();
+            UserValidationView userValidationView = new UserValidationView();
+            new UserValidationController(userValidationView, registeredUser);
+            userValidationView.setVisible(true);
+        });
     }
 }

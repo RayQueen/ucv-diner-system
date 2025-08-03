@@ -62,10 +62,10 @@ public class MenuManagementController implements ActionListener {
         this.menuView.dryField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                menuView.juiceField.requestFocus();
+                menuView.drinkField.requestFocus();
             }
         });
-        this.menuView.juiceField.addActionListener(new ActionListener() {
+        this.menuView.drinkField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuView.dessertField.requestFocus();
@@ -82,7 +82,7 @@ public class MenuManagementController implements ActionListener {
     private void saveMenu() {
         String soup = menuView.soupField.getText();
         String dry = menuView.dryField.getText();
-        String juice = menuView.juiceField.getText();
+        String juice = menuView.drinkField.getText();
         String dessert = menuView.dessertField.getText();
 
         if (soup.isEmpty() || dry.isEmpty() || juice.isEmpty() || dessert.isEmpty()) {
@@ -97,9 +97,11 @@ public class MenuManagementController implements ActionListener {
             } else {
                 turn = "Almuerzo (12:00 PM - 2:00 PM)";
             }
-            String newLine = turn + "," + "Sopa: " + soup + "," + "Seco: " + dry + "," + "Jugo: " + juice + "," + "Postre: " + dessert;
+            String newLine = turn + "," + "Sopa: " + soup + "," + "Seco: " + dry + "," + "Bebida: " + juice + "," + "Postre: " + dessert;
             java.util.List<String> lines = new java.util.ArrayList<>();
-            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("src/models/data/menu.txt"))) {
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(
+                        new java.io.FileInputStream("src/models/data/menu.txt"), "UTF-8"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     lines.add(line);
@@ -111,17 +113,7 @@ public class MenuManagementController implements ActionListener {
             }
             while (lines.size() <= menuType) lines.add("");
             lines.set(menuType, newLine);
-            try (java.io.FileWriter fw = new java.io.FileWriter("src/models/data/menu.txt", false)) {
-                for (String l : lines) {
-                    fw.write(l + "\n");
-                }
-            } catch (java.io.IOException ex) {
-                JOptionPane.showMessageDialog(menuView,
-                    "Error al guardar el menu: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                lastMessage = "Error al guardar el menu";
-                return;
-            }
+            saveMenuUTF8(lines);
             JOptionPane.showMessageDialog(menuView,
                 "Menú guardado con éxito.",
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -131,6 +123,22 @@ public class MenuManagementController implements ActionListener {
             adminView.updateUser(registeredUser.getFullName());
             new controllers.AdminFeedController(adminView, registeredUser);
             adminView.setVisible(true);
+        }
+    }
+
+    private void saveMenuUTF8(java.util.List<String> lines) {
+        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(
+                new java.io.OutputStreamWriter(
+                        new java.io.FileOutputStream("src/models/data/menu.txt"), "UTF-8"))) {
+            for (String l : lines) {
+                writer.write(l);
+                writer.newLine();
+            }
+        } catch (java.io.IOException ex) {
+            JOptionPane.showMessageDialog(menuView,
+                    "Error al guardar el menu: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            lastMessage = "Error al guardar el menu";
         }
     }
 }

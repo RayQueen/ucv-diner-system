@@ -13,7 +13,7 @@ public class FeedController {
     public FeedController(FeedView feedView, RegisteredUser registeredUser) {
         this.feedView = feedView;
         this.feedView.updateUser(registeredUser);
-        models.Menu menuModel = new models.Menu("src/models/data/menu.txt");
+        models.Menu menuModel = new models.Menu();
         this.feedView.updateMenu(menuModel);
         this.feedView.homeButton.addActionListener(new ActionListener() {
             @Override
@@ -43,24 +43,24 @@ public class FeedController {
                 addBalanceView.setVisible(true);
             }
         });
-        this.feedView.payBreakfastButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                feedView.dispose();
-                view.PayView payView = new view.PayView();
-                new controllers.PayController(payView, registeredUser);
-                payView.setVisible(true);
-            }
-        });
-        this.feedView.payLunchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                feedView.dispose();
-                view.PayView payView = new view.PayView();
-                new controllers.PayController(payView, registeredUser);
-                payView.setVisible(true);
-            }
-        });
+        // this.feedView.payBreakfastButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         feedView.dispose();
+        //         view.PayView payView = new view.PayView();
+        //         new controllers.PayController(payView, registeredUser);
+        //         payView.setVisible(true);
+        //     }
+        // });
+        // this.feedView.payLunchButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         feedView.dispose();
+        //         view.PayView payView = new view.PayView();
+        //         new controllers.PayController(payView, registeredUser);
+        //         payView.setVisible(true);
+        //     }
+        // });
     }
     
 }

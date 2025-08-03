@@ -1,7 +1,7 @@
 a,a,Estudiante,987.65,0,estudiante@gmail.com
 b,b,Profesor,123.45,1,profesor@gmail.com
 c,c,Empleado,567.89,2,empleado@ucv.ve
-Ray,a,Maria Laura Reina,701.0,0,reinamlaura@gmail.com
+Ray,a,Maria Laura Reina,693.94,0,reinamlaura@gmail.com
 admin,admin,Juan Gonzales,0.0,3,queen.laura.2110@gmail.com
 user,user,Pedro Perez,500,0,queen.laura.2110@gmail.com
 usuario,Cl@ve12345,Jhon Doe,0.0,3,correo2@gmail.com

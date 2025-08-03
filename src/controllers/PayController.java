@@ -10,15 +10,16 @@ import org.opencv.objdetect.CascadeClassifier;
 
 public class PayController {
     private view.PayView payView;
+    private models.RegisteredUser registeredAdmin;
     private models.RegisteredUser registeredUser;
     private models.Pricing pricingModel;
     public String lastMessage;
 
-    public PayController(view.PayView payView, models.RegisteredUser registeredUser) {
+    public PayController(view.PayView payView, models.RegisteredUser registeredUser, models.RegisteredUser registeredAdmin) {
         this.payView = payView;
         this.registeredUser = registeredUser;
+        this.registeredAdmin = registeredAdmin;
         this.pricingModel = new models.Pricing();
-        this.payView.updateBalance(registeredUser);
         this.payView.updatePrice(registeredUser, pricingModel);
 
         this.payView.payButton.addActionListener(e -> confirmPayment());
@@ -26,9 +27,10 @@ public class PayController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 payView.dispose();
-                view.FeedView feedView = new view.FeedView();
-                new controllers.FeedController(feedView, registeredUser);
-                feedView.setVisible(true);
+                view.AdminFeedView adminView = new view.AdminFeedView();
+                adminView.updateUser(registeredUser.getFullName());
+                new controllers.AdminFeedController(adminView, registeredAdmin);
+                adminView.setVisible(true);
             }
         });
     }
@@ -66,15 +68,14 @@ public class PayController {
             return;
         }
         registeredUser.addBalance(-totalAmount);
-        payView.updateBalance(registeredUser);
         JOptionPane.showMessageDialog(null,
                 "Pago realizado con éxito.",
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
         lastMessage = "Pago realizado con éxito.";
         payView.dispose();
-        view.FeedView feedView = new view.FeedView();
-        new controllers.FeedController(feedView, registeredUser);
-        feedView.setVisible(true);
+        view.UserValidationView userValidationView = new view.UserValidationView();
+        new controllers.UserValidationController(userValidationView, registeredAdmin);
+        userValidationView.setVisible(true);
     }
 
     public int compareUserFace(String userImagePath, String cedula) {

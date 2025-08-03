@@ -4,14 +4,14 @@ public class Turn {
     private String turn;
     private String soup;
     private String dry;
-    private String juice;
+    private String drink;
     private String dessert;
 
     public Turn(String turn, String soup, String dry, String juice, String dessert) {
         this.turn = turn;
         this.soup = soup;
         this.dry = dry;
-        this.juice = juice;
+        this.drink = juice;
         this.dessert = dessert;
     }
 
@@ -27,8 +27,8 @@ public class Turn {
         return dry;
     }
 
-    public String getJuice() {
-        return juice;
+    public String getDrink() {
+        return drink;
     }
 
     public String getDessert() {

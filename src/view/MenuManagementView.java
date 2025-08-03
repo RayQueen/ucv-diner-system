@@ -9,7 +9,7 @@ public class MenuManagementView extends JFrame {
     public boolean turn;
     public JTextField soupField;
     public JTextField dryField;
-    public JTextField juiceField;
+    public JTextField drinkField;
     public JTextField dessertField;
     public JButton homeButton;
     public JButton logOutButton;
@@ -101,9 +101,9 @@ public class MenuManagementView extends JFrame {
         JLabel dryLabel = templateLabel("Seco", B_TEXT, BLACK, CENTER_ALIGNMENT);
         dryField = templateTextField();
 
-        // Juice label and field
-        JLabel juiceLabel = templateLabel("Jugo", B_TEXT, BLACK, CENTER_ALIGNMENT);
-        juiceField = templateTextField();
+        // Drink label and field
+        JLabel drinkLabel = templateLabel("Bebida", B_TEXT, BLACK, CENTER_ALIGNMENT);
+        drinkField = templateTextField();
 
         // Dessert label and field
         JLabel dessertLabel = templateLabel("Postre", B_TEXT, BLACK, CENTER_ALIGNMENT);
@@ -145,8 +145,8 @@ public class MenuManagementView extends JFrame {
         formPanel.add(dryLabel);
         formPanel.add(dryField);
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        formPanel.add(juiceLabel);
-        formPanel.add(juiceField);
+        formPanel.add(drinkLabel);
+        formPanel.add(drinkField);
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(dessertLabel);
         formPanel.add(dessertField);

@@ -12,7 +12,7 @@ public class TurnTest {
         assertEquals("Mañana", turn.getTurn());
         assertEquals("Sopa", turn.getSoup());
         assertEquals("Seco", turn.getDry());
-        assertEquals("Jugo", turn.getJuice());
+        assertEquals("Jugo", turn.getDrink());
         assertEquals("Postre", turn.getDessert());
     }
 
@@ -22,7 +22,7 @@ public class TurnTest {
         assertEquals("", turn.getTurn());
         assertEquals("", turn.getSoup());
         assertEquals("", turn.getDry());
-        assertEquals("", turn.getJuice());
+        assertEquals("", turn.getDrink());
         assertEquals("", turn.getDessert());
     }
 }

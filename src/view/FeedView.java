@@ -20,8 +20,6 @@ public class FeedView extends JFrame {
     public JLabel balanceLabel;
     public JLabel balanceValueLabel;
     public JButton addBalanceButton;
-    public JButton payLunchButton;
-    public JButton payBreakfastButton;
     public JButton logOutButton;
     public JButton homeButton;
 
@@ -146,10 +144,6 @@ public class FeedView extends JFrame {
         menuPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 80));
         menuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Pre-pay buttons
-        payLunchButton = templateButton("Pre-pagar", B_TEXT, PRINCIPAL_COLOR, WHITE, 150);
-        payBreakfastButton = templateButton("Pre-pagar", B_TEXT, PRINCIPAL_COLOR, WHITE, 150);
-
         // Breakfast panel
         menu1Panel = new JPanel() {
             @Override
@@ -228,80 +222,55 @@ public class FeedView extends JFrame {
         balanceValueLabel.setText("Bs. " + usuario.getBalance());
     }
 
-    private JPanel getTurnPanel(Turn menu, JButton prePayButton) {
-        JPanel turnPanel = new JPanel();
+    private JPanel getTurnPanel(Turn menu) {
+        JPanel turnPanel = new JPanel(new BorderLayout());
         turnPanel.setBackground(SECONDARY_COLOR_LIGHT);
-        turnPanel.setLayout(new BoxLayout(turnPanel, BoxLayout.Y_AXIS));
-        turnPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         turnPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
-
+        
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setBackground(SECONDARY_COLOR_LIGHT);
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        
         JLabel turnLabel = templateLabel(menu.getTurn(), TITLE2, PRINCIPAL_COLOR, Component.CENTER_ALIGNMENT);
-
-        JPanel labelsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        labelsPanel.setBackground(SECONDARY_COLOR_LIGHT);
+        turnLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel verticalPanel = new JPanel();
         verticalPanel.setLayout(new BoxLayout(verticalPanel, BoxLayout.Y_AXIS));
         verticalPanel.setBackground(SECONDARY_COLOR_LIGHT);
+        verticalPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel labelSoup = templateLabel(menu.getSoup(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelDry = templateLabel(menu.getDry(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelJuice = templateLabel(menu.getJuice(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
-        JLabel labelDessert = templateLabel(menu.getDessert(), B_TEXT, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelSoup = templateLabel(menu.getSoup(), TITLE3, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelDry = templateLabel(menu.getDry(), TITLE3, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelDrink = templateLabel(menu.getDrink(), TITLE3, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
+        JLabel labelDessert = templateLabel(menu.getDessert(), TITLE3, PRINCIPAL_COLOR, Component.LEFT_ALIGNMENT);
 
         labelSoup.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelDry.setAlignmentX(Component.LEFT_ALIGNMENT);
-        labelJuice.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelDrink.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelDessert.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        verticalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        centerPanel.add(Box.createVerticalGlue());
+        centerPanel.add(turnLabel);
+        centerPanel.add(Box.createVerticalGlue());
+
         verticalPanel.add(labelSoup);
         verticalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         verticalPanel.add(labelDry);
         verticalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        verticalPanel.add(labelJuice);
+        verticalPanel.add(labelDrink);
         verticalPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         verticalPanel.add(labelDessert);
 
-        JPanel horizontalPanel = new JPanel(new GridLayout(1, 2));
-        horizontalPanel.setBackground(SECONDARY_COLOR_LIGHT);
-
-        // Label panel
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBackground(SECONDARY_COLOR_LIGHT);
-        leftPanel.add(Box.createVerticalGlue());
-        leftPanel.add(verticalPanel);
-        leftPanel.add(Box.createVerticalGlue());
-
-        // Button panel
-        JPanel rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBackground(SECONDARY_COLOR_LIGHT);
-        rightPanel.add(Box.createVerticalGlue());
-
-        JPanel buttonFlowPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        buttonFlowPanel.setBackground(SECONDARY_COLOR_LIGHT);
-        buttonFlowPanel.add(prePayButton);
-
-        rightPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        rightPanel.add(buttonFlowPanel);
-        rightPanel.add(Box.createVerticalGlue());
-
-        horizontalPanel.add(leftPanel);
-        horizontalPanel.add(rightPanel);
-
-        turnPanel.add(turnLabel);
-        turnPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        turnPanel.add(horizontalPanel);
-
+        turnPanel.add(centerPanel, BorderLayout.NORTH);
+        turnPanel.add(verticalPanel, BorderLayout.WEST);
         return turnPanel;
     }
 
     public void updateMenu(Menu menu) {
         this.menu1Panel.removeAll();
-        this.menu1Panel.add(getTurnPanel(menu.getBreakfast(), this.payBreakfastButton));
+        this.menu1Panel.add(getTurnPanel(menu.getBreakfast()));
         this.menu2Panel.removeAll();
-        this.menu2Panel.add(getTurnPanel(menu.getLunch(), this.payLunchButton));
+        this.menu2Panel.add(getTurnPanel(menu.getLunch()));
     }
 }

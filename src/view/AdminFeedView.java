@@ -22,6 +22,7 @@ public class AdminFeedView extends JFrame {
     public JButton menuManagementButton;
     public JButton calculateCCBButton;
     public JButton setPricingButton;
+    public JButton payButton;
     public JButton submitConsumptionButton;
     public JButton generateReportsButton;
     public JButton logOutButton;
@@ -101,6 +102,9 @@ public class AdminFeedView extends JFrame {
         
         // Menu management button
         menuManagementButton = templateButton("Gestionar Menú", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
+
+        // Pay button
+        payButton = templateButton("Cobrar Turno", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
         
         // Consumption submission button
         submitConsumptionButton = templateButton("Registrar Consumo", TITLE2, PRINCIPAL_COLOR, WHITE, 300, 60);
@@ -112,7 +116,7 @@ public class AdminFeedView extends JFrame {
         JPanel leftPanel = new JPanel();
         leftPanel.setBackground(WHITE);
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(50, 120, 20, 20));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(70, 120, 20, 20));
         
         // Data panel for data display
         JPanel dataPanel = new JPanel() {
@@ -192,13 +196,15 @@ public class AdminFeedView extends JFrame {
 
         // Add buttons to right panel
         buttonPanel.add(calculateCCBButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(setPricingButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(menuManagementButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(payButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(submitConsumptionButton);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(generateReportsButton);
 
         // Add components to costs panel

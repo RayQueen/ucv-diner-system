@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 public class Menu {
     public Turn[] menus;
 
-    public Menu(String filepath) {
-        loadMenu(filepath);
+    public Menu() {
+        loadMenu("src/models/data/menu.txt");
     }
 
     private void loadMenu(String filePath) {
@@ -25,9 +25,9 @@ public class Menu {
                     String turn = parts[0].trim();
                     String soup = parts[1].trim();
                     String dry = parts[2].trim();
-                    String juice = parts[3].trim();
+                    String drink = parts[3].trim();
                     String dessert = parts[4].trim();
-                    this.menus[index] = new Turn(turn, soup, dry, juice, dessert);
+                    this.menus[index] = new Turn(turn, soup, dry, drink, dessert);
                     index++;
                 }
             }
