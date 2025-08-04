@@ -54,7 +54,7 @@ public class PricingTest {
     @Test
     void testUpdateCostsInFileUpdatesCorrectly() throws IOException {
         Pricing pricing = new Pricing();
-        pricing.updateCostsInFile(1200.0, 600.0, 150, 0.05);
+        pricing.updateCostsInFile(1200.0, 600.0, 150, 0.05, "src/models/data/costs.txt");
         pricing.loadCosts(); // Recargar para ver los cambios
         pricing.calculateCCB(); // Recalcular CCB
         assertEquals(12.6, pricing.getCCB(), 0.01); // Nuevo CCB

@@ -134,10 +134,10 @@ public class Pricing {
     }
 
     // Escribe los costos en costs.txt
-    public void updateCostsInFile(double fixedCost, double variableCost, int plateNumber, double shrinkage) {
+    public void updateCostsInFile(double fixedCost, double variableCost, int plateNumber, double shrinkage, String filePath) {
         java.util.List<String> lines = new java.util.ArrayList<>();
         // Leer el archivo actual
-        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream("src/models/data/costs.txt"), "UTF-8"))) {
+        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(filePath), "UTF-8"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
@@ -157,7 +157,7 @@ public class Pricing {
         lines.set(2, String.valueOf(plateNumber));
         lines.set(3, String.valueOf(shrinkage));
         // Escribe el archivo completo
-        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.OutputStreamWriter(new java.io.FileOutputStream("src/models/data/costs.txt"), "UTF-8"))) {
+        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.OutputStreamWriter(new java.io.FileOutputStream(filePath), "UTF-8"))) {
             for (int i = 0; i < 4; i++) {
                 writer.write(lines.get(i));
                 writer.newLine();

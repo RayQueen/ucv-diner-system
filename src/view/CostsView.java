@@ -165,6 +165,7 @@ public class CostsView extends JFrame {
         add(topPanel, BorderLayout.NORTH);
         add(formPanel, BorderLayout.CENTER);
     }
+    
     public String getSelectedPeriod() {
         return periodComboBox.getSelectedItem().toString();
     }
