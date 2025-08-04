@@ -14,12 +14,14 @@ public class CostsController {
     private CostsView costsView;
     private RegisteredUser registeredUser;
     private Pricing pricingModel;
+    private String period;
     public String lastMessage;
 
     public CostsController(CostsView costsView, RegisteredUser registeredUser) {
     this.costsView = costsView;
     this.registeredUser = registeredUser;
     this.pricingModel = new Pricing();
+    this.period = costsView.getSelectedPeriod();
     this.costsView.saveButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -96,23 +98,40 @@ public class CostsController {
                 JOptionPane.showMessageDialog(costsView, "Los costos no pueden ser negativos.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            try (java.io.FileWriter writer = new java.io.FileWriter("src/models/data/costs.txt", false)) {
-                pricingModel.updateCostsInFile(fixedCostValue, variableCostValue, plateNumberValue, shrinkageValue);
-                costsView.dispose();
-                view.AdminFeedView adminFeedView = new view.AdminFeedView();
-                adminFeedView.updateUser(registeredUser.getFullName());
+            if(period == "Periodo 1-2025") {
+                try (java.io.FileWriter writer = new java.io.FileWriter("src/models/data/costs.txt", false)) {
+                    pricingModel.updateCostsInFile(fixedCostValue, variableCostValue, plateNumberValue, shrinkageValue);
+                    costsView.dispose();
+                    view.AdminFeedView adminFeedView = new view.AdminFeedView();
+                    adminFeedView.updateUser(registeredUser.getFullName());
                 new controllers.AdminFeedController(adminFeedView, registeredUser);
                 adminFeedView.setVisible(true);
-            } catch (java.io.IOException ex) {
-                lastMessage = "Ocurrió un error al guardar el archivo.";
-                JOptionPane.showMessageDialog(costsView,
-                        "Ocurrió un error al guardar el archivo.",
-                        "Error de Guardado",
-                        JOptionPane.ERROR_MESSAGE);
+                } catch (java.io.IOException ex) {
+                    lastMessage = "Ocurrió un error al guardar el archivo.";
+                    JOptionPane.showMessageDialog(costsView,
+                            "Ocurrió un error al guardar el archivo.",
+                            "Error de Guardado",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (period == "Periodo 2-2025") {
+                try (java.io.FileWriter writer = new java.io.FileWriter("src/models/data/costs2.txt", false)) {
+                    pricingModel.updateCostsInFile(fixedCostValue, variableCostValue, plateNumberValue, shrinkageValue);
+                    costsView.dispose();
+                    view.AdminFeedView adminFeedView = new view.AdminFeedView();
+                    adminFeedView.updateUser(registeredUser.getFullName());
+                    new controllers.AdminFeedController(adminFeedView, registeredUser);
+                    adminFeedView.setVisible(true);
+                } catch (java.io.IOException ex) {
+                    lastMessage = "Ocurrió un error al guardar el archivo.";
+                    JOptionPane.showMessageDialog(costsView,
+                            "Ocurrió un error al guardar el archivo.",
+                            "Error de Guardado",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                lastMessage = "Ingrese valores numéricos válidos.";
+                JOptionPane.showMessageDialog(costsView, "Ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (NumberFormatException ex) {
-            lastMessage = "Ingrese valores numéricos válidos.";
-            JOptionPane.showMessageDialog(costsView, "Ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

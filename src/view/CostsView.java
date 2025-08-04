@@ -15,6 +15,7 @@ public class CostsView extends JFrame {
     public JButton homeButton;
     public JButton logOutButton;
     public JLabel periodLabel;
+    public JComboBox<String> periodComboBox;
 
     public CostsView() {
         setTitle("Configuración de Costos - Sabor Central UCV");
@@ -34,6 +35,22 @@ public class CostsView extends JFrame {
         // Period label
         periodLabel = templateLabel("Calculo CBB", TITLE1, WHITE, Component.LEFT_ALIGNMENT);
 
+        // Period combo box
+        String[] periods = {"Periodo 1-2025", "Periodo 2-2025"};
+        JComboBox<String> periodComboBox = new JComboBox<>(periods);
+        periodComboBox.setFont(B_TEXT);
+        periodComboBox.setBackground(WHITE);
+        periodComboBox.setForeground(PRINCIPAL_COLOR);
+        periodComboBox.setMaximumSize(new Dimension(160, 32));
+        periodComboBox.setAlignmentY(Component.RIGHT_ALIGNMENT);
+
+        // Panel for label and combo box
+        JPanel periodLabelPanel = new JPanel();
+        periodLabelPanel.setLayout(new BoxLayout(periodLabelPanel, BoxLayout.X_AXIS));
+        periodLabelPanel.setBackground(PRINCIPAL_COLOR);
+        periodLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        periodComboBox.setAlignmentY(Component.CENTER_ALIGNMENT);
+        
         // Period panel
         JPanel periodPanel = new JPanel();
         periodPanel.setBackground(PRINCIPAL_COLOR);
@@ -140,8 +157,15 @@ public class CostsView extends JFrame {
         formPanel.add(shrinkageField);
         formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         formPanel.add(buttonPanel, BorderLayout.CENTER);
+        periodLabelPanel.add(periodLabel);
+        periodLabelPanel.add(Box.createRigidArea(new Dimension(16, 0)));
+        periodLabelPanel.add(periodComboBox);
+        periodPanel.add(periodLabelPanel);
 
         add(topPanel, BorderLayout.NORTH);
         add(formPanel, BorderLayout.CENTER);
+    }
+    public String getSelectedPeriod() {
+        return periodComboBox.getSelectedItem().toString();
     }
 }
