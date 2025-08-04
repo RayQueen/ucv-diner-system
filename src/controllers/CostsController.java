@@ -128,10 +128,11 @@ public class CostsController {
                             "Error de Guardado",
                             JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (NumberFormatException ex) {
-                lastMessage = "Ingrese valores numéricos válidos.";
-                JOptionPane.showMessageDialog(costsView, "Ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
             }
+        } catch (NumberFormatException e) {
+            lastMessage = "Por favor ingrese valores numéricos válidos.";
+            JOptionPane.showMessageDialog(costsView, "Por favor ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
