@@ -37,7 +37,7 @@ public class CostsView extends JFrame {
 
         // Period combo box
         String[] periods = {"Periodo 1-2025", "Periodo 2-2025"};
-        JComboBox<String> periodComboBox = new JComboBox<>(periods);
+        periodComboBox = new JComboBox<>(periods);
         periodComboBox.setFont(B_TEXT);
         periodComboBox.setBackground(WHITE);
         periodComboBox.setForeground(PRINCIPAL_COLOR);

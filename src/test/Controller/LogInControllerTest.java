@@ -34,7 +34,7 @@ public class LogInControllerTest {
     @Test
     public void testIniciarSesionUsuarioVacio() {
         mockView.userField.setText("");
-        mockView.passwordField.setText("Cl@ve123");
+        mockView.passwordField.setText("Cl@ve12345");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.logInButton, 0, ""));
 
@@ -54,7 +54,7 @@ public class LogInControllerTest {
     @Test
     public void testIniciarSesionCorrecto() {
         mockView.userField.setText("usuario");
-        mockView.passwordField.setText("Cl@ve123");
+        mockView.passwordField.setText("Cl@ve12345");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.logInButton, 0, ""));
 
@@ -64,7 +64,7 @@ public class LogInControllerTest {
     @Test
     public void testIniciarSesionIncorrecto() {
         mockView.userField.setText("usuario");
-        mockView.passwordField.setText("Cl@ve123");
+        mockView.passwordField.setText("Cl@ve12345");
 
         controller.actionPerformed(new java.awt.event.ActionEvent(mockView.logInButton, 0, ""));
 

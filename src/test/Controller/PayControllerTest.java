@@ -1,125 +1,78 @@
+package test.Controller;
+
+import view.PayView;
 import controllers.PayController;
-import models.Pricing;
 import models.RegisteredUser;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.MockedStatic;
-import view.PayView;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
-@ExtendWith(MockitoExtension.class)
 public class PayControllerTest {
-
-    @Mock private PayView mockPayView;
-    @Mock private RegisteredUser mockRegisteredUser;
-    @Mock private Pricing mockPricingModel;
-
-    private PayController spyPayController; // Para espiar y mockear compareUserFace
+    private PayView payView;
+    private RegisteredUser registeredUser;
+    private RegisteredUser registeredAdmin;
+    private PayController controller;
 
     @BeforeEach
     void setUp() {
-        PayController payController = new PayController(mockPayView, mockRegisteredUser);
-
-        // Inyecta el mockPricingModel
-        try {
-            java.lang.reflect.Field pricingModelField = PayController.class.getDeclaredField("pricingModel");
-            pricingModelField.setAccessible(true);
-            pricingModelField.set(payController, mockPricingModel);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            fail("Falló la inyección del mockPricingModel: " + e.getMessage());
-        }
-
-        spyPayController = spy(payController); // Creamos un espía para el controlador
-
-        // Mock de JOptionPane (método estático)
-        mockStatic(JOptionPane.class);
-
-        // Mock de System.loadLibrary para OpenCV
-        mockStatic(System.class);
-        when(System.loadLibrary(anyString())).thenAnswer(invocation -> null); // No hacer nada al cargar la librería
+        payView = new PayView();
+        registeredUser = new RegisteredUser("Ray", "user", "Usuario", 1000.0, 0, "correouser@gmail.com");
+        registeredAdmin = new RegisteredUser("admin", "admin", "Administrador", 0.0, 3, "correoadmin@gmail.com");
+        controller = new PayController(payView, registeredUser, registeredAdmin);
     }
 
     @Test
-    void testPayButtonInsufficientBalance() {
-        when(mockPayView.priceValueLabel).thenReturn(new JLabel("Bs. 100.0"));
-        when(mockRegisteredUser.getBalance()).thenReturn(50.0); // Saldo insuficiente
-
-        spyPayController.payButton.doClick();
-
-        verify(JOptionPane.class).showMessageDialog(null, "Saldo insuficiente para realizar el pago.", "Error", JOptionPane.WARNING_MESSAGE);
-        verify(mockRegisteredUser, never()).addBalance(anyDouble());
-        verify(mockPayView, never()).dispose();
+    void testPagarSaldoInsuficiente() {
+        payView.priceValueLabel.setText("Bs. 2000.0");
+        payView.imagePathField.setText("src/models/data/images/Ray.png");
+        payView.payButton.doClick();
+        assertEquals(1000.0, registeredUser.getBalance());
+        assertEquals("Saldo insuficiente para realizar el pago.", controller.lastMessage);
     }
 
     @Test
     void testPayButtonNoImageProvided() {
-        when(mockPayView.priceValueLabel).thenReturn(new JLabel("Bs. 10.0"));
-        when(mockRegisteredUser.getBalance()).thenReturn(20.0);
-        when(mockPayView.imagePathField).thenReturn(new JTextField("")); // Ruta vacía
-
-        spyPayController.payButton.doClick();
-
-        verify(JOptionPane.class).showMessageDialog(null, "Debe subir una imagen para el reconocimiento facial.", "Error", JOptionPane.WARNING_MESSAGE);
-        verify(mockRegisteredUser, never()).addBalance(anyDouble());
+        payView.priceValueLabel.setText("Bs. 10.0");
+        payView.imagePathField.setText("");
+        payView.payButton.doClick();
+        assertEquals(1000.0, registeredUser.getBalance());
+        assertEquals("Debe subir una imagen para el reconocimiento facial.", controller.lastMessage);
     }
 
     @Test
     void testPayButtonStoredImageNotFound() throws Exception {
-        when(mockPayView.priceValueLabel).thenReturn(new JLabel("Bs. 10.0"));
-        when(mockRegisteredUser.getBalance()).thenReturn(20.0);
-        when(mockPayView.imagePathField).thenReturn(new JTextField("/ruta/a/imagen.png"));
-        when(mockRegisteredUser.getUser()).thenReturn("usuario_sin_imagen_almacenada");
-
-        doReturn(-1).when(spyPayController).compareUserFace(anyString(), anyString()); // Simula imagen no encontrada
-
-        spyPayController.payButton.doClick();
-
-        verify(JOptionPane.class).showMessageDialog(null, "No se encontró la imagen almacenada del usuario.", "Error", JOptionPane.WARNING_MESSAGE);
+        RegisteredUser user = new RegisteredUser("null", "null", "null", 1000.0, 0, "null");
+        controller = new PayController(payView, user, registeredAdmin);
+        payView.priceValueLabel.setText("Bs. 10.0");
+        payView.imagePathField.setText("/ruta/a/imagen.png");
+        payView.payButton.doClick();
+        assertEquals(1000.0, registeredUser.getBalance());
+        assertEquals("No se encontró la imagen almacenada del usuario.", controller.lastMessage);
     }
 
     @Test
     void testPayButtonFacialRecognitionFailed() throws Exception {
-        when(mockPayView.priceValueLabel).thenReturn(new JLabel("Bs. 10.0"));
-        when(mockRegisteredUser.getBalance()).thenReturn(20.0);
-        when(mockPayView.imagePathField).thenReturn(new JTextField("/ruta/a/imagen.png"));
-        when(mockRegisteredUser.getUser()).thenReturn("usuario_con_imagen");
-
-        doReturn(0).when(spyPayController).compareUserFace(anyString(), anyString()); // Simula reconocimiento fallido
-
-        spyPayController.payButton.doClick();
-
-        verify(JOptionPane.class).showMessageDialog(null, "Reconocimiento facial fallido.", "Error", JOptionPane.WARNING_MESSAGE);
+        payView.priceValueLabel.setText("Bs. 10.0");
+        payView.imagePathField.setText("/ruta/a/imagen.png");
+        payView.payButton.doClick();
+        assertEquals(1000.0, registeredUser.getBalance());
+        assertEquals("Reconocimiento facial fallido.", controller.lastMessage);
     }
 
     @Test
     void testPayButtonSuccessfulPayment() throws Exception {
-        when(mockPayView.priceValueLabel).thenReturn(new JLabel("Bs. 10.0"));
-        when(mockRegisteredUser.getBalance()).thenReturn(20.0);
-        when(mockPayView.imagePathField).thenReturn(new JTextField("/ruta/a/imagen.png"));
-        when(mockRegisteredUser.getUser()).thenReturn("usuario_con_imagen");
-        when(mockRegisteredUser.getFullName()).thenReturn("Usuario de Prueba");
-
-        doReturn(1).when(spyPayController).compareUserFace(anyString(), anyString()); // Simula reconocimiento exitoso
-
-        spyPayController.payButton.doClick();
-
-        verify(mockRegisteredUser).addBalance(-10.0);
-        verify(mockPayView).updateBalance(mockRegisteredUser);
-        verify(JOptionPane.class).showMessageDialog(null, "Pago realizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        verify(mockPayView).dispose();
+        payView.priceValueLabel.setText("Bs. 10.0");
+        payView.imagePathField.setText("src/models/data/images/Ray.png");
+        payView.payButton.doClick();
+        assertEquals(990.0, registeredUser.getBalance());
+        assertEquals("Pago realizado con éxito.", controller.lastMessage);
     }
 
     @Test
     void testCancelButtonDisposesView() {
-        spyPayController.cancelButton.doClick();
-        verify(mockPayView).dispose();
+        payView.cancelButton.doClick();
+        assertFalse(payView.isVisible());
     }
 }

@@ -1,2 +1,0 @@
-Desayuno (7:00 AM - 9:00 AM),Sopa: -,Seco: Arepa con atún,Bebida: Jugo de pera,Postre: Ensalada de frutas
-Almuerzo (12:00 PM - 2:00 PM),Sopa: Crema de auyama,Seco: Pechuga de pollo con puré de papas,Bebida: Jugo de parchita,Postre: Ponqué de chocolate
