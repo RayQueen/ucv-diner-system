@@ -49,7 +49,7 @@ public class UserValidationController implements ActionListener {
                 return;
             }
             RegisteredUser user = validUsersModel.findRegisteredUser(enteredUser);
-            if (user != null) {
+            if (user != null && user.getUserType() != 3) {
                 lastMessage = "Usuario válido.";
                 userValidationView.dispose();
                 PayView payView = new PayView();
